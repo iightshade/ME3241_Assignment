@@ -1158,6 +1158,63 @@ drawSprite:
 	ldmfd	sp!, {r4, lr}
 	bx	lr
 	.size	drawSprite, .-drawSprite
+	.align	2
+	.global	fillPalette
+	.type	fillPalette, %function
+fillPalette:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 0, uses_anonymous_args = 0
+	@ link register save eliminated.
+	mov	r0, #83886080
+	ldr	ip, .L10
+	@ lr needed for prologue
+	mov	r1, #0	@  i
+	add	r0, r0, #512
+.L7:
+	mov	r3, r1, asl #2	@  i
+	mov	r2, r1, asl #1	@  i
+	ldrh	r3, [r3, ip]	@  palette
+	add	r1, r1, #1	@  i,  i
+	cmp	r1, #19	@  i
+	strh	r3, [r2, r0]	@ movhi 
+	ble	.L7
+	bx	lr
+.L11:
+	.align	2
+.L10:
+	.word	palette
+	.size	fillPalette, .-fillPalette
+	.align	2
+	.global	fillSprites
+	.type	fillSprites, %function
+fillSprites:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 0, uses_anonymous_args = 0
+	stmfd	sp!, {r4, lr}
+	mov	r4, #100663296
+	ldr	lr, .L20
+	mov	ip, #0	@  i
+	add	r4, r4, #65536
+.L17:
+	mov	r1, ip, asl #2	@  i
+	add	r3, r1, lr
+	ldrh	r0, [r3, #2]	@  sprites
+	ldrh	r2, [r1, lr]	@  sprites
+	mov	r3, ip, asl #1	@  i
+	add	ip, ip, #1	@  i,  i
+	add	r2, r2, r0, asl #8
+	cmp	ip, #1600	@  i
+	strh	r2, [r3, r4]	@ movhi 
+	blt	.L17
+	ldmfd	sp!, {r4, lr}
+	bx	lr
+.L21:
+	.align	2
+.L20:
+	.word	sprites
+	.size	fillSprites, .-fillSprites
 	.global	__divsi3
 	.align	2
 	.global	popSprite
@@ -1174,23 +1231,23 @@ popSprite:
 	mov	r1, r2	@  count
 	mov	r0, #240
 	mov	r6, r3	@  x
-	ldr	r3, .L19
+	ldr	r3, .L39
 	mov	lr, pc
 	bx	r3
 	cmp	r8, #76	@  dir
 	mov	r5, r0	@  step
 	ldr	sl, [fp, #4]	@  y,  y
-	beq	.L17
-.L3:
+	beq	.L37
+.L23:
 	cmp	r8, #82	@  dir
-	beq	.L18
-.L2:
+	beq	.L38
+.L22:
 	ldmea	fp, {r4, r5, r6, r7, r8, sl, fp, sp, lr}
 	bx	lr
-.L18:
+.L38:
 	mov	r4, #240	@  i
-.L14:
-	ldr	r3, .L19+4
+.L34:
+	ldr	r3, .L39+4
 	rsb	r2, r6, r4	@  x,  i
 	smull	r0, r1, r3, r2
 	mov	r3, r2, asr #31
@@ -1204,12 +1261,12 @@ popSprite:
 	rsb	r4, r5, r4	@  i,  step,  i
 	bl	drawSprite
 	cmp	r4, #0	@  i
-	bgt	.L14
-	b	.L2
-.L17:
+	bgt	.L34
+	b	.L22
+.L37:
 	mov	r4, #0	@  i
-.L8:
-	ldr	r3, .L19+4
+.L28:
+	ldr	r3, .L39+4
 	add	r2, r6, r4	@  x,  i
 	smull	r0, r1, r3, r2
 	mov	r3, r2, asr #31
@@ -1223,71 +1280,14 @@ popSprite:
 	add	r4, r4, r5	@  i,  i,  step
 	bl	drawSprite
 	cmp	r4, #239	@  i
-	ble	.L8
-	b	.L3
-.L20:
-	.align	2
-.L19:
-	.word	__divsi3
-	.word	-2004318071
-	.size	popSprite, .-popSprite
-	.align	2
-	.global	fillPalette
-	.type	fillPalette, %function
-fillPalette:
-	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 0
-	@ frame_needed = 0, uses_anonymous_args = 0
-	@ link register save eliminated.
-	mov	r0, #83886080
-	ldr	ip, .L29
-	@ lr needed for prologue
-	mov	r1, #0	@  i
-	add	r0, r0, #512
-.L26:
-	mov	r3, r1, asl #2	@  i
-	mov	r2, r1, asl #1	@  i
-	ldrh	r3, [r3, ip]	@  palette
-	add	r1, r1, #1	@  i,  i
-	cmp	r1, #19	@  i
-	strh	r3, [r2, r0]	@ movhi 
-	ble	.L26
-	bx	lr
-.L30:
-	.align	2
-.L29:
-	.word	palette
-	.size	fillPalette, .-fillPalette
-	.align	2
-	.global	fillSprites
-	.type	fillSprites, %function
-fillSprites:
-	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 0
-	@ frame_needed = 0, uses_anonymous_args = 0
-	stmfd	sp!, {r4, lr}
-	mov	r4, #100663296
-	ldr	lr, .L39
-	mov	ip, #0	@  i
-	add	r4, r4, #65536
-.L36:
-	mov	r1, ip, asl #2	@  i
-	add	r3, r1, lr
-	ldrh	r0, [r3, #2]	@  sprites
-	ldrh	r2, [r1, lr]	@  sprites
-	mov	r3, ip, asl #1	@  i
-	add	ip, ip, #1	@  i,  i
-	add	r2, r2, r0, asl #8
-	cmp	ip, #1600	@  i
-	strh	r2, [r3, r4]	@ movhi 
-	blt	.L36
-	ldmfd	sp!, {r4, lr}
-	bx	lr
+	ble	.L28
+	b	.L23
 .L40:
 	.align	2
 .L39:
-	.word	sprites
-	.size	fillSprites, .-fillSprites
+	.word	__divsi3
+	.word	-2004318071
+	.size	popSprite, .-popSprite
 	.global	counter
 	.bss
 	.global	counter

@@ -246,21 +246,6 @@ void drawSprite(int sprites, int N, int x, int y)
     *(unsigned short *)(0x7000004 + 8*N) = sprites*2;
 }
 
-void popSprite(int sprites, char dir, int count, int x, int y)
-{
-    int i; int step = 240/count;
-    if (dir == 'L'){
-        for (i=0;i<240;i+=step){
-            drawSprite(sprites,i,(x+i)%240,y);
-        }
-    }
-    if (dir == 'R'){
-        for (i=240;i>0;i-=step){
-            drawSprite(sprites,i,(i-x)%240,y);
-        }
-    }
-}
-
 void fillPalette(void)
 {
     int i;
@@ -278,7 +263,23 @@ void fillSprites(void)
     ((unsigned short *) 0x6010000)[i] = (sprites[i*2+1] << 8) + sprites[i*2];
 
 }
+
+void popSprite(int sprites, char dir, int count, int x, int y)
+{
+    int i; int step = 240/count;
+    if (dir == 'L'){
+        for (i=0;i<240;i+=step){
+            drawSprite(sprites,i,(x+i)%240,y);
+        }
+    }
+    if (dir == 'R'){
+        for (i=240;i>0;i-=step){
+            drawSprite(sprites,i,(i-x)%240,y);
+        }
+    }
+}
 # 7 "main.c" 2
+# 1 "myhandler.h" 1
 
 
 
@@ -286,8 +287,6 @@ void fillSprites(void)
 
 int counter = 0;
 int countertens = 0;
-
-
 
 void Handler(void)
 {
@@ -299,10 +298,10 @@ void Handler(void)
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
-# 36 "main.c"
+# 28 "myhandler.h"
         if ((*(u16*)0x4000202 & 0x8) == 0x8)
     {
-# 68 "main.c"
+# 60 "myhandler.h"
         while (ch[i]!='\0') {d[i]=ch[i]; i++; }
         x = 240/2 - i/2*steps; y = 160/2;
         for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
@@ -310,7 +309,7 @@ void Handler(void)
     }
         if ((*(u16*)0x4000202 & 0x10) == 0x10)
     {
-# 84 "main.c"
+# 76 "myhandler.h"
     }
             if (0x100==1) {
             for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+2*k*steps),y);
@@ -318,13 +317,10 @@ void Handler(void)
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
 }
-
-
-
-
+# 8 "main.c" 2
+# 19 "main.c"
 int main(void)
 {
-        int i,numsprites;
 
 
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
@@ -335,7 +331,8 @@ int main(void)
 
     fillPalette();
     fillSprites();
-# 118 "main.c"
+
+
     *(u16*)0x4000208 = 0x0;
     (*(unsigned int*)0x3007FFC) = (int)&Handler;
     *(u16*)0x4000200 |= 0x8 | 0x10 | 0x1000;
