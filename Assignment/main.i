@@ -278,6 +278,45 @@ void popSprite(int sprites, char dir, int count, int x, int y)
         }
     }
 }
+
+void checkbutton(void)
+{
+
+    u16 buttons = (0x3FF & (~*(volatile u16*)0x4000130));
+
+    if ((buttons & 0x001) == 0x001)
+    {
+        buttonA();
+    }
+    if ((buttons & 0x002) == 0x002)
+    {
+        buttonB();
+    }
+    if ((buttons & 0x004) == 0x004)
+    {
+        buttonSel();
+    }
+    if ((buttons & 0x008) == 0x008)
+    {
+        buttonS();
+    }
+    if ((buttons & 0x010) == 0x010)
+    {
+        buttonR();
+    }
+    if ((buttons & 0x020) == 0x020)
+    {
+        buttonL();
+    }
+    if ((buttons & 0x040) == 0x040)
+    {
+        buttonU();
+    }
+    if ((buttons & 0x080) == 0x080)
+    {
+        buttonD();
+    }
+}
 # 7 "main.c" 2
 # 1 "myhandler.h" 1
 
@@ -288,20 +327,21 @@ void popSprite(int sprites, char dir, int count, int x, int y)
 int counter = 0;
 int countertens = 0;
 
+
 void Handler(void)
 {
     u16 Flag;
-    int x,y,steps,a1,a2;
+    int x,y,steps;
     int newline = 0;
-    int d[50]={},l[10]={};
+    int d[50] = {}, l[10] = {};
     int i = 0, j, k, linecount = 1;
-    char ch[50]="GAME>";
-    a1 = 0; a2 = 1;
+    char ch[50] = "NEWN GAME>";
+    int a1 = 0, a2 = 1;
     steps = 10;
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
-# 31 "myhandler.h"
+# 32 "myhandler.h"
     if ((*(u16*)0x4000202 & 0x8) == 0x8)
     {
       while (ch[i] != '\0'){d[i] = ch[i]; i++;}
@@ -312,15 +352,16 @@ void Handler(void)
         drawSprite(d[k] - 64, k, (x + k *steps), y);
       }
     }
-# 70 "myhandler.h"
+# 71 "myhandler.h"
     if ((*(u16*)0x4000202 & 0x10) == 0x10)
         {
-# 83 "myhandler.h"
+# 84 "myhandler.h"
     }
 
     if (0x100==1) {
       for(k = 0; k <= i-1; k++) drawSprite(d[k] - 64, k, (x+2*k*steps), y);
     }
+
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
 }
