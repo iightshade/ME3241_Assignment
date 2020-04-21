@@ -26,6 +26,7 @@ int main(void)
     *(unsigned short *) 0x5000200 = 0;
     *(unsigned short *) 0x5000202 = RGB(31,31,31);
 
+	 // init
     fillPalette();
     fillSprites();
 
@@ -35,6 +36,7 @@ int main(void)
     REG_IE |= 0x8 | 0x10 | 0x1000;// TODO: complete this line to choose which timer interrupts to enable
     KEYCNT |= 0x7FFF;
     REG_IME = 0x1;		// Enable interrupt handling
+
 
     // Set Timer Mode (fill that section and replace TMX with selected timer number)
     REG_TM0D = 49141; // 1sec = 16393 ticks x 61 microsec (max = 65534)
