@@ -1306,8 +1306,8 @@ countertens:
 	.section	.rodata
 	.align	2
 .LC0:
-	.ascii	"NEW GAME>\000"
-	.space	40
+	.ascii	"GAME>\000"
+	.space	44
 	.text
 	.align	2
 	.global	Handler
@@ -1327,27 +1327,27 @@ Handler:
 	mov	lr, pc
 	bx	r4
 	ldr	r3, .L62+4
-	ldmia	r3, {r0, r1, r2}
-	mov	ip, #0	@  i
-	sub	r3, fp, #328
-	str	ip, [fp, #-276]	@  i,  l
-	str	ip, [fp, #-272]	@  i,  l
-	str	ip, [fp, #-268]	@  i,  l
-	str	ip, [fp, #-264]	@  i,  l
-	str	ip, [fp, #-260]	@  i,  l
-	str	ip, [fp, #-256]	@  i,  l
-	str	ip, [fp, #-252]	@  i,  l
-	str	ip, [fp, #-248]	@  i,  l
-	str	ip, [fp, #-244]	@  i,  l
-	str	ip, [fp, #-240]	@  i,  l
-	mov	r6, r3
-	stmia	r3!, {r0, r1}
-	sub	r0, fp, #316
-	strh	r2, [r3, #0]	@ movhi 
-	sub	r0, r0, #2
-	mov	r2, #40
-	mov	r1, ip	@  i
-	mov	r5, ip	@  i,  i
+	sub	ip, fp, #320
+	ldmia	r3, {r0, r1}
+	mov	r2, #0	@  i
+	sub	r3, fp, #324
+	sub	ip, ip, #2
+	str	r0, [fp, #-328]
+	str	r2, [fp, #-276]	@  i,  l
+	str	r2, [fp, #-272]	@  i,  l
+	str	r2, [fp, #-268]	@  i,  l
+	str	r2, [fp, #-264]	@  i,  l
+	str	r2, [fp, #-260]	@  i,  l
+	str	r2, [fp, #-256]	@  i,  l
+	str	r2, [fp, #-252]	@  i,  l
+	str	r2, [fp, #-248]	@  i,  l
+	str	r2, [fp, #-244]	@  i,  l
+	str	r2, [fp, #-240]	@  i,  l
+	mov	r5, r2	@  i,  i
+	strh	r1, [r3, #0]	@ movhi 
+	mov	r0, ip
+	mov	r1, r2	@  i
+	mov	r2, #44
 	mov	lr, pc
 	bx	r4
 	mov	r3, #67108864
@@ -1361,8 +1361,9 @@ Handler:
 	mov	sl, #10	@  steps
 	mov	r8, r3, asr #16	@  Flag
 	beq	.L42
-	ldrb	r3, [r6, #0]	@ zero_extendqisi2	@  ch
-	cmp	r3, r5
+	sub	r3, fp, #328
+	ldrb	r2, [r3, #0]	@ zero_extendqisi2	@  ch
+	cmp	r2, r5
 	beq	.L60
 	sub	r2, fp, #36
 	sub	ip, fp, #36

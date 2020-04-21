@@ -1,7 +1,7 @@
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
 
 void drawSprite(int sprites, int N, int x, int y)
-{   
+{
     // Gift function: displays sprite number numb on screen at position (x,y), as sprite object N
     *(unsigned short *)(0x7000000 + 8*N) = y | 0x2000;
     *(unsigned short *)(0x7000002 + 8*N) = x;
@@ -27,7 +27,7 @@ void fillSprites(void)
 }
 
 void popSprite(int sprites, char dir, int count, int x, int y)
-{   
+{
     int i; int step = SCREEN_WIDTH/count;
     if (dir == 'L'){
         for (i=0;i<240;i+=step){

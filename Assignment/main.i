@@ -290,30 +290,37 @@ int countertens = 0;
 
 void Handler(void)
 {
-    u16 Flag; int x,y,steps,a1,a2; int newline = 0;
-            int d[50]={},l[10]={},i=0,j,linecount=1,k;
-        char ch[50]="NEW GAME>";
+    u16 Flag;
+    int x,y,steps,a1,a2;
+    int newline = 0;
+    int d[50]={},l[10]={};
+    int i = 0, j, k, linecount = 1;
+    char ch[50]="GAME>";
     a1 = 0; a2 = 1;
     steps = 10;
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
-# 28 "myhandler.h"
-        if ((*(u16*)0x4000202 & 0x8) == 0x8)
+# 31 "myhandler.h"
+    if ((*(u16*)0x4000202 & 0x8) == 0x8)
     {
-# 60 "myhandler.h"
-        while (ch[i]!='\0') {d[i]=ch[i]; i++; }
-        x = 240/2 - i/2*steps; y = 160/2;
-        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
+      while (ch[i] != '\0'){d[i] = ch[i]; i++;}
+      x = 240 / 2 - i / 2 * steps;
+      y = 160 / 2;
 
+      for(k = 0; k <= i - 1; k++){
+        drawSprite(d[k] - 64, k, (x + k *steps), y);
+      }
     }
-        if ((*(u16*)0x4000202 & 0x10) == 0x10)
-    {
-# 76 "myhandler.h"
+# 70 "myhandler.h"
+    if ((*(u16*)0x4000202 & 0x10) == 0x10)
+        {
+# 83 "myhandler.h"
     }
-            if (0x100==1) {
-            for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+2*k*steps),y);
-        }
+
+    if (0x100==1) {
+      for(k = 0; k <= i-1; k++) drawSprite(d[k] - 64, k, (x+2*k*steps), y);
+    }
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
 }

@@ -8,7 +8,7 @@
 
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
-//Buttons: 
+//Buttons:
 //A button = Z, B button = X, Arrow Keys = leftrightpdown
 
 #define KEYCNT *(volatile u16*)0x4000132
@@ -41,7 +41,7 @@ int main(void)
     REG_TM0CNT |= TIMER_FREQUENCY_1024 | TIMER_ENABLE | TIMER_INTERRUPTS;	// TODO: complete this line to set timer frequency and enable timer
 
     REG_TM1D = 57337; // 0.5sec = 8196 ticks x 61 microsec (max = 65534)
-    REG_TM1CNT |= TIMER_FREQUENCY_1024 | TIMER_ENABLE | TIMER_INTERRUPTS;   
+    REG_TM1CNT |= TIMER_FREQUENCY_1024 | TIMER_ENABLE | TIMER_INTERRUPTS;
 
     while(1);
 
