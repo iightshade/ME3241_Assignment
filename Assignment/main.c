@@ -25,7 +25,7 @@ int main(void)
     // Fill SpritePal
     *(unsigned short *) 0x5000200 = 0;
     *(unsigned short *) 0x5000202 = RGB(31,31,31);
-	// Filling
+
     fillPalette();
     fillSprites();
 

@@ -40,5 +40,3 @@ void popSprite(int sprites, char dir, int count, int x, int y)
         }
     }
 }
-
-

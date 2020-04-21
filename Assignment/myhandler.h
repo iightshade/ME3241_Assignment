@@ -6,16 +6,15 @@
 int counter = 0;
 int countertens = 0;
 
-// Main handler used to update the screen //
 void Handler(void)
 {
     u16 Flag;
-    int x,y,steps;
+    int x,y,steps,a1,a2;
     int newline = 0;
     int d[50] = {}, l[10] = {};
     int i = 0, j, k, linecount = 1;
-    char ch[50] = "NEWN GAME>"; //all caps, > to change line
-    int a1 = 0, a2 = 1;
+    char ch[50]="NEW GAME>"; //all caps, > to change line
+    a1 = 0; a2 = 1;
     steps = 10;
 
     REG_IME = 0x00; // Stop all other interrupt handling, while we handle this current one
@@ -86,7 +85,6 @@ void Handler(void)
     if (KEY_R==1) {
       for(k = 0; k <= i-1; k++) drawSprite(d[k] - 64, k, (x+2*k*steps), y);
     }
-
     REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
     REG_IME = 0x01;  // Re-enable interrupt handling
 }

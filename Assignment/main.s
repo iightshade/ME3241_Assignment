@@ -1288,100 +1288,6 @@ popSprite:
 	.word	__divsi3
 	.word	-2004318071
 	.size	popSprite, .-popSprite
-	.align	2
-	.global	checkbutton
-	.type	checkbutton, %function
-checkbutton:
-	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 0
-	@ frame_needed = 1, uses_anonymous_args = 0
-	mov	ip, sp
-	stmfd	sp!, {r4, fp, ip, lr, pc}
-	mov	r2, #67108864
-	add	r2, r2, #304
-	ldrh	r3, [r2, #0]
-	mvn	r3, r3
-	mov	r4, r3, asl #22
-	mov	r4, r4, lsr #22
-	tst	r4, #1
-	sub	fp, ip, #-4294967292
-	bne	.L50
-.L42:
-	tst	r4, #2
-	bne	.L51
-.L43:
-	tst	r4, #4
-	bne	.L52
-.L44:
-	tst	r4, #8
-	bne	.L53
-.L45:
-	tst	r4, #16
-	bne	.L54
-.L46:
-	tst	r4, #32
-	bne	.L55
-.L47:
-	tst	r4, #64
-	bne	.L56
-.L48:
-	tst	r4, #128
-	bne	.L57
-.L41:
-	ldmea	fp, {r4, fp, sp, lr}
-	bx	lr
-.L57:
-	ldr	r0, .L58
-	mov	lr, pc
-	bx	r0
-	b	.L41
-.L56:
-	ldr	r0, .L58+4
-	mov	lr, pc
-	bx	r0
-	b	.L48
-.L55:
-	ldr	r0, .L58+8
-	mov	lr, pc
-	bx	r0
-	b	.L47
-.L54:
-	ldr	r0, .L58+12
-	mov	lr, pc
-	bx	r0
-	b	.L46
-.L53:
-	ldr	r0, .L58+16
-	mov	lr, pc
-	bx	r0
-	b	.L45
-.L52:
-	ldr	r0, .L58+20
-	mov	lr, pc
-	bx	r0
-	b	.L44
-.L51:
-	ldr	r0, .L58+24
-	mov	lr, pc
-	bx	r0
-	b	.L43
-.L50:
-	ldr	r0, .L58+28
-	mov	lr, pc
-	bx	r0
-	b	.L42
-.L59:
-	.align	2
-.L58:
-	.word	buttonD
-	.word	buttonU
-	.word	buttonL
-	.word	buttonR
-	.word	buttonS
-	.word	buttonSel
-	.word	buttonB
-	.word	buttonA
-	.size	checkbutton, .-checkbutton
 	.global	counter
 	.bss
 	.global	counter
@@ -1400,8 +1306,8 @@ countertens:
 	.section	.rodata
 	.align	2
 .LC0:
-	.ascii	"NEWN GAME>\000"
-	.space	39
+	.ascii	"GAME>\000"
+	.space	44
 	.text
 	.align	2
 	.global	Handler
@@ -1416,34 +1322,32 @@ Handler:
 	sub	sp, sp, #292
 	mov	r1, #0
 	mov	r2, #200
-	ldr	r4, .L81
+	ldr	r4, .L62
 	sub	r0, fp, #236
 	mov	lr, pc
 	bx	r4
-	ldr	r3, .L81+4
-	ldmia	r3, {r0, r1, r2}
-	mov	ip, #0	@  i
-	sub	r3, fp, #328
-	str	ip, [fp, #-276]	@  i,  l
-	str	ip, [fp, #-272]	@  i,  l
-	str	ip, [fp, #-268]	@  i,  l
-	str	ip, [fp, #-264]	@  i,  l
-	str	ip, [fp, #-260]	@  i,  l
-	str	ip, [fp, #-256]	@  i,  l
-	str	ip, [fp, #-252]	@  i,  l
-	str	ip, [fp, #-248]	@  i,  l
-	str	ip, [fp, #-244]	@  i,  l
-	str	ip, [fp, #-240]	@  i,  l
-	mov	r6, r3
-	stmia	r3!, {r0, r1}
-	strh	r2, [r3], #2	@ movhi 
-	mov	r5, ip	@  i,  i
-	sub	r0, fp, #316
-	mov	ip, r2, lsr #16
-	strb	ip, [r3, #0]
-	mov	r2, #39
-	sub	r0, r0, #1
-	mov	r1, r5	@  i
+	ldr	r3, .L62+4
+	sub	ip, fp, #320
+	ldmia	r3, {r0, r1}
+	mov	r2, #0	@  i
+	sub	r3, fp, #324
+	sub	ip, ip, #2
+	str	r0, [fp, #-328]
+	str	r2, [fp, #-276]	@  i,  l
+	str	r2, [fp, #-272]	@  i,  l
+	str	r2, [fp, #-268]	@  i,  l
+	str	r2, [fp, #-264]	@  i,  l
+	str	r2, [fp, #-260]	@  i,  l
+	str	r2, [fp, #-256]	@  i,  l
+	str	r2, [fp, #-252]	@  i,  l
+	str	r2, [fp, #-248]	@  i,  l
+	str	r2, [fp, #-244]	@  i,  l
+	str	r2, [fp, #-240]	@  i,  l
+	mov	r5, r2	@  i,  i
+	strh	r1, [r3, #0]	@ movhi 
+	mov	r0, ip
+	mov	r1, r2	@  i
+	mov	r2, #44
 	mov	lr, pc
 	bx	r4
 	mov	r3, #67108864
@@ -1456,14 +1360,15 @@ Handler:
 	tst	r3, #524288
 	mov	sl, #10	@  steps
 	mov	r8, r3, asr #16	@  Flag
-	beq	.L61
-	ldrb	r3, [r6, #0]	@ zero_extendqisi2	@  ch
-	cmp	r3, r5
-	beq	.L79
+	beq	.L42
+	sub	r3, fp, #328
+	ldrb	r2, [r3, #0]	@ zero_extendqisi2	@  ch
+	cmp	r2, r5
+	beq	.L60
 	sub	r2, fp, #36
 	sub	ip, fp, #36
 	sub	lr, fp, #36
-.L65:
+.L46:
 	add	ip, ip, #1
 	sub	r3, ip, #292
 	sub	r2, r2, #292
@@ -1474,8 +1379,8 @@ Handler:
 	add	r5, r5, #1	@  i,  i
 	add	lr, lr, #4
 	mov	r2, ip
-	bne	.L65
-.L79:
+	bne	.L46
+.L60:
 	add	r3, r5, r5, lsr #31	@  i,  i
 	mov	r3, r3, asr #1
 	mul	r2, sl, r3	@  steps
@@ -1483,10 +1388,10 @@ Handler:
 	mov	r5, #0	@  k
 	cmp	r5, r7	@  k
 	rsb	r2, r2, #120	@  x
-	bgt	.L61
+	bgt	.L42
 	mov	r4, r2	@  x,  x
 	sub	r6, fp, #36
-.L70:
+.L51:
 	ldr	r0, [r6, #-200]	@  d
 	mov	r1, r5	@  k
 	mov	r2, r4	@  x
@@ -1497,8 +1402,8 @@ Handler:
 	cmp	r5, r7	@  k
 	add	r6, r6, #4
 	add	r4, r4, sl	@  x,  x,  steps
-	ble	.L70
-.L61:
+	ble	.L51
+.L42:
 	mov	r3, #512
 	add	r3, r3, #67108866
 	strh	r8, [r3, #0]	@ movhi 	@  Flag
@@ -1508,9 +1413,9 @@ Handler:
 	strh	r3, [r2, #0]	@ movhi 
 	ldmea	fp, {r4, r5, r6, r7, r8, sl, fp, sp, lr}
 	bx	lr
-.L82:
+.L63:
 	.align	2
-.L81:
+.L62:
 	.word	memset
 	.word	.LC0
 	.size	Handler, .-Handler
@@ -1571,16 +1476,16 @@ main:
 	add	ip, ip, #67108866
 	ldrh	r1, [ip, #0]
 	mov	r2, #50331648
-	ldr	r3, .L87
+	ldr	r3, .L68
 	orr	r1, r1, #195
 	add	r2, r2, #32512
 	str	r3, [r2, #252]
 	strh	r1, [ip, #0]	@ movhi 
-.L84:
-	b	.L84
-.L88:
+.L65:
+	b	.L65
+.L69:
 	.align	2
-.L87:
+.L68:
 	.word	Handler
 	.size	main, .-main
 	.ident	"GCC: (GNU) 3.3.6"
