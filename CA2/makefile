@@ -10,7 +10,7 @@ include $(HAMDIR)/system/master.mak
 #
 # Set the name of your desired GBA image name here
 #
-PROGNAME=ca2
+PROGNAME=mini
 
 #
 # Set a list of files you want to compile
