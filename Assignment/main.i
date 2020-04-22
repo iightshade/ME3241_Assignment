@@ -294,7 +294,9 @@ void Handler(void)
     int newline = 0;
     int d[50] = {}, l[10] = {};
     int i = 0, j, k, linecount = 1;
-    char ch[50]="NEW GAME>";
+    char ch[50]="N";
+         int playerSprite[10] = {};
+         int playerX = 240/2, playerY = 150;
     a1 = 0; a2 = 1;
     steps = 10;
 
@@ -303,21 +305,22 @@ void Handler(void)
 
     if ((*(u16*)0x4000202 & 0x8) == 0x8)
     {
-      while (ch[i] != '\0'){d[i] = ch[i]; i++;}
-      x = 240 / 2 - i / 2 * steps;
-      y = 160 / 2;
+      while (ch[i] != '\0'){playerSprite[i] = ch[i]; i++;}
+
+
+
 
                 counter = counter + checkbutton();
 
       for(k = 0; k <= i - 1; k++){
-        drawSprite(d[k] - 64, k, (x + k *steps + counter), y);
+        drawSprite(playerSprite[k] - 64, k, (playerX + counter), playerY);
       }
     }
 
 
     if ((*(u16*)0x4000202 & 0x10) == 0x10)
         {
-# 50 "myhandler.h"
+# 53 "myhandler.h"
     }
 
     if (0x100==1) {
@@ -353,11 +356,12 @@ int checkbutton(void)
     if ((buttons & 0x010) == 0x010)
     {
 
+                  return 1;
     }
     if ((buttons & 0x020) == 0x020)
     {
 
-                 return -1;
+                  return -1;
     }
     if ((buttons & 0x040) == 0x040)
     {
@@ -396,7 +400,7 @@ int main(void)
 
 
 
-    *(u16*)0x4000100 = 49141;
+    *(u16*)0x4000100 = 65255;
     *(u16*)0x4000102 |= 0x0003 | 0x0080 | 0x0040;
 
     *(u16*)0x4000104 = 57337;

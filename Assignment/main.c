@@ -27,7 +27,7 @@ int main(void)
     *(unsigned short *) 0x5000200 = 0;
     *(unsigned short *) 0x5000202 = RGB(31,31,31);
 
-	 // init
+	 ////// init
     fillPalette();
     fillSprites();
 
@@ -40,7 +40,7 @@ int main(void)
 
 
     // Set Timer Mode (fill that section and replace TMX with selected timer number)
-    REG_TM0D = 49141; // 1sec = 16393 ticks x 61 microsec (max = 65534)
+    REG_TM0D = 65255; // ( 60Hz refresh rate ) 
     REG_TM0CNT |= TIMER_FREQUENCY_1024 | TIMER_ENABLE | TIMER_INTERRUPTS;	// TODO: complete this line to set timer frequency and enable timer
 
     REG_TM1D = 57337; // 0.5sec = 8196 ticks x 61 microsec (max = 65534)

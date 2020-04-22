@@ -13,7 +13,9 @@ void Handler(void)
     int newline = 0;
     int d[50] = {}, l[10] = {};
     int i = 0, j, k, linecount = 1;
-    char ch[50]="NEW GAME>"; //all caps, > to change line
+    char ch[50]="N"; //all caps, > to change line
+	 int playerSprite[10] = {};
+	 int playerX = SCREEN_WIDTH/2, playerY = 150;
     a1 = 0; a2 = 1;
     steps = 10;
 
@@ -22,14 +24,12 @@ void Handler(void)
 
     if ((REG_IF & INT_TIMER0) == INT_TIMER0) // TODO: replace XXX with the specific interrupt you are handling
     {
-      while (ch[i] != '\0'){d[i] = ch[i]; i++;}
-      x = SCREEN_WIDTH / 2 - i / 2 * steps;
-      y = SCREEN_HEIGHT / 2;
-
+      while (ch[i] != '\0'){playerSprite[i] = ch[i]; i++;}
+		
 		counter = counter + checkbutton();		
-
+		
       for(k = 0; k <= i - 1; k++){
-        drawSprite(d[k] - 64, k, (x + k *steps + counter), y);
+        drawSprite(playerSprite[k] - 64, k, (playerX + counter), playerY);
       }
     }
 
@@ -49,10 +49,7 @@ void Handler(void)
       //     {countertens++;}
     }
 
-    if (KEY_R==1) {
-		//counter = counter + 1;
-      //for(k = 0; k <= i-1; k++) drawSprite(d[k] - 64, k, (x+2*k*steps), y);
-    }
+
     REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
     REG_IME = 0x01;  // Re-enable interrupt handling
 }
@@ -82,11 +79,12 @@ int checkbutton(void)
     if ((buttons & KEY_RIGHT) == KEY_RIGHT)
     {
         // buttonR();
+		  return 1;
     }
     if ((buttons & KEY_LEFT) == KEY_LEFT)
     {
         //buttonL();
-		 return -1;
+		  return -1;
     }
     if ((buttons & KEY_UP) == KEY_UP)
     {

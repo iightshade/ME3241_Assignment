@@ -1306,32 +1306,37 @@ countertens:
 	.section	.rodata
 	.align	2
 .LC0:
-	.ascii	"NEW GAME>\000"
-	.space	40
+	.ascii	"N\000"
+	.space	48
 	.text
 	.align	2
 	.global	Handler
 	.type	Handler, %function
 Handler:
 	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 292
+	@ args = 0, pretend = 0, frame = 332
 	@ frame_needed = 1, uses_anonymous_args = 0
 	mov	ip, sp
-	stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
+	stmfd	sp!, {r4, r5, r6, r7, r8, fp, ip, lr, pc}
 	sub	fp, ip, #-4294967292
-	sub	sp, sp, #292
+	sub	sp, sp, #332
 	mov	r1, #0
 	mov	r2, #200
 	ldr	r4, .L57
-	sub	r0, fp, #240
+	sub	r0, fp, #232
 	mov	lr, pc
 	bx	r4
 	ldr	r3, .L57+4
-	ldmia	r3, {r0, r1, r2}
+	mov	lr, #-1224736768
+	ldrh	r3, [r3, #0]
 	mov	ip, #0	@  i
-	sub	r3, fp, #332
-	str	ip, [fp, #-280]	@  i,  l
-	str	ip, [fp, #-276]	@  i,  l
+	mov	lr, lr, asr #22
+	sub	r0, fp, #320
+	sub	r6, fp, #32
+	mov	r2, #48
+	strh	r3, [r6, lr]	@ movhi 	@  ch
+	sub	r0, r0, #2
+	mov	r1, ip	@  i
 	str	ip, [fp, #-272]	@  i,  l
 	str	ip, [fp, #-268]	@  i,  l
 	str	ip, [fp, #-264]	@  i,  l
@@ -1340,13 +1345,8 @@ Handler:
 	str	ip, [fp, #-252]	@  i,  l
 	str	ip, [fp, #-248]	@  i,  l
 	str	ip, [fp, #-244]	@  i,  l
-	mov	r6, r3
-	stmia	r3!, {r0, r1}
-	sub	r0, fp, #320
-	strh	r2, [r3, #0]	@ movhi 
-	sub	r0, r0, #2
-	mov	r2, #40
-	mov	r1, ip	@  i
+	str	ip, [fp, #-240]	@  i,  l
+	str	ip, [fp, #-236]	@  i,  l
 	mov	r5, ip	@  i,  i
 	mov	lr, pc
 	bx	r4
@@ -1358,15 +1358,25 @@ Handler:
 	ldrh	r3, [r2, #0]
 	mov	r3, r3, asl #16
 	tst	r3, #524288
-	mov	r9, #10	@  steps
-	mov	sl, r3, asr #16	@  Flag
+	str	r5, [fp, #-364]	@  i,  playerSprite
+	str	r5, [fp, #-360]	@  i,  playerSprite
+	str	r5, [fp, #-356]	@  i,  playerSprite
+	str	r5, [fp, #-352]	@  i,  playerSprite
+	str	r5, [fp, #-348]	@  i,  playerSprite
+	str	r5, [fp, #-344]	@  i,  playerSprite
+	str	r5, [fp, #-340]	@  i,  playerSprite
+	str	r5, [fp, #-336]	@  i,  playerSprite
+	str	r5, [fp, #-332]	@  i,  playerSprite
+	str	r5, [fp, #-328]	@  i,  playerSprite
+	mov	r8, r3, asr #16	@  Flag
 	beq	.L42
-	ldrb	r3, [r6, #0]	@ zero_extendqisi2	@  ch
-	cmp	r3, r5
+	sub	r3, fp, #324
+	ldrb	r2, [r3, #0]	@ zero_extendqisi2	@  ch
+	cmp	r2, r5
 	beq	.L55
-	sub	r2, fp, #40
-	sub	ip, fp, #40
-	sub	lr, fp, #40
+	sub	r2, fp, #32
+	sub	ip, fp, #32
+	sub	lr, fp, #32
 .L46:
 	add	ip, ip, #1
 	sub	r3, ip, #292
@@ -1374,50 +1384,45 @@ Handler:
 	ldrb	r1, [r3, #0]	@ zero_extendqisi2	@  ch
 	ldrb	r0, [r2, #0]	@ zero_extendqisi2	@  ch
 	cmp	r1, #0
-	str	r0, [lr, #-200]	@  d
+	str	r0, [lr, #-332]	@  playerSprite
 	add	r5, r5, #1	@  i,  i
 	add	lr, lr, #4
 	mov	r2, ip
 	bne	.L46
 .L55:
-	add	r3, r5, r5, lsr #31	@  i,  i
-	mov	r3, r3, asr #1
-	mul	r2, r9, r3	@  steps
 	ldr	r0, .L57+8
-	rsb	r4, r2, #120	@  x
 	mov	lr, pc
 	bx	r0
-	ldr	r8, .L57+12
-	ldr	r3, [r8, #0]	@  counter
-	sub	r7, r5, #1	@  i
-	mov	r5, #0	@  k
+	ldr	r7, .L57+12
+	ldr	r3, [r7, #0]	@  counter
+	sub	r6, r5, #1	@  i
+	mov	r4, #0	@  k
 	add	r3, r3, r0
-	cmp	r5, r7	@  k
-	str	r3, [r8, #0]	@  counter
+	cmp	r4, r6	@  k
+	str	r3, [r7, #0]	@  counter
 	bgt	.L42
-	sub	r6, fp, #40
+	sub	r5, fp, #32
 .L51:
-	ldr	r0, [r6, #-200]	@  d
-	ldr	r2, [r8, #0]	@  counter
-	mov	r1, r5	@  k
-	add	r2, r4, r2	@  x
+	ldr	r0, [r5, #-332]	@  playerSprite
+	ldr	r2, [r7, #0]	@  counter
+	mov	r1, r4	@  k
 	sub	r0, r0, #64
-	mov	r3, #80
-	add	r5, r5, #1	@  k,  k
+	add	r2, r2, #120
+	mov	r3, #150
+	add	r4, r4, #1	@  k,  k
 	bl	drawSprite
-	cmp	r5, r7	@  k
-	add	r6, r6, #4
-	add	r4, r4, r9	@  x,  x,  steps
+	cmp	r4, r6	@  k
+	add	r5, r5, #4
 	ble	.L51
 .L42:
 	mov	r3, #512
 	add	r3, r3, #67108866
 	mov	r2, #67108864
-	strh	sl, [r3, #0]	@ movhi 	@  Flag
+	strh	r8, [r3, #0]	@ movhi 	@  Flag
 	add	r2, r2, #520
 	mov	r3, #1	@ movhi
 	strh	r3, [r2, #0]	@ movhi 
-	ldmea	fp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
+	ldmea	fp, {r4, r5, r6, r7, r8, fp, sp, lr}
 	bx	lr
 .L58:
 	.align	2
@@ -1439,10 +1444,15 @@ checkbutton:
 	add	r2, r2, #304
 	ldrh	r3, [r2, #0]
 	mvn	r3, r3
+	mov	r3, r3, asl #22
+	mov	r3, r3, lsr #22
+	tst	r3, #16
+	@ lr needed for prologue
+	mov	r0, #1
+	bxne	lr
 	ands	r3, r3, #32
 	mvn	r0, #0
 	moveq	r0, r3
-	@ lr needed for prologue
 	bx	lr
 	.size	checkbutton, .-checkbutton
 	.align	2
@@ -1472,41 +1482,40 @@ main:
 	orr	r3, r3, #4096
 	orr	r3, r3, #24
 	strh	r3, [r2, #0]	@ movhi 
-	mov	ip, #304
-	add	ip, ip, #67108866
-	ldrh	r3, [ip, #0]
-	mvn	r3, r3
-	mov	r1, #67108864
-	and	r3, r3, #32768
-	mov	r0, r1
-	mvn	r3, r3
-	mvn	r2, #16384
-	strh	r3, [ip, #0]	@ movhi 
-	add	r1, r1, #520
-	add	r0, r0, #256
-	sub	r2, r2, #10
-	mov	r3, #1	@ movhi
-	strh	r3, [r1, #0]	@ movhi 
-	strh	r2, [r0, #0]	@ movhi 
-	mov	r1, #256
+	mov	r1, #304
 	add	r1, r1, #67108866
 	ldrh	r3, [r1, #0]
+	mvn	r3, r3
+	and	r3, r3, #32768
 	mov	r0, #67108864
+	mvn	r3, r3
+	strh	r3, [r1, #0]	@ movhi 
+	mov	r2, r0
+	mov	r3, #1	@ movhi
+	add	r0, r0, #520
+	strh	r3, [r0, #0]	@ movhi 
+	add	r2, r2, #256
+	mvn	r3, #280	@ movhi
+	strh	r3, [r2, #0]	@ movhi 
+	mov	ip, #256
+	add	ip, ip, #67108866
+	ldrh	r3, [ip, #0]
+	mov	r1, #67108864
 	mvn	r2, #8192
 	orr	r3, r3, #195
+	add	r1, r1, #260
 	sub	r2, r2, #6
-	add	r0, r0, #260
-	strh	r3, [r1, #0]	@ movhi 
-	mov	ip, #260
-	strh	r2, [r0, #0]	@ movhi 
-	add	ip, ip, #67108866
-	ldrh	r1, [ip, #0]
+	strh	r3, [ip, #0]	@ movhi 
+	mov	r0, #260
+	strh	r2, [r1, #0]	@ movhi 
+	add	r0, r0, #67108866
+	ldrh	r1, [r0, #0]
 	mov	r2, #50331648
 	ldr	r3, .L72
 	orr	r1, r1, #195
 	add	r2, r2, #32512
 	str	r3, [r2, #252]
-	strh	r1, [ip, #0]	@ movhi 
+	strh	r1, [r0, #0]	@ movhi 
 .L69:
 	b	.L69
 .L73:
