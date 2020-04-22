@@ -7,7 +7,7 @@ int counter = 0;
 int pos = 0;
 int playerX = SCREEN_WIDTH/2, playerY = SCREEN_HEIGHT-20;
 int spriteCounter;
-int laserPositions[50][3];
+int laserPositions[10][3];
 int laserCounter = 0;
 int laserTimeCounter = 0;
 // Alien positions (active, Xpos, Y pos)
@@ -87,28 +87,6 @@ void Handler(void)
         drawSprite(SPACESHIP, spriteCounter, playerX, playerY);
         spriteCounter++;
 
-        // Update laser positions //
-        laserTimeCounter++;
-        if(laserTimeCounter > 100){
-          if(pressedButtons[0] == 1){
-            createLaser();
-            laserTimeCounter = 0;
-          }
-        }
-        pressedButtons[0] = 0;
-
-        for( i = 0; i < laserCounter; i++){
-          if(laserPositions[i][0] == 1){
-            laserPositions[i][2] = laserPositions[i][2] - 1;
-            drawSprite(LASER, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
-            spriteCounter++;
-          }
-
-          if(laserPositions[i][2] < 10){
-            laserPositions[i][0] = 0;
-          }
-        }
-
         // Update alien positions //
         alienTimer++;
         if(alienTimer == 3){
@@ -132,6 +110,29 @@ void Handler(void)
           }
         }
 
+
+        // Create laser positions //
+        laserTimeCounter++;
+        if(laserTimeCounter > 100){
+          if(pressedButtons[0] == 1){
+            createLaser();
+            laserTimeCounter = 0;
+          }
+        }
+        pressedButtons[0] = 0;
+
+        for( i = 0; i < laserCounter; i++){
+          if(laserPositions[i][0] == 1){
+            laserPositions[i][2] = laserPositions[i][2] - 1;
+          }
+            drawSprite(LASER, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
+            spriteCounter++;
+
+          // Deactivate lasers out of screen
+          if(laserPositions[i][2] < -20){
+            laserPositions[i][0] = 0;
+          }
+        }
     }
 
     REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
@@ -188,7 +189,7 @@ void createLaser(void){
   laserPositions[laserCounter][1] = playerX;
   laserPositions[laserCounter][2] = playerY;
   laserCounter++;
-  if(laserCounter > 50){
+  if(laserCounter > 10){
     laserCounter = 0;
   }
 }
