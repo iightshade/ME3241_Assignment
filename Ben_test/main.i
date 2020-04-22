@@ -643,11 +643,27 @@ void popSprite(int sprites, char dir, int count, int x, int y)
 
 
 
-
 int counter = 0;
 int pos = 0;
 int playerX = 240/2, playerY = 160 -20;
+int spriteCounter;
+int lazerPositions[500][3];
 
+int alienPositions[10][3]= {
+    {1, 30, 80},
+    {1, 50, 80},
+    {1, 70, 80},
+    {1, 90, 80},
+    {1, 110, 80},
+    {1, 30, 100},
+    {1, 50, 100},
+    {1, 70, 100},
+    {1, 90, 100},
+    {1, 110, 100},
+};
+int alienTimer = 0;
+int totalNumAliens = 10;
+int aliensMove = 1;
 
 void Handler(void)
 {
@@ -684,17 +700,46 @@ void Handler(void)
         counter++;
 
     }
+
         if ((*(u16*)0x4000202 & 0x10) == 0x10)
     {
         steps = 16;
-        playerX = playerX + checkbutton();
 
+
+        playerX = playerX + checkbutton();
         drawSprite(40, 10001, playerX, playerY);
+
+
 
         drawSprite(40 +4, 10002, playerX, playerY-pos);
         pos+=16;
 
 
+        alienTimer++;
+        if(alienTimer == 2){
+          for(i = 0; i < totalNumAliens; i++){
+            alienPositions[i][1] = alienPositions[i][1] + aliensMove;
+          }
+          alienTimer = 0;
+        }
+
+
+        if(alienPositions[9][1] >> 200){
+          aliensMove = -1;
+        }
+
+
+
+
+
+
+        spriteCounter = 10003;
+        for(i = 0; i < totalNumAliens; i++){
+          if(alienPositions[i][0] == 1){
+            drawSprite(40 +4 +4, spriteCounter, alienPositions[i][1], alienPositions[i][2]);
+            spriteCounter++;
+          }
+        }
 
     }
 

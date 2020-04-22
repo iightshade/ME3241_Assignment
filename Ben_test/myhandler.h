@@ -1,4 +1,3 @@
-
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
@@ -7,7 +6,24 @@
 int counter = 0;
 int pos = 0;
 int playerX = SCREEN_WIDTH/2, playerY = SCREEN_HEIGHT-20;
-
+int spriteCounter;
+int lazerPositions[500][3];
+// Alien positions (active, Xpos, Y pos)
+int alienPositions[10][3]= {
+    {1, 30, 80},
+    {1, 50, 80},
+    {1, 70, 80},
+    {1, 90, 80},
+    {1, 110, 80},
+    {1, 30, 100},
+    {1, 50, 100},
+    {1, 70, 100},
+    {1, 90, 100},
+    {1, 110, 100},
+};
+int alienTimer = 0;
+int totalNumAliens = 10;
+int aliensMove = 1;
 
 void Handler(void)
 {
@@ -44,17 +60,46 @@ void Handler(void)
         counter++;
 
     }
+
         if ((REG_IF & INT_TIMER1) == INT_TIMER1) // TODO: replace XXX with the specific interrupt you are handling
     {
         steps = 16;
-        playerX = playerX + checkbutton();
-        // drawSprite(SPACESHIP,10001,x,y);
-        drawSprite(SPACESHIP, 10001, playerX, playerY);
 
+        // Spaceship position //
+        playerX = playerX + checkbutton();
+        drawSprite(SPACESHIP, 10001, playerX, playerY);
+        // drawSprite(SPACESHIP,10001,x,y);
+
+        // Lazer positions //
         drawSprite(LASER, 10002, playerX, playerY-pos);
         pos+=16;
 
-        // drawSprite(ALIEN1,10003,x,y);
+        // Update alien positions //
+        alienTimer++;
+        if(alienTimer == 2){
+          for(i = 0; i < totalNumAliens; i++){
+            alienPositions[i][1] = alienPositions[i][1] + aliensMove;
+          }
+          alienTimer = 0;
+        }
+
+        //Change alien move direction if aliens are too near the edges
+        // if(alienPositions[9][1] >> 200){
+        //   aliensMove = -1;
+        // }
+        // if(alienPositions[0][1] << 20){
+        //   aliensMove = 1;
+        // }
+
+
+        // Print alien positions //
+        spriteCounter = 10003;
+        for(i = 0; i < totalNumAliens; i++){
+          if(alienPositions[i][0] == 1){
+            drawSprite(ALIEN1, spriteCounter, alienPositions[i][1], alienPositions[i][2]);
+            spriteCounter++;
+          }
+        }
 
     }
 

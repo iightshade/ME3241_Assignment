@@ -3594,6 +3594,62 @@ playerX:
 	.size	playerY, 4
 playerY:
 	.word	140
+	.global	alienPositions
+	.align	2
+	.type	alienPositions, %object
+	.size	alienPositions, 120
+alienPositions:
+	.word	1
+	.word	30
+	.word	80
+	.word	1
+	.word	50
+	.word	80
+	.word	1
+	.word	70
+	.word	80
+	.word	1
+	.word	90
+	.word	80
+	.word	1
+	.word	110
+	.word	80
+	.word	1
+	.word	30
+	.word	100
+	.word	1
+	.word	50
+	.word	100
+	.word	1
+	.word	70
+	.word	100
+	.word	1
+	.word	90
+	.word	100
+	.word	1
+	.word	110
+	.word	100
+	.global	alienTimer
+	.bss
+	.global	alienTimer
+	.align	2
+	.type	alienTimer, %object
+	.size	alienTimer, 4
+alienTimer:
+	.space	4
+	.global	totalNumAliens
+	.data
+	.align	2
+	.type	totalNumAliens, %object
+	.size	totalNumAliens, 4
+totalNumAliens:
+	.word	10
+	.global	aliensMove
+	.align	2
+	.type	aliensMove, %object
+	.size	aliensMove, 4
+aliensMove:
+	.word	1
 	.section	.rodata
 	.align	2
 .LC0:
@@ -3609,19 +3665,19 @@ playerY:
 	.type	Handler, %function
 Handler:
 	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 344
+	@ args = 0, pretend = 0, frame = 348
 	@ frame_needed = 1, uses_anonymous_args = 0
 	mov	ip, sp
 	stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
 	sub	fp, ip, #-4294967292
-	sub	sp, sp, #344
+	sub	sp, sp, #348
 	mov	r1, #0
 	mov	r2, #200
-	ldr	sl, .L69
+	ldr	sl, .L89
 	sub	r0, fp, #240
 	mov	lr, pc
 	bx	sl
-	ldr	r3, .L69+4
+	ldr	r3, .L89+4
 	ldmia	r3, {r0, r1, r2}
 	mov	ip, #0	@  i
 	sub	r3, fp, #332
@@ -3652,66 +3708,139 @@ Handler:
 	ldrh	r3, [r2, #0]
 	mov	r3, r3, asl #16
 	tst	r3, #524288
-	mov	r9, r3, asr #16	@  Flag
-	bne	.L67
+	mov	r3, r3, asr #16
+	str	r3, [fp, #-388]	@  Flag
+	bne	.L85
 .L52:
-	mov	r7, #512
-	add	r7, r7, #67108866
-	ldrh	r3, [r7, #0]
-	tst	r3, #16
-	bne	.L68
+	mov	r3, #512
+	add	r3, r3, #67108866
+	ldrh	r2, [r3, #0]
+	tst	r2, #16
+	bne	.L86
 .L62:
-	mov	r3, #67108864
-	add	r3, r3, #520
-	mov	r2, #1	@ movhi
-	strh	r9, [r7, #0]	@ movhi 	@  Flag
-	strh	r2, [r3, #0]	@ movhi 
+	sub	r0, fp, #256
+	mov	r3, #512
+	mov	r2, #67108864
+	ldrh	r0, [r0, #-132]	@  Flag
+	add	r3, r3, #67108866
+	add	r2, r2, #520
+	mov	r1, #1	@ movhi
+	strh	r0, [r3, #0]	@ movhi 
+	strh	r1, [r2, #0]	@ movhi 
 	ldmea	fp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
 	bx	lr
-.L68:
-	ldr	r0, .L69+8
+.L86:
+	ldr	r0, .L89+8
 	mov	lr, pc
 	bx	r0
-	ldr	r4, .L69+12
+	ldr	r4, .L89+12
 	ldr	ip, [r4, #0]	@  playerX
-	ldr	r6, .L69+16
+	ldr	r6, .L89+16
 	add	ip, ip, r0	@  x
-	ldr	r5, .L69+20
+	ldr	r5, .L89+20
 	mov	r1, #9984
 	mov	r2, ip	@  x
 	ldr	r3, [r6, #0]	@  y,  playerY
+	str	ip, [r4, #0]	@  x,  playerX
 	mov	r0, #40
 	add	r1, r1, #17
-	str	ip, [r4, #0]	@  x,  playerX
 	bl	drawSprite
-	ldr	r1, [r5, #0]	@  pos
 	ldr	r3, [r6, #0]	@  playerY
+	ldr	r1, [r5, #0]	@  pos
 	rsb	r3, r1, r3	@  y
 	mov	r1, #9984
 	ldr	r2, [r4, #0]	@  x,  playerX
 	mov	r0, #44
 	add	r1, r1, #18
 	bl	drawSprite
+	ldr	ip, .L89+24
+	ldr	r2, [ip, #0]	@  alienTimer
 	ldr	r3, [r5, #0]	@  pos
+	add	r2, r2, #1
+	cmp	r2, #2
 	add	r3, r3, #16
 	str	r3, [r5, #0]	@  pos
+	str	r2, [ip, #0]	@  alienTimer
+	ldrne	r6, .L89+28
+	ldrne	r7, .L89+32
+	beq	.L87
+.L63:
+	ldr	r3, [r7, #112]	@  alienPositions
+	cmp	r3, #0
+	ldrlt	r3, .L89+36
+	mvnlt	r2, #0
+	strlt	r2, [r3, #0]	@  aliensMove
+	ldr	r2, [r6, #0]	@  totalNumAliens
+	ldr	r5, .L89+40
+	mov	r3, #9984
+	mov	r8, #0	@  i
+	add	r3, r3, #19
+	cmp	r8, r2	@  i
+	str	r3, [r5, #0]	@  spriteCounter
+	bge	.L62
+	mov	r4, r8	@  i,  i
+.L75:
+	ldr	r3, [r4, r7]	@  alienPositions
+	cmp	r3, #1
+	add	r2, r4, r7	@  i
+	mov	r0, #48
+	add	r8, r8, #1	@  i,  i
+	add	r4, r4, #12	@  i,  i
+	beq	.L88
+.L72:
+	ldr	r3, [r6, #0]	@  totalNumAliens
+	cmp	r8, r3	@  i
+	blt	.L75
 	b	.L62
-.L67:
-	ldr	r0, .L69+24
-	ldr	r6, .L69+28
-	ldr	r1, [r0, #0]	@  counter
-	smull	r3, r2, r6, r1
-	ldr	r3, .L69+32
+.L88:
+	ldr	r3, [r2, #8]	@  y,  alienPositions
+	ldr	r1, [r5, #0]	@  k,  spriteCounter
+	ldr	r2, [r2, #4]	@  x,  alienPositions
+	bl	drawSprite
+	ldr	r3, [r5, #0]	@  spriteCounter
+	add	r3, r3, #1
+	str	r3, [r5, #0]	@  spriteCounter
+	b	.L72
+.L87:
+	ldr	r6, .L89+28
+	ldr	r2, [r6, #0]	@  totalNumAliens
+	mov	r8, #0	@  i
+	cmp	r8, r2	@  i
+	ldrge	r7, .L89+32
+	bge	.L81
+	ldr	r3, .L89+36
+	ldr	r7, .L89+32
+	ldr	r0, [r3, #0]	@  aliensMove
+	mov	r1, r2
+	mov	r2, r7
+.L68:
+	ldr	r3, [r2, #4]	@  alienPositions
+	add	r8, r8, #1	@  i,  i
+	add	r3, r3, r0
+	cmp	r8, r1	@  i
+	str	r3, [r2, #4]	@  alienPositions
+	add	r2, r2, #12
+	blt	.L68
+.L81:
+	mov	r3, #0
+	str	r3, [ip, #0]	@  alienTimer
+	b	.L63
+.L85:
+	ldr	r9, .L89+44
+	ldr	r6, .L89+48
+	ldr	r1, [r9, #0]	@  counter
+	ldr	r3, .L89+52
+	smull	r0, r2, r6, r1
 	smull	r0, ip, r3, r1
 	mov	r4, r1, asr #31
 	rsb	r0, r4, r2, asr #2	@  ones
-	ldr	r3, .L69+36
+	ldr	r3, .L89+56
 	mov	lr, r0	@  ones,  ones
 	add	ip, ip, r1
 	rsb	ip, r4, ip, asr #5
 	smull	r2, r0, r3, lr	@  ones
 	smull	r3, r5, r6, ip
-	ldr	r3, .L69+40
+	ldr	r3, .L89+60
 	smull	r2, r6, r3, r1
 	sub	r7, r0, lr, asr #31	@  tens,  ones
 	mov	r3, ip, asr #31
@@ -3745,7 +3874,7 @@ Handler:
 	mov	r2, #197
 	mov	r3, #10
 	bl	drawSprite
-	ldr	r3, .L69+44
+	ldr	r3, .L89+64
 	ldmia	r3, {r0, r1}
 	sub	ip, fp, #380
 	str	r0, [fp, #-384]
@@ -3763,7 +3892,7 @@ Handler:
 	ldrb	r2, [r3, #0]	@ zero_extendqisi2	@  ch
 	cmp	r2, r8
 	mov	sl, #7	@  steps
-	beq	.L64
+	beq	.L77
 	sub	r2, fp, #40
 	sub	ip, fp, #40
 	sub	lr, fp, #40
@@ -3779,11 +3908,11 @@ Handler:
 	add	lr, lr, #4
 	mov	r2, ip
 	bne	.L56
-.L64:
+.L77:
 	sub	r7, r8, #1	@  i
 	mov	r4, #0	@  k
 	cmp	r4, r7	@  k
-	bgt	.L66
+	bgt	.L79
 	mov	r6, #97	@  x
 	sub	r5, fp, #40
 .L61:
@@ -3798,21 +3927,25 @@ Handler:
 	add	r5, r5, #4
 	add	r6, r6, sl	@  x,  x,  steps
 	ble	.L61
-.L66:
-	ldr	r0, .L69+24
-	ldr	r3, [r0, #0]	@  counter
+.L79:
+	ldr	r3, [r9, #0]	@  counter
 	add	r3, r3, #1
-	str	r3, [r0, #0]	@  counter
+	str	r3, [r9, #0]	@  counter
 	b	.L52
-.L70:
+.L90:
 	.align	2
-.L69:
+.L89:
 	.word	memset
 	.word	.LC0
 	.word	checkbutton
 	.word	playerX
 	.word	playerY
 	.word	pos
+	.word	alienTimer
+	.word	totalNumAliens
+	.word	alienPositions
+	.word	aliensMove
+	.word	spriteCounter
 	.word	counter
 	.word	1717986919
 	.word	-2004318071
@@ -3899,16 +4032,18 @@ main:
 	add	r0, r0, #67108866
 	ldrh	r1, [r0, #0]
 	mov	r2, #50331648
-	ldr	r3, .L84
+	ldr	r3, .L104
 	orr	r1, r1, #195
 	add	r2, r2, #32512
 	str	r3, [r2, #252]
 	strh	r1, [r0, #0]	@ movhi 
-.L81:
-	b	.L81
-.L85:
+.L101:
+	b	.L101
+.L105:
 	.align	2
-.L84:
+.L104:
 	.word	Handler
 	.size	main, .-main
+	.comm	spriteCounter,4,4
+	.comm	lazerPositions,6000,4
 	.ident	"GCC: (GNU) 3.3.6"
