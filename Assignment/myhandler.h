@@ -1,4 +1,4 @@
-
+#define INPUT                      (KEY_MASK & (~REG_KEYS))
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
 //Buttons:
@@ -26,6 +26,7 @@ void Handler(void)
       x = SCREEN_WIDTH / 2 - i / 2 * steps;
       y = SCREEN_HEIGHT / 2;
 
+		counter = counter + checkbutton();		
 
       for(k = 0; k <= i - 1; k++){
         drawSprite(d[k] - 64, k, (x + k *steps + counter), y);
@@ -49,9 +50,52 @@ void Handler(void)
     }
 
     if (KEY_R==1) {
-		counter = counter + 1;
+		//counter = counter + 1;
       //for(k = 0; k <= i-1; k++) drawSprite(d[k] - 64, k, (x+2*k*steps), y);
     }
     REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
     REG_IME = 0x01;  // Re-enable interrupt handling
+}
+
+
+int checkbutton(void)
+{
+	// Gift function to show you how a function that can be called upon button interrupt to detect which button was pressed and run a specific function for each button could look like. You would have to define each buttonA/buttonB/... function yourself.
+    u16 buttons = INPUT;
+
+    if ((buttons & KEY_A) == KEY_A)
+    {
+        //buttonA();
+    }
+    if ((buttons & KEY_B) == KEY_B)
+    {
+        // buttonB();
+    }
+    if ((buttons & KEY_SELECT) == KEY_SELECT)
+    {
+        // buttonSel();
+    }
+    if ((buttons & KEY_START) == KEY_START)
+    {
+        // buttonS();
+    }
+    if ((buttons & KEY_RIGHT) == KEY_RIGHT)
+    {
+        // buttonR();
+    }
+    if ((buttons & KEY_LEFT) == KEY_LEFT)
+    {
+        //buttonL();
+		 return -1;
+    }
+    if ((buttons & KEY_UP) == KEY_UP)
+    {
+        // buttonU();
+    }
+    if ((buttons & KEY_DOWN) == KEY_DOWN)
+    {
+        // buttonD();
+    }
+
+	 return 0;
 }

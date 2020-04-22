@@ -1138,24 +1138,6 @@ sprites:
 	.short	0
 	.text
 	.align	2
-	.global	checkbutton
-	.type	checkbutton, %function
-checkbutton:
-	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 0
-	@ frame_needed = 0, uses_anonymous_args = 0
-	@ link register save eliminated.
-	mov	r2, #67108864
-	add	r2, r2, #304
-	ldrh	r3, [r2, #0]
-	mvn	r3, r3
-	tst	r3, #16
-	@ lr needed for prologue
-	mvn	r0, #0
-	bxne	lr
-	bx	lr
-	.size	checkbutton, .-checkbutton
-	.align	2
 	.global	drawSprite
 	.type	drawSprite, %function
 drawSprite:
@@ -1185,22 +1167,22 @@ fillPalette:
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
 	mov	r0, #83886080
-	ldr	ip, .L19
+	ldr	ip, .L10
 	@ lr needed for prologue
 	mov	r1, #0	@  i
 	add	r0, r0, #512
-.L16:
+.L7:
 	mov	r3, r1, asl #2	@  i
 	mov	r2, r1, asl #1	@  i
 	ldrh	r3, [r3, ip]	@  palette
 	add	r1, r1, #1	@  i,  i
 	cmp	r1, #19	@  i
 	strh	r3, [r2, r0]	@ movhi 
-	ble	.L16
+	ble	.L7
 	bx	lr
-.L20:
+.L11:
 	.align	2
-.L19:
+.L10:
 	.word	palette
 	.size	fillPalette, .-fillPalette
 	.align	2
@@ -1212,10 +1194,10 @@ fillSprites:
 	@ frame_needed = 0, uses_anonymous_args = 0
 	stmfd	sp!, {r4, lr}
 	mov	r4, #100663296
-	ldr	lr, .L29
+	ldr	lr, .L20
 	mov	ip, #0	@  i
 	add	r4, r4, #65536
-.L26:
+.L17:
 	mov	r1, ip, asl #2	@  i
 	add	r3, r1, lr
 	ldrh	r0, [r3, #2]	@  sprites
@@ -1225,12 +1207,12 @@ fillSprites:
 	add	r2, r2, r0, asl #8
 	cmp	ip, #1600	@  i
 	strh	r2, [r3, r4]	@ movhi 
-	blt	.L26
+	blt	.L17
 	ldmfd	sp!, {r4, lr}
 	bx	lr
-.L30:
+.L21:
 	.align	2
-.L29:
+.L20:
 	.word	sprites
 	.size	fillSprites, .-fillSprites
 	.global	__divsi3
@@ -1249,23 +1231,23 @@ popSprite:
 	mov	r1, r2	@  count
 	mov	r0, #240
 	mov	r6, r3	@  x
-	ldr	r3, .L48
+	ldr	r3, .L39
 	mov	lr, pc
 	bx	r3
 	cmp	r8, #76	@  dir
 	mov	r5, r0	@  step
 	ldr	sl, [fp, #4]	@  y,  y
-	beq	.L46
-.L32:
+	beq	.L37
+.L23:
 	cmp	r8, #82	@  dir
-	beq	.L47
-.L31:
+	beq	.L38
+.L22:
 	ldmea	fp, {r4, r5, r6, r7, r8, sl, fp, sp, lr}
 	bx	lr
-.L47:
+.L38:
 	mov	r4, #240	@  i
-.L43:
-	ldr	r3, .L48+4
+.L34:
+	ldr	r3, .L39+4
 	rsb	r2, r6, r4	@  x,  i
 	smull	r0, r1, r3, r2
 	mov	r3, r2, asr #31
@@ -1279,12 +1261,12 @@ popSprite:
 	rsb	r4, r5, r4	@  i,  step,  i
 	bl	drawSprite
 	cmp	r4, #0	@  i
-	bgt	.L43
-	b	.L31
-.L46:
-	mov	r4, #0	@  i
+	bgt	.L34
+	b	.L22
 .L37:
-	ldr	r3, .L48+4
+	mov	r4, #0	@  i
+.L28:
+	ldr	r3, .L39+4
 	add	r2, r6, r4	@  x,  i
 	smull	r0, r1, r3, r2
 	mov	r3, r2, asr #31
@@ -1298,11 +1280,11 @@ popSprite:
 	add	r4, r4, r5	@  i,  i,  step
 	bl	drawSprite
 	cmp	r4, #239	@  i
-	ble	.L37
-	b	.L32
-.L49:
+	ble	.L28
+	b	.L23
+.L40:
 	.align	2
-.L48:
+.L39:
 	.word	__divsi3
 	.word	-2004318071
 	.size	popSprite, .-popSprite
@@ -1340,11 +1322,11 @@ Handler:
 	sub	sp, sp, #292
 	mov	r1, #0
 	mov	r2, #200
-	ldr	r4, .L66
+	ldr	r4, .L57
 	sub	r0, fp, #240
 	mov	lr, pc
 	bx	r4
-	ldr	r3, .L66+4
+	ldr	r3, .L57+4
 	ldmia	r3, {r0, r1, r2}
 	mov	ip, #0	@  i
 	sub	r3, fp, #332
@@ -1378,14 +1360,14 @@ Handler:
 	tst	r3, #524288
 	mov	r9, #10	@  steps
 	mov	sl, r3, asr #16	@  Flag
-	beq	.L51
+	beq	.L42
 	ldrb	r3, [r6, #0]	@ zero_extendqisi2	@  ch
 	cmp	r3, r5
-	beq	.L64
+	beq	.L55
 	sub	r2, fp, #40
 	sub	ip, fp, #40
 	sub	lr, fp, #40
-.L55:
+.L46:
 	add	ip, ip, #1
 	sub	r3, ip, #292
 	sub	r2, r2, #292
@@ -1396,20 +1378,25 @@ Handler:
 	add	r5, r5, #1	@  i,  i
 	add	lr, lr, #4
 	mov	r2, ip
-	bne	.L55
-.L64:
+	bne	.L46
+.L55:
 	add	r3, r5, r5, lsr #31	@  i,  i
 	mov	r3, r3, asr #1
 	mul	r2, r9, r3	@  steps
+	ldr	r0, .L57+8
+	rsb	r4, r2, #120	@  x
+	mov	lr, pc
+	bx	r0
+	ldr	r8, .L57+12
+	ldr	r3, [r8, #0]	@  counter
 	sub	r7, r5, #1	@  i
 	mov	r5, #0	@  k
+	add	r3, r3, r0
 	cmp	r5, r7	@  k
-	rsb	r2, r2, #120	@  x
-	bgt	.L51
-	ldr	r8, .L66+8
-	mov	r4, r2	@  x,  x
+	str	r3, [r8, #0]	@  counter
+	bgt	.L42
 	sub	r6, fp, #40
-.L60:
+.L51:
 	ldr	r0, [r6, #-200]	@  d
 	ldr	r2, [r8, #0]	@  counter
 	mov	r1, r5	@  k
@@ -1421,8 +1408,8 @@ Handler:
 	cmp	r5, r7	@  k
 	add	r6, r6, #4
 	add	r4, r4, r9	@  x,  x,  steps
-	ble	.L60
-.L51:
+	ble	.L51
+.L42:
 	mov	r3, #512
 	add	r3, r3, #67108866
 	mov	r2, #67108864
@@ -1432,13 +1419,32 @@ Handler:
 	strh	r3, [r2, #0]	@ movhi 
 	ldmea	fp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
 	bx	lr
-.L67:
+.L58:
 	.align	2
-.L66:
+.L57:
 	.word	memset
 	.word	.LC0
+	.word	checkbutton
 	.word	counter
 	.size	Handler, .-Handler
+	.align	2
+	.global	checkbutton
+	.type	checkbutton, %function
+checkbutton:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 0, uses_anonymous_args = 0
+	@ link register save eliminated.
+	mov	r2, #67108864
+	add	r2, r2, #304
+	ldrh	r3, [r2, #0]
+	mvn	r3, r3
+	ands	r3, r3, #32
+	mvn	r0, #0
+	moveq	r0, r3
+	@ lr needed for prologue
+	bx	lr
+	.size	checkbutton, .-checkbutton
 	.align	2
 	.global	main
 	.type	main, %function

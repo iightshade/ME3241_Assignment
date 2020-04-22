@@ -237,48 +237,6 @@ u16 sprites[] = {
 
 # 1 "gbalib.h" 1
 
-
-int checkbutton(void)
-{
-
-    u16 buttons = (0x3FF & (~*(volatile u16*)0x4000130));
-
-    if ((buttons & 0x001) == 0x001)
-    {
-
-    }
-    if ((buttons & 0x002) == 0x002)
-    {
-
-    }
-    if ((buttons & 0x004) == 0x004)
-    {
-
-    }
-    if ((buttons & 0x008) == 0x008)
-    {
-
-    }
-    if ((buttons & 0x010) == 0x010)
-    {
-
-                  return -1;
-    }
-    if ((buttons & 0x020) == 0x020)
-    {
-
-
-    }
-    if ((buttons & 0x040) == 0x040)
-    {
-
-    }
-    if ((buttons & 0x080) == 0x080)
-    {
-
-    }
-}
-
 void drawSprite(int sprites, int N, int x, int y)
 {
 
@@ -349,6 +307,7 @@ void Handler(void)
       x = 240 / 2 - i / 2 * steps;
       y = 160 / 2;
 
+                counter = counter + checkbutton();
 
       for(k = 0; k <= i - 1; k++){
         drawSprite(d[k] - 64, k, (x + k *steps + counter), y);
@@ -358,15 +317,58 @@ void Handler(void)
 
     if ((*(u16*)0x4000202 & 0x10) == 0x10)
         {
-# 49 "myhandler.h"
+# 50 "myhandler.h"
     }
 
     if (0x100==1) {
-                counter = counter + checkbutton();
+
 
     }
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
+}
+
+
+int checkbutton(void)
+{
+
+    u16 buttons = (0x3FF & (~*(volatile u16*)0x4000130));
+
+    if ((buttons & 0x001) == 0x001)
+    {
+
+    }
+    if ((buttons & 0x002) == 0x002)
+    {
+
+    }
+    if ((buttons & 0x004) == 0x004)
+    {
+
+    }
+    if ((buttons & 0x008) == 0x008)
+    {
+
+    }
+    if ((buttons & 0x010) == 0x010)
+    {
+
+    }
+    if ((buttons & 0x020) == 0x020)
+    {
+
+                 return -1;
+    }
+    if ((buttons & 0x040) == 0x040)
+    {
+
+    }
+    if ((buttons & 0x080) == 0x080)
+    {
+
+    }
+
+         return 0;
 }
 # 8 "main.c" 2
 # 19 "main.c"
@@ -375,6 +377,7 @@ int main(void)
 
 
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
+
 
 
     *(unsigned short *) 0x5000200 = 0;

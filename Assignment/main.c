@@ -21,6 +21,7 @@ int main(void)
 
     // Set Mode 2
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
+	 // 0x1142 for mode 3 and setting background 
 
     // Fill SpritePal
     *(unsigned short *) 0x5000200 = 0;
