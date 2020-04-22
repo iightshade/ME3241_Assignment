@@ -51,7 +51,7 @@ void Handler(void)
         drawSprite(LASER,10002,x,y-pos);
         pos+=16;
         
-        drawSprite(ALIEN1,10003,x,y);
+        // drawSprite(ALIEN1,10003,x,y);
 
     }
 

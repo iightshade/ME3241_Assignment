@@ -8,6 +8,7 @@
 #include "myhandler.h"
 
 
+
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
 //Buttons: 
