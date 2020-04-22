@@ -636,17 +636,6 @@ void popSprite(int sprites, char dir, int count, int x, int y)
         }
     }
 }
-
-void ClearScreen()
-{
-    int x,y,c=0;
-    for (x = 0; x < 240; x++){
-        for (y = 0; y < 160; y++){
-                drawSprite(0,c,x,y); c++;
-                }
-            }
-
-}
 # 8 "main.c" 2
 # 1 "myhandler.h" 1
 
@@ -659,137 +648,55 @@ int counter = 0;
 int pos = 0;
 int playerX = 240/2, playerY = 160 -20;
 
-int menu_point = 160/2 + 1*20-20;
-int menumap = 1, gamemap = 0, highscore = 0;
-int CS = 0;
-
-int spriteCounter;
-int lazerPositions[500][3];
-
-int alienPositions[10][3]= {
-    {1, 30, 80},
-    {1, 50, 80},
-    {1, 70, 80},
-    {1, 90, 80},
-    {1, 110, 80},
-    {1, 30, 100},
-    {1, 50, 100},
-    {1, 70, 100},
-    {1, 90, 100},
-    {1, 110, 100},
-};
-int alienTimer = 0;
-int totalNumAliens = 10;
-int aliensMove = 1;
-
 
 void Handler(void)
 {
     u16 Flag; int x,y,steps,a1,a2; int newline = 0;
-    int d[50]={},l[10]={},i=0,j,linecount=1,k, c=0,mod=0;
-
+    int d[50]={},l[10]={},i=0,j,linecount=1,k;
+    char ch[50]="NEW GAME>";
     a1 = 0; a2 = 1;
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
-    if ((*(u16*)0x4000202 & 0x20) == 0x20){
-        if (menumap == 1){
-            char ch[50]=" NEW GAME>HIGHSCORE>CREDITS>";
-            steps = 10;
 
-            while (ch[i]!='\0'){d[i]=ch[i]; i++;}
+        if ((*(u16*)0x4000202 & 0x8) == 0x8)
+    {
 
-            for(j=0;j<=i-1;j++){
-                if (d[j]==62){
-                    l[linecount]=j-mod;
-                    mod = j; linecount ++;
-                    }
-                }
 
-            for(j=1;j<=linecount;j++){
-                x = 240/2 - 8/2*steps;
-                y = 160/2 + j*20-20;
+        int ones, tens, min_ones, min_tens, distx;
+        steps = 7;
 
-                for(k=0;k<=l[j]-1;k++){
-                    drawSprite(d[c]-64,c,(x+k*steps),y);
-                    c++;
-                    }
-                }
+        x = 240 - 15; y = 10;
+        ones = counter%10;
+        tens = counter/10%6;
+        min_ones = counter/60%10;
+        min_tens = counter/600;
+        drawSprite(ones+27,10,x,y);
+        drawSprite(tens+27,100,x-steps,y);
+        drawSprite(min_ones+27,1000,x-2*steps-7,y);
+        drawSprite(min_tens+27,10000,x-3*steps-7,y);
+        distx = x-3*steps-7;
 
-            menu_point = menu_point + (-checkbutton())*20;
-            if (menu_point > 160/2 + 3*20-20) menu_point = 160/2 + 3*20-20;
-            if (menu_point < 160/2 + 1*20-20) menu_point = 160/2 + 1*20-20;
+        char ch[50]="LIVES>";
+        while (ch[i]!='\0') {d[i]=ch[i]; i++;}
+        x = distx-100;
+        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
+        counter++;
 
-            drawSprite(37, c, 240/2 - 5*steps, menu_point);
+    }
+        if ((*(u16*)0x4000202 & 0x10) == 0x10)
+    {
+        steps = 16;
+        playerX = playerX + checkbutton();
 
-            if (menu_point == (160/2 + 1*20-20) && checkbutton()==5){
-                menumap = 0, gamemap = 1, highscore = 0; CS=1;}
-            if (menu_point == (160/2 + 2*20-20) && checkbutton()==5){
-                menumap = 0, gamemap = 0, highscore = 1; CS=1;}
-            }
+        drawSprite(40, 10001, playerX, playerY);
 
-        }
+        drawSprite(40 +4, 10002, playerX, playerY-pos);
+        pos+=16;
 
 
 
-        if (gamemap == 1){
-            if (CS==1){ClearScreen();CS--;}
-            if ((*(u16*)0x4000202 & 0x8) == 0x8){
-
-
-            int ones, tens, min_ones, min_tens, distx;
-            steps = 7;
-
-            x = 240 - 15; y = 10;
-            ones = counter%10;
-            tens = counter/10%6;
-            min_ones = counter/60%10;
-            min_tens = counter/600;
-            drawSprite(ones+27,10,x,y);
-            drawSprite(tens+27,100,x-steps,y);
-            drawSprite(min_ones+27,1000,x-2*steps-7,y);
-            drawSprite(min_tens+27,10000,x-3*steps-7,y);
-            distx = x-3*steps-7;
-
-            char ch[50]="LIVES>";
-            while (ch[i]!='\0') {d[i]=ch[i]; i++;}
-            x = distx-100;
-            for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
-            counter++;
-            }
-
-
-
-
-            if ((*(u16*)0x4000202 & 0x10) == 0x10){
-
-            steps = 16;
-            playerX = playerX + checkbutton();
-
-            drawSprite(40, 10001, playerX, playerY);
-
-            drawSprite(40 +4, 10002, playerX, playerY-pos);
-            pos+=16;
-
-
-            alienTimer++;
-            if(alienTimer == 2){
-              for(i = 0; i < totalNumAliens; i++){
-                alienPositions[i][1] = alienPositions[i][1] + aliensMove;
-              }
-              alienTimer = 0;
-            }
-# 142 "myhandler.h"
-            spriteCounter = 10003;
-            for(i = 0; i < totalNumAliens; i++){
-              if(alienPositions[i][0] == 1){
-                drawSprite(40 +4 +4, spriteCounter, alienPositions[i][1], alienPositions[i][2]);
-                spriteCounter++;
-                }
-              }
-            }
-        }
-
+    }
 
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
@@ -803,7 +710,6 @@ int checkbutton(void)
     if ((buttons & 0x001) == 0x001)
     {
 
-          return 5;
     }
     if ((buttons & 0x002) == 0x002)
     {
@@ -830,20 +736,19 @@ int checkbutton(void)
     if ((buttons & 0x040) == 0x040)
     {
 
-          return 1;
     }
     if ((buttons & 0x080) == 0x080)
     {
 
-          return -1;
     }
 
          return 0;
 }
 # 9 "main.c" 2
-# 20 "main.c"
+# 22 "main.c"
 int main(void)
 {
+
 
 
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
@@ -859,7 +764,7 @@ int main(void)
 
     *(u16*)0x4000208 = 0x0;
     (*(unsigned int*)0x3007FFC) = (int)&Handler;
-    *(u16*)0x4000200 |= 0x8 | 0x10 | 0x20 | 0x1000;
+    *(u16*)0x4000200 |= 0x8 | 0x10 | 0x1000;
     *(volatile u16*)0x4000132 |= 0x7FFF;
     *(u16*)0x4000208 = 0x1;
 
@@ -869,9 +774,6 @@ int main(void)
 
     *(u16*)0x4000104 = 65255;
     *(u16*)0x4000106 |= 0x0003 | 0x0080 | 0x0040;
-
-    *(u16*)0x4000108 = 64509;
-    *(u16*)0x400010A |= 0x0003 | 0x0080 | 0x0040;
 
     while(1);
 
