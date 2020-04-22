@@ -4,32 +4,48 @@
 //Buttons: 
 //A button = Z, B button = X, Arrow Keys = leftrightpdown
 int counter = 0;
-int countertens = 0;
 
 void Handler(void)
 {
     u16 Flag; int x,y,steps,a1,a2; int newline = 0;
     int d[50]={},l[10]={},i=0,j,linecount=1,k;
-    char ch[50]="ABCDE>"; //all caps, > to change line
+    char ch[50]="NEW GAME>"; //all caps, > to change line
     a1 = 0; a2 = 1;
     steps = 10;
 
     REG_IME = 0x00; // Stop all other interrupt handling, while we handle this current one
     Flag = REG_IF;
 
-    // if ((REG_IF & INT_TIMER0) == INT_TIMER0) // TODO: replace XXX with the specific interrupt you are handling
-    // {
-    //     ones = counter%10;
-    //     tens = counter/10;
-    //     drawSprite(ones,10,x+20,y);
-    //     drawSprite(tens,3,x,y);
-    //     counter++;
-    // }
-        if ((REG_IF & INT_TIMER0) == INT_TIMER0) // TODO: replace XXX with the specific interrupt you are handling
+        if ((REG_IF & INT_TIMER0) == INT_TIMER0) 
     {   
         //Display screen, ASCII into what to type, 65 = A
         //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
-        
+        int x , y, ones, tens, min_ones, min_tens;
+        x = SCREEN_WIDTH - 15; y = 10;
+        ones = counter%10;
+        tens = counter/10%6;
+        min_ones = counter/60%10;
+        min_tens = counter/600;
+        drawSprite(ones+NUMBER,10,x,y); 
+        drawSprite(tens+NUMBER,100,x-10,y);
+        drawSprite(min_ones+NUMBER,1000,x-25,y);
+        drawSprite(min_tens+NUMBER,10000,x-35,y);
+        counter++;
+
+    }
+        if ((REG_IF & INT_TIMER1) == INT_TIMER1) // TODO: replace XXX with the specific interrupt you are handling
+    {   
+        x = SCREEN_WIDTH/2; y = SCREEN_HEIGHT/2;
+        drawSprite(40,1,x,y);
+    }
+
+    REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
+    REG_IME = 0x01;  // Re-enable interrupt handling
+}
+
+
+    //     FOR GAME MENU -----------------------------------------------------------
+
     //     int d[50]={},l[10]={},i=0,j,linecount=1,k,c=0,mod=0; //l[] = letters in line
     //     char ch[50]="NEW GAME >NEW GAME"; //all caps, > to change line
     //     while (ch[i]!='\0'){ 
@@ -54,27 +70,27 @@ void Handler(void)
     //         }
     //     }
     // }
-        x = SCREEN_WIDTH/2; y = SCREEN_HEIGHT/2;
-        drawSprite(16,1,x,y);
 
-        // while (ch[i]!='\0') {d[i]=ch[i]; i++; }
-        // x = SCREEN_WIDTH/2 - i/2*steps; y = SCREEN_HEIGHT/2;
-        // for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
+    //      while (ch[i]!='\0') {d[i]=ch[i]; i++; }
+    //      x = SCREEN_WIDTH/2 - i/2*steps; y = SCREEN_HEIGHT/2;
+    //      for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
 
-    }
-        if ((REG_IF & INT_TIMER1) == INT_TIMER1) // TODO: replace XXX with the specific interrupt you are handling
-    {   
-        // popSprite(ALIEN, 'L', 6, (x+steps*counter) % SCREEN_WIDTH,
-        //     y + countertens*steps);
+    //      x = SCREEN_WIDTH/2; y = SCREEN_HEIGHT/2;
+    //      drawSprite(40,1,x,y);
 
-        // popSprite(a2, 'R', 6, (SCREEN_WIDTH-steps*counter)% SCREEN_WIDTH, //PROBLEM
-        //     y + steps + countertens*steps);
 
-        // counter++;
-        // if (counter%10 == 0)
-        //     {countertens++;}
-    }
 
-    REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
-    REG_IME = 0x01;  // Re-enable interrupt handling
-}
+
+
+
+    //      ALIEN MOTION------------------------------------------
+
+    //     popSprite(ALIEN, 'L', 6, (x+steps*counter) % SCREEN_WIDTH,
+    //     y + countertens*steps);
+
+    //     popSprite(a2, 'R', 6, (SCREEN_WIDTH-steps*counter)% SCREEN_WIDTH, //PROBLEM
+    //     y + steps + countertens*steps);
+
+    //     counter++;
+    //     if (counter%10 == 0)
+    //         {countertens++;}

@@ -9,11 +9,12 @@ void drawSprite(int spritenumb, int N, int x, int y)
         *(unsigned short *)(0x7000004 + 8*N) = spritenumb*2;
         *(unsigned short *)(0x7000002 + 8*N) = x;
     }
-    else if (spritenumb > SPRITE8 && spritenumb <= 42 ) {
-        *(unsigned short *)(0x7000004 + 8*N) = spritenumb*8;
+    else if (spritenumb >= 40) 
+    {
         *(unsigned short *)(0x7000002 + 8*N) = x | 0x4000;
+        *(unsigned short *)(0x7000004 + 8*N) = (spritenumb/4*8);
     }
-    else {*(unsigned short *)(0x7000004 + 8*N) = spritenumb*32;}
+    // else {*(unsigned short *)(0x7000004 + 8*N) = spritenumb*32;}
 }
 
 void fillPalette(void)
@@ -29,8 +30,8 @@ void fillSprites(void)
     int i,numsprites;
 
     numsprites = 50; // numsprites very impt - sets the limit of sprites that can show
-    for (i = 0; i < (SPRITE8)*8*8; i++) spriteData[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
-    for (i = (SPRITE8)*8*8; i <= (42*16*16); i++) {spriteData[i] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
+    for (i = 0; i <= (SPRITE8-1)*8*8; i++) spriteData[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
+    for (i = 0; i <= (43*16*16); i++) {spriteData[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
 }
 
 void popSprite(int sprites, char dir, int count, int x, int y)
