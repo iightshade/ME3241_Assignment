@@ -4,8 +4,16 @@ void drawSprite(int spritenumb, int N, int x, int y)
 {   
     // Gift function: displays sprite number numb on screen at position (x,y), as sprite object N
     *(unsigned short *)(0x7000000 + 8*N) = y | 0x2000;
-    *(unsigned short *)(0x7000002 + 8*N) = x | 0x4000;
-    *(unsigned short *)(0x7000004 + 8*N) = spritenumb*8;
+
+    if (spritenumb <= SPRITE8) {
+        *(unsigned short *)(0x7000004 + 8*N) = spritenumb*2;
+        *(unsigned short *)(0x7000002 + 8*N) = x;
+    }
+    else if (spritenumb > SPRITE8 && spritenumb <= 42 ) {
+        *(unsigned short *)(0x7000004 + 8*N) = spritenumb*8;
+        *(unsigned short *)(0x7000002 + 8*N) = x | 0x4000;
+    }
+    else {*(unsigned short *)(0x7000004 + 8*N) = spritenumb*32;}
 }
 
 void fillPalette(void)
@@ -20,10 +28,9 @@ void fillSprites(void)
 {
     int i,numsprites;
 
-    numsprites = 50;
-    for (i = 0; i < (numsprites)*8*8/2; i++) // numsprites very impt - sets the limit of sprites that can show
-    spriteData[i] = (sprites[i*2+1] << 8) + sprites[i*2];
-
+    numsprites = 50; // numsprites very impt - sets the limit of sprites that can show
+    for (i = 0; i < (SPRITE8)*8*8; i++) spriteData[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
+    for (i = (SPRITE8)*8*8; i <= (42*16*16); i++) {spriteData[i] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
 }
 
 void popSprite(int sprites, char dir, int count, int x, int y)

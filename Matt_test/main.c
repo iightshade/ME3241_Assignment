@@ -1,10 +1,12 @@
 // -----------------------------------------------------------------------------
 // C-Skeleton to be used with HAM Library from www.ngine.de
 // -----------------------------------------------------------------------------
-#include "sprites.h"
+#include "sprites8.h"
+#include "sprites16.h"
 #include "gba.h"
 #include "gbalib.h"
 #include "myhandler.h"
+
 
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
@@ -13,14 +15,11 @@
 
 #define KEYCNT *(volatile u16*)0x4000132
 
-
-
 // -----------------------------------------------------------------------------
 // Project Entry Point
 // -----------------------------------------------------------------------------
 int main(void)
 {
-
 
     // Set Mode 2
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
