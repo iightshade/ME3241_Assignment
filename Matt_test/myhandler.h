@@ -1,10 +1,13 @@
 
+#define INPUT                      (KEY_MASK & (~REG_KEYS))
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
-//Buttons: 
+//Buttons:
 //A button = Z, B button = X, Arrow Keys = leftrightpdown
 int counter = 0;
 int pos = 0;
+int playerX = SCREEN_WIDTH/2, playerY = SCREEN_HEIGHT-20;
+
 
 void Handler(void)
 {
@@ -16,8 +19,8 @@ void Handler(void)
     REG_IME = 0x00; // Stop all other interrupt handling, while we handle this current one
     Flag = REG_IF;
 
-        if ((REG_IF & INT_TIMER0) == INT_TIMER0) 
-    {   
+        if ((REG_IF & INT_TIMER0) == INT_TIMER0)
+    {
         //Display screen, ASCII into what to type, 65 = A
         //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
         int ones, tens, min_ones, min_tens, distx;
@@ -28,7 +31,7 @@ void Handler(void)
         tens = counter/10%6;
         min_ones = counter/60%10;
         min_tens = counter/600;
-        drawSprite(ones+NUMBER,10,x,y); 
+        drawSprite(ones+NUMBER,10,x,y);
         drawSprite(tens+NUMBER,100,x-steps,y);
         drawSprite(min_ones+NUMBER,1000,x-2*steps-7,y);
         drawSprite(min_tens+NUMBER,10000,x-3*steps-7,y);
@@ -42,15 +45,15 @@ void Handler(void)
 
     }
         if ((REG_IF & INT_TIMER1) == INT_TIMER1) // TODO: replace XXX with the specific interrupt you are handling
-    {   
-        steps = 
-        x = SCREEN_WIDTH/2; y = SCREEN_HEIGHT-20;
+    {
+        steps = 16;
+        playerX = playerX + checkbutton();
         // drawSprite(SPACESHIP,10001,x,y);
-        drawSprite(SPACESHIP,10001,x,y);
+        drawSprite(SPACESHIP, 10001, playerX, playerY);
 
-        drawSprite(LASER,10002,x,y-pos);
+        drawSprite(LASER, 10002, playerX, playerY-pos);
         pos+=16;
-        
+
         // drawSprite(ALIEN1,10003,x,y);
 
     }
@@ -59,25 +62,68 @@ void Handler(void)
     REG_IME = 0x01;  // Re-enable interrupt handling
 }
 
+int checkbutton(void)
+{
+	// Gift function to show you how a function that can be called upon button interrupt to detect which button was pressed and run a specific function for each button could look like. You would have to define each buttonA/buttonB/... function yourself.
+    u16 buttons = INPUT;
+
+    if ((buttons & KEY_A) == KEY_A)
+    {
+        //buttonA();
+    }
+    if ((buttons & KEY_B) == KEY_B)
+    {
+        // buttonB();
+    }
+    if ((buttons & KEY_SELECT) == KEY_SELECT)
+    {
+        // buttonSel();
+    }
+    if ((buttons & KEY_START) == KEY_START)
+    {
+        // buttonS();
+    }
+    if ((buttons & KEY_RIGHT) == KEY_RIGHT)
+    {
+        // buttonR();
+		  return 1;
+    }
+    if ((buttons & KEY_LEFT) == KEY_LEFT)
+    {
+        //buttonL();
+		  return -1;
+    }
+    if ((buttons & KEY_UP) == KEY_UP)
+    {
+        // buttonU();
+    }
+    if ((buttons & KEY_DOWN) == KEY_DOWN)
+    {
+        // buttonD();
+    }
+
+	 return 0;
+}
+
 
     //     FOR GAME MENU -----------------------------------------------------------
 
     //     int d[50]={},l[10]={},i=0,j,linecount=1,k,c=0,mod=0; //l[] = letters in line
     //     char ch[50]="NEW GAME >NEW GAME"; //all caps, > to change line
-    //     while (ch[i]!='\0'){ 
-    //         d[i]=ch[i]; i++; 
+    //     while (ch[i]!='\0'){
+    //         d[i]=ch[i]; i++;
     //     }
     //     for(j=0;j<=i-1;j++){
     //         if (d[j]==62){
     //             l[linecount]=j-mod; //letters in line
     //             mod = j;
     //             linecount ++;
-    //             }                
+    //             }
     //         }
 
     //     if (linecount ==2) {
     //     for(j=1;j<=linecount;j++){
-    //         x = SCREEN_WIDTH/2 - l[j]/2*steps; 
+    //         x = SCREEN_WIDTH/2 - l[j]/2*steps;
     //         y = SCREEN_HEIGHT/2 + j*20;
 
     //         for(k=0;k<=l[j]-1;k++){

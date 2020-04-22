@@ -565,7 +565,7 @@ u16 sprites16[] = {
     0,0,1,1,1,1,0,0,
 
     0,7,7,7,7,7,7,7,
-    0,1,1,0,0,1,1,0,
+    0,1,1,7,7,1,1,7,
     1,1,1,1,1,1,1,1,
     0,1,1,1,1,1,1,1,
     0,1,1,1,1,1,1,1,
@@ -574,7 +574,7 @@ u16 sprites16[] = {
     0,0,0,0,1,1,1,1,
 
     7,7,7,7,7,7,7,0,
-    0,1,1,0,0,1,1,0,
+    7,1,1,7,7,1,1,0,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,0,
     1,1,1,1,1,1,1,0,
@@ -643,8 +643,11 @@ void popSprite(int sprites, char dir, int count, int x, int y)
 
 
 
+
 int counter = 0;
 int pos = 0;
+int playerX = 240/2, playerY = 160 -20;
+
 
 void Handler(void)
 {
@@ -683,21 +686,66 @@ void Handler(void)
     }
         if ((*(u16*)0x4000202 & 0x10) == 0x10)
     {
-        steps =
-        x = 240/2; y = 160 -20;
+        steps = 16;
+        playerX = playerX + checkbutton();
 
-        drawSprite(40 +4 +4,10001,x,y);
+        drawSprite(40, 10001, playerX, playerY);
 
-        drawSprite(40 +4,10002,x,y-pos);
+        drawSprite(40 +4, 10002, playerX, playerY-pos);
         pos+=16;
+
+
 
     }
 
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
 }
+
+int checkbutton(void)
+{
+
+    u16 buttons = (0x3FF & (~*(volatile u16*)0x4000130));
+
+    if ((buttons & 0x001) == 0x001)
+    {
+
+    }
+    if ((buttons & 0x002) == 0x002)
+    {
+
+    }
+    if ((buttons & 0x004) == 0x004)
+    {
+
+    }
+    if ((buttons & 0x008) == 0x008)
+    {
+
+    }
+    if ((buttons & 0x010) == 0x010)
+    {
+
+                  return 1;
+    }
+    if ((buttons & 0x020) == 0x020)
+    {
+
+                  return -1;
+    }
+    if ((buttons & 0x040) == 0x040)
+    {
+
+    }
+    if ((buttons & 0x080) == 0x080)
+    {
+
+    }
+
+         return 0;
+}
 # 9 "main.c" 2
-# 21 "main.c"
+# 22 "main.c"
 int main(void)
 {
 
@@ -724,7 +772,7 @@ int main(void)
     *(u16*)0x4000100 = 49141;
     *(u16*)0x4000102 |= 0x0003 | 0x0080 | 0x0040;
 
-    *(u16*)0x4000104 = 57337;
+    *(u16*)0x4000104 = 65255;
     *(u16*)0x4000106 |= 0x0003 | 0x0080 | 0x0040;
 
     while(1);
