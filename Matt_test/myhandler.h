@@ -4,6 +4,7 @@
 //Buttons: 
 //A button = Z, B button = X, Arrow Keys = leftrightpdown
 int counter = 0;
+int pos = 0;
 
 void Handler(void)
 {
@@ -11,7 +12,6 @@ void Handler(void)
     int d[50]={},l[10]={},i=0,j,linecount=1,k;
     char ch[50]="NEW GAME>"; //all caps, > to change line
     a1 = 0; a2 = 1;
-    steps = 10;
 
     REG_IME = 0x00; // Stop all other interrupt handling, while we handle this current one
     Flag = REG_IF;
@@ -20,23 +20,39 @@ void Handler(void)
     {   
         //Display screen, ASCII into what to type, 65 = A
         //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
-        int x , y, ones, tens, min_ones, min_tens;
+        int ones, tens, min_ones, min_tens, distx;
+        steps = 7;
+
         x = SCREEN_WIDTH - 15; y = 10;
         ones = counter%10;
         tens = counter/10%6;
         min_ones = counter/60%10;
         min_tens = counter/600;
         drawSprite(ones+NUMBER,10,x,y); 
-        drawSprite(tens+NUMBER,100,x-10,y);
-        drawSprite(min_ones+NUMBER,1000,x-25,y);
-        drawSprite(min_tens+NUMBER,10000,x-35,y);
+        drawSprite(tens+NUMBER,100,x-steps,y);
+        drawSprite(min_ones+NUMBER,1000,x-2*steps-7,y);
+        drawSprite(min_tens+NUMBER,10000,x-3*steps-7,y);
+        distx = x-3*steps-7;
+
+        char ch[50]="LIVES>"; //all caps, > to change line
+        while (ch[i]!='\0') {d[i]=ch[i]; i++;}
+        x = distx-100;
+        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
         counter++;
 
     }
         if ((REG_IF & INT_TIMER1) == INT_TIMER1) // TODO: replace XXX with the specific interrupt you are handling
     {   
-        x = SCREEN_WIDTH/2; y = SCREEN_HEIGHT/2;
-        drawSprite(40,1,x,y);
+        steps = 
+        x = SCREEN_WIDTH/2; y = SCREEN_HEIGHT-20;
+        // drawSprite(SPACESHIP,10001,x,y);
+        drawSprite(SPACESHIP,10001,x,y);
+
+        drawSprite(LASER,10002,x,y-pos);
+        pos+=16;
+        
+        drawSprite(ALIEN1,10003,x,y);
+
     }
 
     REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
