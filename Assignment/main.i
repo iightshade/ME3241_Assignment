@@ -238,6 +238,47 @@ u16 sprites[] = {
 # 1 "gbalib.h" 1
 
 
+int checkbutton(void)
+{
+
+    u16 buttons = (0x3FF & (~*(volatile u16*)0x4000130));
+
+    if ((buttons & 0x001) == 0x001)
+    {
+
+    }
+    if ((buttons & 0x002) == 0x002)
+    {
+
+    }
+    if ((buttons & 0x004) == 0x004)
+    {
+
+    }
+    if ((buttons & 0x008) == 0x008)
+    {
+
+    }
+    if ((buttons & 0x010) == 0x010)
+    {
+
+                  return -1;
+    }
+    if ((buttons & 0x020) == 0x020)
+    {
+
+
+    }
+    if ((buttons & 0x040) == 0x040)
+    {
+
+    }
+    if ((buttons & 0x080) == 0x080)
+    {
+
+    }
+}
+
 void drawSprite(int sprites, int N, int x, int y)
 {
 
@@ -293,33 +334,36 @@ void Handler(void)
     u16 Flag;
     int x,y,steps,a1,a2;
     int newline = 0;
-    int d[50]={},l[10]={};
+    int d[50] = {}, l[10] = {};
     int i = 0, j, k, linecount = 1;
-    char ch[50]="GAME>";
+    char ch[50]="NEW GAME>";
     a1 = 0; a2 = 1;
     steps = 10;
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
-# 31 "myhandler.h"
+
     if ((*(u16*)0x4000202 & 0x8) == 0x8)
     {
       while (ch[i] != '\0'){d[i] = ch[i]; i++;}
       x = 240 / 2 - i / 2 * steps;
       y = 160 / 2;
 
+
       for(k = 0; k <= i - 1; k++){
-        drawSprite(d[k] - 64, k, (x + k *steps), y);
+        drawSprite(d[k] - 64, k, (x + k *steps + counter), y);
       }
     }
-# 70 "myhandler.h"
+
+
     if ((*(u16*)0x4000202 & 0x10) == 0x10)
         {
-# 83 "myhandler.h"
+# 49 "myhandler.h"
     }
 
     if (0x100==1) {
-      for(k = 0; k <= i-1; k++) drawSprite(d[k] - 64, k, (x+2*k*steps), y);
+                counter = counter + checkbutton();
+
     }
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
@@ -336,6 +380,7 @@ int main(void)
     *(unsigned short *) 0x5000200 = 0;
     *(unsigned short *) 0x5000202 = ((31) + (31<<5) + (31<<10));
 
+
     fillPalette();
     fillSprites();
 
@@ -345,6 +390,7 @@ int main(void)
     *(u16*)0x4000200 |= 0x8 | 0x10 | 0x1000;
     *(volatile u16*)0x4000132 |= 0x7FFF;
     *(u16*)0x4000208 = 0x1;
+
 
 
     *(u16*)0x4000100 = 49141;
