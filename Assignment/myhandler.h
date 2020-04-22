@@ -5,33 +5,58 @@
 //A button = Z, B button = X, Arrow Keys = leftrightpdown
 int counter = 0;
 int countertens = 0;
+int enemies = 10
 
 void Handler(void)
 {
     u16 Flag;
-    int x,y,steps,a1,a2;
+    //int x,y,steps
+	 //int a1,a2;
     int newline = 0;
     int d[50] = {}, l[10] = {};
     int i = 0, j, k, linecount = 1;
     char ch[50]="N"; //all caps, > to change line
 	 int playerSprite[10] = {};
 	 int playerX = SCREEN_WIDTH/2, playerY = 150;
-    a1 = 0; a2 = 1;
+    // a1 = 0; a2 = 1;
     steps = 10;
 
     REG_IME = 0x00; // Stop all other interrupt handling, while we handle this current one
     Flag = REG_IF;
 
-    if ((REG_IF & INT_TIMER0) == INT_TIMER0) // TODO: replace XXX with the specific interrupt you are handling
+    if ((REG_IF & INT_TIMER0) == INT_TIMER0) 
     {
       while (ch[i] != '\0'){playerSprite[i] = ch[i]; i++;}
 		
+
+
+
+
+
 		counter = counter + checkbutton();		
+
+
+
+
+
+
 		
-      for(k = 0; k <= i - 1; k++){
+      for(k = 0; k < i ; k++){
         drawSprite(playerSprite[k] - 64, k, (playerX + counter), playerY);
       }
+
+
+
+
+
+
+
     }
+
+
+
+
+
 
 
     if ((REG_IF & INT_TIMER1) == INT_TIMER1)
