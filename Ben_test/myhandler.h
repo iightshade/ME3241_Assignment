@@ -24,6 +24,8 @@ int alienPositions[10][3]= {
 int alienTimer = 0;
 int totalNumAliens = 10;
 int aliensMove = 1;
+int maxAlienRight = 220;
+int maxAlienLeft = 10;
 
 void Handler(void)
 {
@@ -77,20 +79,17 @@ void Handler(void)
         // Update alien positions //
         alienTimer++;
         if(alienTimer == 2){
+          if(alienPositions[9][1] > maxAlienRight){
+            aliensMove = -1;
+          }
+          if(alienPositions[0][1] < maxAlienLeft){
+            aliensMove = 1;
+          }
           for(i = 0; i < totalNumAliens; i++){
             alienPositions[i][1] = alienPositions[i][1] + aliensMove;
           }
           alienTimer = 0;
         }
-
-        //Change alien move direction if aliens are too near the edges
-        // if(alienPositions[9][1] >> 200){
-        //   aliensMove = -1;
-        // }
-        // if(alienPositions[0][1] << 20){
-        //   aliensMove = 1;
-        // }
-
 
         // Print alien positions //
         spriteCounter = 10003;

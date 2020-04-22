@@ -3650,6 +3650,18 @@ totalNumAliens:
 	.size	aliensMove, 4
 aliensMove:
 	.word	1
+	.global	maxAlienRight
+	.align	2
+	.type	maxAlienRight, %object
+	.size	maxAlienRight, 4
+maxAlienRight:
+	.word	230
+	.global	maxAlienLeft
+	.align	2
+	.type	maxAlienLeft, %object
+	.size	maxAlienLeft, 4
+maxAlienLeft:
+	.word	10
 	.section	.rodata
 	.align	2
 .LC0:
@@ -3741,56 +3753,51 @@ Handler:
 	mov	r1, #9984
 	mov	r2, ip	@  x
 	ldr	r3, [r6, #0]	@  y,  playerY
-	str	ip, [r4, #0]	@  x,  playerX
 	mov	r0, #40
 	add	r1, r1, #17
+	str	ip, [r4, #0]	@  x,  playerX
 	bl	drawSprite
-	ldr	r3, [r6, #0]	@  playerY
 	ldr	r1, [r5, #0]	@  pos
+	ldr	r3, [r6, #0]	@  playerY
 	rsb	r3, r1, r3	@  y
 	mov	r1, #9984
 	ldr	r2, [r4, #0]	@  x,  playerX
 	mov	r0, #44
 	add	r1, r1, #18
 	bl	drawSprite
-	ldr	ip, .L89+24
-	ldr	r2, [ip, #0]	@  alienTimer
+	ldr	lr, .L89+24
+	ldr	r2, [lr, #0]	@  alienTimer
 	ldr	r3, [r5, #0]	@  pos
 	add	r2, r2, #1
 	cmp	r2, #2
 	add	r3, r3, #16
 	str	r3, [r5, #0]	@  pos
-	str	r2, [ip, #0]	@  alienTimer
-	ldrne	r6, .L89+28
-	ldrne	r7, .L89+32
+	str	r2, [lr, #0]	@  alienTimer
+	ldrne	r7, .L89+28
 	beq	.L87
 .L63:
-	ldr	r3, [r7, #112]	@  alienPositions
-	cmp	r3, #0
-	ldrlt	r3, .L89+36
-	mvnlt	r2, #0
-	strlt	r2, [r3, #0]	@  aliensMove
-	ldr	r2, [r6, #0]	@  totalNumAliens
-	ldr	r5, .L89+40
+	ldr	r2, [r7, #0]	@  totalNumAliens
+	ldr	r5, .L89+32
 	mov	r3, #9984
 	mov	r8, #0	@  i
 	add	r3, r3, #19
 	cmp	r8, r2	@  i
 	str	r3, [r5, #0]	@  spriteCounter
 	bge	.L62
+	ldr	r6, .L89+36
 	mov	r4, r8	@  i,  i
-.L75:
-	ldr	r3, [r4, r7]	@  alienPositions
+.L76:
+	ldr	r3, [r4, r6]	@  alienPositions
 	cmp	r3, #1
-	add	r2, r4, r7	@  i
+	add	r2, r4, r6	@  i
 	mov	r0, #48
 	add	r8, r8, #1	@  i,  i
 	add	r4, r4, #12	@  i,  i
 	beq	.L88
-.L72:
-	ldr	r3, [r6, #0]	@  totalNumAliens
+.L73:
+	ldr	r3, [r7, #0]	@  totalNumAliens
 	cmp	r8, r3	@  i
-	blt	.L75
+	blt	.L76
 	b	.L62
 .L88:
 	ldr	r3, [r2, #8]	@  y,  alienPositions
@@ -3800,47 +3807,58 @@ Handler:
 	ldr	r3, [r5, #0]	@  spriteCounter
 	add	r3, r3, #1
 	str	r3, [r5, #0]	@  spriteCounter
-	b	.L72
+	b	.L73
 .L87:
-	ldr	r6, .L89+28
-	ldr	r2, [r6, #0]	@  totalNumAliens
-	mov	r8, #0	@  i
-	cmp	r8, r2	@  i
-	ldrge	r7, .L89+32
-	bge	.L81
-	ldr	r3, .L89+36
-	ldr	r7, .L89+32
-	ldr	r0, [r3, #0]	@  aliensMove
-	mov	r1, r2
-	mov	r2, r7
-.L68:
+	ldr	r3, .L89+40
+	ldr	r6, .L89+36
+	ldr	r1, [r3, #0]	@  maxAlienRight
+	ldr	r2, [r6, #112]	@  alienPositions
+	cmp	r2, r1
+	ldrgt	r2, .L89+44
+	mvngt	r3, #0
+	strgt	r3, [r2, #0]	@  aliensMove
+	ldr	r3, .L89+48
+	ldr	r2, [r6, #4]	@  alienPositions
+	ldr	r1, [r3, #0]	@  maxAlienLeft
+	ldr	r7, .L89+28
+	cmp	r2, r1
+	ldrlt	r2, .L89+44
+	ldr	r1, [r7, #0]	@  i,  totalNumAliens
+	movlt	r3, #1
+	strlt	r3, [r2, #0]	@  aliensMove
+	cmp	r1, #0	@  i
+	ble	.L82
+	ldr	r2, .L89+44
+	mov	r8, r1	@  i,  i
+	ldr	r0, [r2, #0]	@  aliensMove
+	mov	r2, r6
+.L70:
 	ldr	r3, [r2, #4]	@  alienPositions
-	add	r8, r8, #1	@  i,  i
+	subs	r8, r8, #1	@  i,  i
 	add	r3, r3, r0
-	cmp	r8, r1	@  i
 	str	r3, [r2, #4]	@  alienPositions
 	add	r2, r2, #12
-	blt	.L68
-.L81:
+	bne	.L70
+.L82:
 	mov	r3, #0
-	str	r3, [ip, #0]	@  alienTimer
+	str	r3, [lr, #0]	@  alienTimer
 	b	.L63
 .L85:
-	ldr	r9, .L89+44
-	ldr	r6, .L89+48
+	ldr	r9, .L89+52
+	ldr	r6, .L89+56
 	ldr	r1, [r9, #0]	@  counter
-	ldr	r3, .L89+52
+	ldr	r3, .L89+60
 	smull	r0, r2, r6, r1
 	smull	r0, ip, r3, r1
 	mov	r4, r1, asr #31
 	rsb	r0, r4, r2, asr #2	@  ones
-	ldr	r3, .L89+56
+	ldr	r3, .L89+64
 	mov	lr, r0	@  ones,  ones
 	add	ip, ip, r1
 	rsb	ip, r4, ip, asr #5
 	smull	r2, r0, r3, lr	@  ones
 	smull	r3, r5, r6, ip
-	ldr	r3, .L89+60
+	ldr	r3, .L89+68
 	smull	r2, r6, r3, r1
 	sub	r7, r0, lr, asr #31	@  tens,  ones
 	mov	r3, ip, asr #31
@@ -3874,7 +3892,7 @@ Handler:
 	mov	r2, #197
 	mov	r3, #10
 	bl	drawSprite
-	ldr	r3, .L89+64
+	ldr	r3, .L89+72
 	ldmia	r3, {r0, r1}
 	sub	ip, fp, #380
 	str	r0, [fp, #-384]
@@ -3892,7 +3910,7 @@ Handler:
 	ldrb	r2, [r3, #0]	@ zero_extendqisi2	@  ch
 	cmp	r2, r8
 	mov	sl, #7	@  steps
-	beq	.L77
+	beq	.L78
 	sub	r2, fp, #40
 	sub	ip, fp, #40
 	sub	lr, fp, #40
@@ -3908,11 +3926,11 @@ Handler:
 	add	lr, lr, #4
 	mov	r2, ip
 	bne	.L56
-.L77:
+.L78:
 	sub	r7, r8, #1	@  i
 	mov	r4, #0	@  k
 	cmp	r4, r7	@  k
-	bgt	.L79
+	bgt	.L80
 	mov	r6, #97	@  x
 	sub	r5, fp, #40
 .L61:
@@ -3927,7 +3945,7 @@ Handler:
 	add	r5, r5, #4
 	add	r6, r6, sl	@  x,  x,  steps
 	ble	.L61
-.L79:
+.L80:
 	ldr	r3, [r9, #0]	@  counter
 	add	r3, r3, #1
 	str	r3, [r9, #0]	@  counter
@@ -3943,9 +3961,11 @@ Handler:
 	.word	pos
 	.word	alienTimer
 	.word	totalNumAliens
-	.word	alienPositions
-	.word	aliensMove
 	.word	spriteCounter
+	.word	alienPositions
+	.word	maxAlienRight
+	.word	aliensMove
+	.word	maxAlienLeft
 	.word	counter
 	.word	1717986919
 	.word	-2004318071
