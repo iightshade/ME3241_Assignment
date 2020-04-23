@@ -657,31 +657,6 @@ void ClearScreen()
 int counter = 0;
 int pos = 0;
 int playerX = 240/2, playerY = 160 -20;
-int spriteCounter;
-int laserPositions[10][3];
-int laserCounter = 0;
-int laserTimeCounter = 0;
-
-int alienPositions[10][3]= {
-    {1, 30, 80},
-    {1, 50, 80},
-    {1, 70, 80},
-    {1, 90, 80},
-    {1, 110, 80},
-    {1, 30, 100},
-    {1, 50, 100},
-    {1, 70, 100},
-    {1, 90, 100},
-    {1, 110, 100},
-};
-int alienTimer = 0;
-int totalNumAliens = 10;
-int aliensMove = 1;
-int maxAlienRight = 220;
-int maxAlienLeft = 10;
-
-
-int pressedButtons[8] = {0,0,0,0,0,0,0,0};
 
 int menu_point = 160/2 + 1*20-20;
 int menumap = 1, gamemap = 0, highscore = 0;
@@ -800,7 +775,6 @@ void Handler(void)
         counter++;
         }
 
-<<<<<<< HEAD
 
         if ((*(u16*)0x4000202 & 0x10) == 0x10){
 
@@ -828,61 +802,10 @@ void Handler(void)
         laserTimeCounter++;
         if(laserTimeCounter > 25){
           if(pressedButtons[6] == 1){
-=======
-    }
-
-        if ((*(u16*)0x4000202 & 0x10) == 0x10)
-    {
-        checkbutton();
-        spriteCounter = 10001;
-
-
-        if(pressedButtons[4] == 1){
-          playerX = playerX + 1;
-          pressedButtons[4] = 0;
-        }
-        if(pressedButtons[5] == 1){
-          playerX = playerX - 1;
-          pressedButtons[5] = 0;
-        }
-
-        drawSprite(40, spriteCounter, playerX, playerY);
-        spriteCounter++;
-
-
-        alienTimer++;
-        if(alienTimer == 3){
-          if(alienPositions[9][1] > maxAlienRight){
-            aliensMove = -1;
-          }
-          if(alienPositions[0][1] < maxAlienLeft){
-            aliensMove = 1;
-          }
-          for(i = 0; i < totalNumAliens; i++){
-            alienPositions[i][1] = alienPositions[i][1] + aliensMove;
-          }
-          alienTimer = 0;
-        }
-
-
-        for(i = 0; i < totalNumAliens; i++){
-          if(alienPositions[i][0] == 1){
-            drawSprite(40 +4 +4, spriteCounter, alienPositions[i][1], alienPositions[i][2]);
-            spriteCounter++;
-          }
-        }
-
-
-
-        laserTimeCounter++;
-        if(laserTimeCounter > 100){
-          if(pressedButtons[0] == 1){
->>>>>>> 2fe11424385364bbed9066fbd1304475d4b43e5d
             createLaser();
             laserTimeCounter = 0;
           }
         }
-<<<<<<< HEAD
         pressedButtons[6] = 0;
 
 
@@ -891,27 +814,15 @@ void Handler(void)
             laserPositions[i][2] = laserPositions[i][2] - 2;
           }
 
-=======
-        pressedButtons[0] = 0;
-
-        for( i = 0; i < laserCounter; i++){
-          if(laserPositions[i][0] == 1){
-            laserPositions[i][2] = laserPositions[i][2] - 1;
-          }
->>>>>>> 2fe11424385364bbed9066fbd1304475d4b43e5d
             drawSprite(40 +4, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
             spriteCounter++;
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 2fe11424385364bbed9066fbd1304475d4b43e5d
           if(laserPositions[i][2] < -20){
             laserPositions[i][0] = 0;
           }
         }
-<<<<<<< HEAD
 
 
 
@@ -949,22 +860,19 @@ void Handler(void)
             }
          }
       }
-=======
->>>>>>> 2fe11424385364bbed9066fbd1304475d4b43e5d
     }
 
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
 }
 
-void checkbutton(void)
+int checkbutton(void)
 {
 
     u16 buttons = (0x3FF & (~*(volatile u16*)0x4000130));
 
     if ((buttons & 0x001) == 0x001)
     {
-      pressedButtons[0] = 1;
 
         pressedButtons[0] = 1;
     }
@@ -984,22 +892,12 @@ void checkbutton(void)
     if ((buttons & 0x010) == 0x010)
     {
 
-<<<<<<< HEAD
                 pressedButtons[4] = 1;
-=======
-        pressedButtons[4] = 1;
-
->>>>>>> 2fe11424385364bbed9066fbd1304475d4b43e5d
     }
     if ((buttons & 0x020) == 0x020)
     {
 
-<<<<<<< HEAD
                 pressedButtons[5] = 1;
-=======
-        pressedButtons[5] = 1;
-
->>>>>>> 2fe11424385364bbed9066fbd1304475d4b43e5d
     }
     if ((buttons & 0x040) == 0x040)
     {
@@ -1012,16 +910,7 @@ void checkbutton(void)
        pressedButtons[7] = 1;
     }
 
-}
-
-void createLaser(void){
-  laserPositions[laserCounter][0] = 1;
-  laserPositions[laserCounter][1] = playerX;
-  laserPositions[laserCounter][2] = playerY;
-  laserCounter++;
-  if(laserCounter > 10){
-    laserCounter = 0;
-  }
+         return 0;
 }
 
 void createLaser(void){

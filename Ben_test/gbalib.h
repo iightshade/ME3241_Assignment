@@ -48,3 +48,15 @@ void popSprite(int sprites, char dir, int count, int x, int y)
         }
     }
 }
+
+void ClearScreen()
+{
+    int x,y,c=0;
+    for (x = 0; x < SCREEN_WIDTH; x++){
+        for (y = 0; y < SCREEN_HEIGHT; y++){
+                drawSprite(SPACE,c,x,y); c++;
+                }
+            } 
+
+}
+

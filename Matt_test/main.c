@@ -43,7 +43,7 @@ int main(void)
     REG_TM0D = 49141; // 1sec = 16393 ticks x 61 microsec (max = 65534)
     REG_TM0CNT |= TIMER_FREQUENCY_1024 | TIMER_ENABLE | TIMER_INTERRUPTS;	// TODO: complete this line to set timer frequency and enable timer
 
-    REG_TM1D = 65255; 
+    REG_TM1D = 65255;
     REG_TM1CNT |= TIMER_FREQUENCY_1024 | TIMER_ENABLE | TIMER_INTERRUPTS;
 
     REG_TM2D = 64509; // 0.0625sec = 1025 ticks x 61 microsec (max = 65534)
