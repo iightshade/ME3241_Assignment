@@ -689,6 +689,9 @@ int maxAlienLeft = 10;
 
 int pressedButtons[8] = {};
 
+int endcount;
+int saved_counter;
+
 
 void Handler(void)
 {
@@ -741,12 +744,14 @@ void Handler(void)
             drawSprite(37, c, 240/2 - 5*steps, menu_point);
 
             if (menu_point == (160/2 + 1*20-20) && pressedButtons[0] == 1){
-                menumap = 0, gamemap = 1, highscore = 0; CS=1;}
-            if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
-                menumap = 0, gamemap = 0, highscore = 1; CS=1;}
+                menumap = 0; gamemap = 1; highscore = 0; CS=1; pressedButtons[0] = 0;
             }
-
+            if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
+                menumap = 0; gamemap = 0; highscore = 1; CS=1;pressedButtons[0] = 0;
+            }
         }
+
+    }
 
 
     if (gamemap == 1){
@@ -853,6 +858,7 @@ void Handler(void)
                     if(alienPositions[i][0] == 1){
                       deactivateLaser(j);
                       alienPositions[i][0] = 0;
+                      endcount++;
                     }
                   }
                 }
@@ -864,6 +870,13 @@ void Handler(void)
             }
          }
       }
+
+      if(endcount == totalNumAliens){
+        ClearScreen(); saved_counter = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; endcount = 0; laserCounter = 0;
+        for(i = 0; i < totalNumAliens; i++){
+            alienPositions[i][0] = 1;
+            }
+        }
     }
 
     *(u16*)0x4000202 = Flag;
@@ -918,14 +931,12 @@ int checkbutton(void)
 }
 
 void createLaser(void){
-  if(gamemap == 1){
-    laserPositions[laserCounter][0] = 1;
-    laserPositions[laserCounter][1] = playerX;
-    laserPositions[laserCounter][2] = playerY;
-    laserCounter++;
-    if(laserCounter > 9){
-      laserCounter = 0;
-    }
+  laserPositions[laserCounter][0] = 1;
+  laserPositions[laserCounter][1] = playerX;
+  laserPositions[laserCounter][2] = playerY;
+  laserCounter++;
+  if(laserCounter > 9){
+    laserCounter = 0;
   }
 }
 
