@@ -27,7 +27,7 @@ int main(void)
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
 
 
-    // Fill SpritePal
+    //// Fill SpritePal
     *(unsigned short *) 0x5000200 = 0;
     *(unsigned short *) 0x5000202 = RGB(31,31,31);
 
