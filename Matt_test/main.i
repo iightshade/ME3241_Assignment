@@ -654,7 +654,6 @@ void ClearScreen()
 
 
 
-
 int counter = 0;
 int pos = 0;
 int playerX = 240/2, playerY = 160 -20;
@@ -663,24 +662,32 @@ int menu_point = 160/2 + 1*20-20;
 int menumap = 1, gamemap = 0, highscore = 0;
 int CS = 0;
 
+int NAlien;
 int spriteCounter;
-int lazerPositions[500][3];
+int laserPositions[10][3];
+int laserCounter = 0;
+int laserTimeCounter = 0;
 
 int alienPositions[10][3]= {
-    {1, 30, 80},
-    {1, 50, 80},
-    {1, 70, 80},
-    {1, 90, 80},
-    {1, 110, 80},
-    {1, 30, 100},
-    {1, 50, 100},
-    {1, 70, 100},
-    {1, 90, 100},
-    {1, 110, 100},
+    {1, 30, 30},
+    {1, 50, 30},
+    {1, 70, 30},
+    {1, 90, 30},
+    {1, 110, 30},
+    {1, 30, 50},
+    {1, 50, 50},
+    {1, 70, 50},
+    {1, 90, 50},
+    {1, 110, 50},
 };
 int alienTimer = 0;
 int totalNumAliens = 10;
 int aliensMove = 1;
+int maxAlienRight = 220;
+int maxAlienLeft = 10;
+
+
+int pressedButtons[8] = {};
 
 
 void Handler(void)
@@ -692,8 +699,9 @@ void Handler(void)
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
-    if ((*(u16*)0x4000202 & 0x20) == 0x20){
-        if (menumap == 1){
+
+    if (menumap == 1){
+        if ((*(u16*)0x4000202 & 0x20) == 0x20){
             char ch[50]=" NEW GAME>HIGHSCORE>CREDITS>";
             steps = 10;
 
@@ -716,80 +724,143 @@ void Handler(void)
                     }
                 }
 
-            menu_point = menu_point + (-checkbutton())*20;
+            checkbutton();
+
+            if(pressedButtons[6] == 1){
+                  menu_point = menu_point + (-pressedButtons[6])*20;
+                  pressedButtons[6] = 0;
+                }
+            if(pressedButtons[7] == 1){
+                  menu_point = menu_point + (pressedButtons[7])*20;
+                  pressedButtons[7] = 0;
+                }
+
             if (menu_point > 160/2 + 3*20-20) menu_point = 160/2 + 3*20-20;
             if (menu_point < 160/2 + 1*20-20) menu_point = 160/2 + 1*20-20;
 
             drawSprite(37, c, 240/2 - 5*steps, menu_point);
 
-            if (menu_point == (160/2 + 1*20-20) && checkbutton()==5){
+            if (menu_point == (160/2 + 1*20-20) && pressedButtons[0] == 1){
                 menumap = 0, gamemap = 1, highscore = 0; CS=1;}
-            if (menu_point == (160/2 + 2*20-20) && checkbutton()==5){
+            if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
                 menumap = 0, gamemap = 0, highscore = 1; CS=1;}
             }
 
         }
 
 
-
-        if (gamemap == 1){
-            if (CS==1){ClearScreen();CS--;}
-            if ((*(u16*)0x4000202 & 0x8) == 0x8){
-
-
-            int ones, tens, min_ones, min_tens, distx;
-            steps = 7;
-
-            x = 240 - 15; y = 10;
-            ones = counter%10;
-            tens = counter/10%6;
-            min_ones = counter/60%10;
-            min_tens = counter/600;
-            drawSprite(ones+27,10,x,y);
-            drawSprite(tens+27,100,x-steps,y);
-            drawSprite(min_ones+27,1000,x-2*steps-7,y);
-            drawSprite(min_tens+27,10000,x-3*steps-7,y);
-            distx = x-3*steps-7;
-
-            char ch[50]="LIVES>";
-            while (ch[i]!='\0') {d[i]=ch[i]; i++;}
-            x = distx-100;
-            for(k=0;k<=i-1;k++) drawSprite(d[k]-64,k,(x+k*steps),y);
-            counter++;
-            }
+    if (gamemap == 1){
+        if (CS==1){ClearScreen();CS--;}
+        if ((*(u16*)0x4000202 & 0x8) == 0x8){
 
 
+        int ones, tens, min_ones, min_tens, distx;
+        steps = 7; spriteCounter = 0;
 
+        x = 240 - 15; y = 10;
+        ones = counter%10;
+        tens = counter/10%6;
+        min_ones = counter/60%10;
+        min_tens = counter/600;
+        drawSprite(ones+27,spriteCounter+1,x,y);
+        drawSprite(tens+27,spriteCounter+2,x-steps,y);
+        drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,y);
+        drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,y);
+        distx = x-3*steps-7;
 
-            if ((*(u16*)0x4000202 & 0x10) == 0x10){
-
-            steps = 16;
-            playerX = playerX + checkbutton();
-
-            drawSprite(40, 10001, playerX, playerY);
-
-            drawSprite(40 +4, 10002, playerX, playerY-pos);
-            pos+=16;
-
-
-            alienTimer++;
-            if(alienTimer == 2){
-              for(i = 0; i < totalNumAliens; i++){
-                alienPositions[i][1] = alienPositions[i][1] + aliensMove;
-              }
-              alienTimer = 0;
-            }
-# 142 "myhandler.h"
-            spriteCounter = 10003;
-            for(i = 0; i < totalNumAliens; i++){
-              if(alienPositions[i][0] == 1){
-                drawSprite(40 +4 +4, spriteCounter, alienPositions[i][1], alienPositions[i][2]);
-                spriteCounter++;
-                }
-              }
-            }
+        char ch[50]="LIVES>";
+        while (ch[i]!='\0') {d[i]=ch[i]; i++;}
+        x = distx-100;
+        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+10+k,(x+k*steps),y);
+        counter++;
         }
 
+
+        if ((*(u16*)0x4000202 & 0x10) == 0x10){
+
+        checkbutton();
+        spriteCounter = 10001;
+
+
+        if(pressedButtons[4] == 1){
+          playerX = playerX + 1;
+          if(playerX > maxAlienRight) playerX = maxAlienRight;
+          pressedButtons[4] = 0;
+        }
+        if(pressedButtons[5] == 1){
+          playerX = playerX - 1;
+          if(playerX < maxAlienLeft) playerX = maxAlienLeft;
+          pressedButtons[5] = 0;
+        }
+
+        drawSprite(40, spriteCounter, playerX, playerY);
+        spriteCounter++;
+
+
+
+
+        laserTimeCounter++;
+        if(laserTimeCounter > 25){
+          if(pressedButtons[6] == 1){
+            createLaser();
+            laserTimeCounter = 0;
+          }
+        }
+        pressedButtons[6] = 0;
+
+
+        for( i = 0; i < laserCounter; i++){
+          if(laserPositions[i][0] == 1){
+            laserPositions[i][2] = laserPositions[i][2] - 2;
+          }
+
+            drawSprite(40 +4, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
+            spriteCounter++;
+
+
+
+          if(laserPositions[i][2] < -20){
+            laserPositions[i][0] = 0;
+          }
+        }
+
+
+
+
+        alienTimer++;
+        if(alienTimer == 3){
+          if(alienPositions[9][1] > maxAlienRight){
+            aliensMove = -1;
+          }
+          if(alienPositions[0][1] < maxAlienLeft){
+            aliensMove = 1;
+          }
+          for(i = 0; i < totalNumAliens; i++){
+            alienPositions[i][1] = alienPositions[i][1] + aliensMove;
+          }
+          alienTimer = 0;
+        }
+
+
+
+        for(i = 0; i < totalNumAliens; i++){
+
+            NAlien = 200;
+            for(j = 0; j < laserCounter; j++){
+                if(laserPositions[j][1] >= alienPositions[i][1] && laserPositions[j][1] < alienPositions[i][1]+16 && laserPositions[j][2] == alienPositions[i][2]){
+                    alienPositions[i][0] = 0;
+
+                    }
+                }
+          if(alienPositions[i][0] == 1){
+            drawSprite(40 +4 +4, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
+            }
+          if(alienPositions[i][0] == 0){
+            drawSprite(0, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
+            }
+         }
+      }
+    }
 
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
@@ -803,45 +874,56 @@ int checkbutton(void)
     if ((buttons & 0x001) == 0x001)
     {
 
-          return 5;
+        pressedButtons[0] = 1;
     }
     if ((buttons & 0x002) == 0x002)
     {
 
+        pressedButtons[1] = 1;
     }
     if ((buttons & 0x004) == 0x004)
     {
-
+        pressedButtons[2] = 1;
     }
     if ((buttons & 0x008) == 0x008)
     {
-
+        pressedButtons[3] = 1;
     }
     if ((buttons & 0x010) == 0x010)
     {
 
-                  return 1;
+                pressedButtons[4] = 1;
     }
     if ((buttons & 0x020) == 0x020)
     {
 
-                  return -1;
+                pressedButtons[5] = 1;
     }
     if ((buttons & 0x040) == 0x040)
     {
 
-          return 1;
+        pressedButtons[6] = 1;
     }
     if ((buttons & 0x080) == 0x080)
     {
 
-          return -1;
+       pressedButtons[7] = 1;
     }
 
          return 0;
 }
+
+void createLaser(void){
+  laserPositions[laserCounter][0] = 1;
+  laserPositions[laserCounter][1] = playerX;
+  laserPositions[laserCounter][2] = playerY;
+  laserCounter++;
+  if(laserCounter > 10){
+    laserCounter = 0;
+  }
+}
 # 9 "main.c" 2
-# 20 "main.c"
+# 21 "main.c"
 int main(void)
 {
 
