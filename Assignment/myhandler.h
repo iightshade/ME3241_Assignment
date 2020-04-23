@@ -51,16 +51,19 @@ int yhigh = 10;
 void Handler(void)
 {
     u16 Flag; int x,y,steps,a1,a2; int newline = 0;
-    int d[50]={},l[10]={},i=0,j,linecount=1,k,    c=0,mod=0; //l[] = letters in line
+    int d[50]={},d1[50]={},l[10]={},i=0,j,linecount=1,k,    c=0,mod=0; //l[] = letters in line
 
     a1 = 0; a2 = 1;
 
     REG_IME = 0x00; // Stop all other interrupt handling, while we handle this current one
     Flag = REG_IF;
 
-    if (menumap == 1){
-        if ((REG_IF & INT_TIMER2) == INT_TIMER2){
-            char ch[50]=" NEW GAME>HIGHSCORE>CREDITS>"; //all caps, > to change line
+    if ((REG_IF & INT_TIMER2) == INT_TIMER2){
+
+            //MENU------------------------------------------------------
+
+            if (menumap == 1){ 
+            char ch[50]=" STAR>INVADERS>"; //all caps, > to change line
             steps = 10;
 
             while (ch[i]!='\0'){d[i]=ch[i]; i++;}
@@ -73,11 +76,32 @@ void Handler(void)
                 }
 
             for(j=1;j<=linecount;j++){
+                x = SCREEN_WIDTH/2 - 10*steps + j*20;
+                y = 10 + j*20;
+
+                for(k=0;k<=l[j]-1;k++){
+                    drawSprite(d[c]-64,c,(x+k*steps),y);
+                    c++;
+                }
+            }
+            drawSprite(SPACESHIP, c, SCREEN_WIDTH/2 + 30, 20 +1*20);
+            char ch1[50]=" NEW GAME>HIGHSCORE>CREDITS>"; //all caps, > to change line
+            i=0; mod=0; linecount=1; c=30;
+            while (ch1[i]!='\0'){d1[i]=ch1[i]; i++;}
+
+            for(j=0;j<=i-1;j++){ //run through all the letters in ch1[]
+                if (d1[j]==62){
+                    l[linecount]=j-mod; //letters in 1 line
+                    mod = j; linecount ++;
+                    }
+                }
+
+            for(j=1;j<=linecount;j++){
                 x = SCREEN_WIDTH/2 - 8/2*steps;
                 y = SCREEN_HEIGHT/2 + j*20-20;
 
                 for(k=0;k<=l[j]-1;k++){
-                    drawSprite(d[c]-64,c,(x+k*steps),y);
+                    drawSprite(d1[c-30]-64,c,(x+k*steps),y);
                     c++;
                     }
                 }
@@ -112,15 +136,14 @@ void Handler(void)
             }
         }
 
-    }
 
-        if ((REG_IF & INT_TIMER2) == INT_TIMER2){ // Highscore and Credits
 
-            // Highscore sceen //
+            //HIGHSCORE------------------------------------------------------
+            
             if (highscore == 1){
                 if (CS==1){ClearScreen();CS--;}
-                int ones, tens, min_ones, min_tens;
-                char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>"; //all caps, > to change line
+                int ones, tens, min_ones, min_tens; c = 0;
+                char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>"; //all caps, > to change line 
                 steps = 10; linecount = 1; i = 0;
                 while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
@@ -140,7 +163,7 @@ void Handler(void)
                         c++;
                         }
                     }
-
+                
                 checkbutton();
 
                 x = SCREEN_WIDTH - 50; spriteCounter = 300;
@@ -156,7 +179,7 @@ void Handler(void)
                     }
 
                 for (j=0;j<entryno;j++){
-
+                    
                     spriteCounter += 5;
                     ones = saved_counter[j]%10;
                     tens = saved_counter[j]/10%6;
@@ -173,15 +196,18 @@ void Handler(void)
                 }
 
                 if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10; 
                 }
             }
 
-            // Credits screen //
+
+            //CREDITS------------------------------------------------------
+
+
             if (credits == 1){
                 if (CS==1){ClearScreen();CS--;}
                 int ones, tens, min_ones, min_tens;
-                char ch[50]=" THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>"; //all caps, > to change line
+                char ch[50]=" THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>"; //all caps, > to change line 
                 steps = 10; linecount = 1; i = 0; mod = 0; c = 0;
                 while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
@@ -201,10 +227,10 @@ void Handler(void)
                         c++;
                         }
                     }
-
+                
                 checkbutton();
                 if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10; 
                 }
 
             }

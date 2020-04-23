@@ -1118,16 +1118,19 @@ int yhigh = 10;
 void Handler(void)
 {
     u16 Flag; int x,y,steps,a1,a2; int newline = 0;
-    int d[50]={},l[10]={},i=0,j,linecount=1,k, c=0,mod=0;
+    int d[50]={},d1[50]={},l[10]={},i=0,j,linecount=1,k, c=0,mod=0;
 
     a1 = 0; a2 = 1;
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
 
-    if (menumap == 1){
-        if ((*(u16*)0x4000202 & 0x20) == 0x20){
-            char ch[50]=" NEW GAME>HIGHSCORE>CREDITS>";
+    if ((*(u16*)0x4000202 & 0x20) == 0x20){
+
+
+
+            if (menumap == 1){
+            char ch[50]=" STAR>INVADERS>";
             steps = 10;
 
             while (ch[i]!='\0'){d[i]=ch[i]; i++;}
@@ -1140,11 +1143,32 @@ void Handler(void)
                 }
 
             for(j=1;j<=linecount;j++){
+                x = 240/2 - 10*steps + j*20;
+                y = 10 + j*20;
+
+                for(k=0;k<=l[j]-1;k++){
+                    drawSprite(d[c]-64,c,(x+k*steps),y);
+                    c++;
+                }
+            }
+            drawSprite(40, c, 240/2 + 30, 20 +1*20);
+            char ch1[50]=" NEW GAME>HIGHSCORE>CREDITS>";
+            i=0; mod=0; linecount=1; c=30;
+            while (ch1[i]!='\0'){d1[i]=ch1[i]; i++;}
+
+            for(j=0;j<=i-1;j++){
+                if (d1[j]==62){
+                    l[linecount]=j-mod;
+                    mod = j; linecount ++;
+                    }
+                }
+
+            for(j=1;j<=linecount;j++){
                 x = 240/2 - 8/2*steps;
                 y = 160/2 + j*20-20;
 
                 for(k=0;k<=l[j]-1;k++){
-                    drawSprite(d[c]-64,c,(x+k*steps),y);
+                    drawSprite(d1[c-30]-64,c,(x+k*steps),y);
                     c++;
                     }
                 }
@@ -1179,14 +1203,13 @@ void Handler(void)
             }
         }
 
-    }
 
-        if ((*(u16*)0x4000202 & 0x20) == 0x20){
+
 
 
             if (highscore == 1){
                 if (CS==1){ClearScreen();CS--;}
-                int ones, tens, min_ones, min_tens;
+                int ones, tens, min_ones, min_tens; c = 0;
                 char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>";
                 steps = 10; linecount = 1; i = 0;
                 while (ch[i]!='\0'){d[i]=ch[i]; i++;}
@@ -1243,6 +1266,9 @@ void Handler(void)
                 ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
                 }
             }
+
+
+
 
 
             if (credits == 1){
@@ -1534,7 +1560,7 @@ void cleanButtons(void){
 
 }
 # 9 "main.c" 2
-# 21 "main.c"
+# 20 "main.c"
 int main(void)
 {
 
