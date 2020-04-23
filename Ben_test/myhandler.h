@@ -1,4 +1,6 @@
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
+#include <time.h>
+
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
 //Buttons:
@@ -38,6 +40,9 @@ int maxAlienLeft = 10;
 // A, B, Sel, Str, R, L, U, D
 int pressedButtons[8] = {};
 
+int alienLaserPositions[10][3];
+int alienlaserCounter = 0;
+int alienlaserTimeCounter = 0;
 
 void Handler(void)
 {
@@ -157,22 +162,21 @@ void Handler(void)
         }
         pressedButtons[6] = 0;                    // Reset laser button
 
+        spriteCounter = 10100;
 
         for( i = 0; i < 10; i++){                   // Maximum number of lasers that can exist
           if(laserPositions[i][0] == 1){            // if laser is active its moves
             laserPositions[i][2] = laserPositions[i][2] - 2;
-          }
-          if(laserPositions[i][0] == 0){
-            deactivateLaser(i);
-          }
             drawSprite(LASER, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
-            spriteCounter++;
-
+          }
 
           // Deactivate lasers out of screen
           if(laserPositions[i][2] < -20){
             deactivateLaser(i);
           }
+
+          spriteCounter++;
+
         }
 
 
@@ -212,6 +216,30 @@ void Handler(void)
             drawSprite(SPACE, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
             }
          }
+
+         // Alien laser //
+         alienlaserTimeCounter++; // Rate of Fire
+         if(alienlaserTimeCounter > 50){
+           createAlienLaser();
+           alienlaserTimeCounter = 0;
+         }
+
+         spriteCounter = 10200;
+         for( i = 0; i < 10; i++){                   // Maximum number of lasers that can exist
+           if(alienLaserPositions[i][0] == 1){            // if laser is active its moves
+             alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
+             drawSprite(LASER, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+           }
+
+           // Deactivate lasers out of screen
+           if(alienLaserPositions[i][2] > 200){
+             deactivateAlienLaser(i);
+           }
+
+           spriteCounter++;
+
+         }
+
       }
     }
 
@@ -219,7 +247,7 @@ void Handler(void)
     REG_IME = 0x01;  // Re-enable interrupt handling
 }
 
-int checkbutton(void)
+void checkbutton(void)
 {
 	// Gift function to show you how a function that can be called upon button interrupt to detect which button was pressed and run a specific function for each button could look like. You would have to define each buttonA/buttonB/... function yourself.
     u16 buttons = INPUT;
@@ -263,7 +291,6 @@ int checkbutton(void)
        pressedButtons[7] = 1;
     }
 
-	 return 0;
 }
 
 void createLaser(void){
@@ -281,17 +308,39 @@ void createLaser(void){
 void deactivateLaser(int i){
   laserPositions[i][0] = 0;
   laserPositions[i][2] = -20;
+  drawSprite(LASER, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
+
 }
 
+void createAlienLaser(void){
+  int attackingAlien = -1;
+  int breakCounter = 0;
+  // srand(time(0));
+  while(attackingAlien == -1){
+    attackingAlien = rand();
+    attackingAlien = attackingAlien % 10;
+    breakCounter++;
+    if(alienPositions[attackingAlien][0] == 0){
+      attackingAlien = -1;
+    }
+    if(breakCounter > 10){
+      break;
+    }
+  }
+  if(attackingAlien != -1){
+    alienLaserPositions[alienlaserCounter][0] = 1;
+    alienLaserPositions[alienlaserCounter][1] = alienPositions[attackingAlien][1];
+    alienLaserPositions[alienlaserCounter][2] = alienPositions[attackingAlien][2];
+    alienlaserCounter++;
+    if(alienlaserCounter > 9){
+      alienlaserCounter = 0;
+    }
+  }
+}
 
-    //     ALIEN MOTION------------------------------------------
+void deactivateAlienLaser(int i){
+  alienLaserPositions[i][0] = 0;
+  alienLaserPositions[i][2] = 200;
+  drawSprite(LASER, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
 
-    //     popSprite(ALIEN, 'L', 6, (x+steps*counter) % SCREEN_WIDTH,
-    //     y + countertens*steps);
-
-    //     popSprite(a2, 'R', 6, (SCREEN_WIDTH-steps*counter)% SCREEN_WIDTH, //PROBLEM
-    //     y + steps + countertens*steps);
-
-    //     counter++;
-    //     if (counter%10 == 0)
-    //         {countertens++;}
+}

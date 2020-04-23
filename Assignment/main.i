@@ -650,6 +650,424 @@ void ClearScreen()
 # 8 "main.c" 2
 # 1 "myhandler.h" 1
 
+# 1 "/usr/local/arm-thumb-elf/sys-include/time.h" 1 3 4
+# 10 "/usr/local/arm-thumb-elf/sys-include/time.h" 3 4
+# 1 "/usr/local/arm-thumb-elf/sys-include/_ansi.h" 1 3 4
+# 15 "/usr/local/arm-thumb-elf/sys-include/_ansi.h" 3 4
+# 1 "/usr/local/arm-thumb-elf/sys-include/newlib.h" 1 3 4
+# 16 "/usr/local/arm-thumb-elf/sys-include/_ansi.h" 2 3 4
+# 1 "/usr/local/arm-thumb-elf/sys-include/sys/config.h" 1 3 4
+
+
+
+# 1 "/usr/local/arm-thumb-elf/sys-include/machine/ieeefp.h" 1 3 4
+# 5 "/usr/local/arm-thumb-elf/sys-include/sys/config.h" 2 3 4
+# 17 "/usr/local/arm-thumb-elf/sys-include/_ansi.h" 2 3 4
+# 11 "/usr/local/arm-thumb-elf/sys-include/time.h" 2 3 4
+# 1 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 1 3 4
+# 14 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+# 1 "/usr/local/arm-thumb-elf/sys-include/sys/_types.h" 1 3 4
+# 12 "/usr/local/arm-thumb-elf/sys-include/sys/_types.h" 3 4
+typedef long _off_t;
+__extension__ typedef long long _off64_t;
+
+
+typedef int _ssize_t;
+
+
+
+
+
+# 1 "/usr/local/lib/gcc-lib/arm-thumb-elf/3.3.6/include/stddef.h" 1 3 4
+# 354 "/usr/local/lib/gcc-lib/arm-thumb-elf/3.3.6/include/stddef.h" 3 4
+typedef unsigned int wint_t;
+# 23 "/usr/local/arm-thumb-elf/sys-include/sys/_types.h" 2 3 4
+
+
+typedef struct
+{
+  int __count;
+  union
+  {
+    wint_t __wch;
+    unsigned char __wchb[4];
+  } __value;
+} _mbstate_t;
+
+typedef int _flock_t;
+# 15 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 2 3 4
+
+
+
+
+typedef unsigned long __ULong;
+# 40 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+struct _Bigint
+{
+  struct _Bigint *_next;
+  int _k, _maxwds, _sign, _wds;
+  __ULong _x[1];
+};
+
+
+struct __tm
+{
+  int __tm_sec;
+  int __tm_min;
+  int __tm_hour;
+  int __tm_mday;
+  int __tm_mon;
+  int __tm_year;
+  int __tm_wday;
+  int __tm_yday;
+  int __tm_isdst;
+};
+# 68 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+struct _atexit {
+        struct _atexit *_next;
+        int _ind;
+        void (*_fns[32])(void);
+        void *_fnargs[32];
+        __ULong _fntypes;
+};
+# 91 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+struct __sbuf {
+        unsigned char *_base;
+        int _size;
+};
+
+
+
+
+
+
+typedef long _fpos_t;
+# 156 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+struct __sFILE {
+  unsigned char *_p;
+  int _r;
+  int _w;
+  short _flags;
+  short _file;
+  struct __sbuf _bf;
+  int _lbfsize;
+
+
+
+
+
+
+  void * _cookie;
+
+  int (*_read) (void * _cookie, char *_buf, int _n);
+  int (*_write) (void * _cookie, const char *_buf, int _n);
+
+  _fpos_t (*_seek) (void * _cookie, _fpos_t _offset, int _whence);
+  int (*_close) (void * _cookie);
+
+
+  struct __sbuf _ub;
+  unsigned char *_up;
+  int _ur;
+
+
+  unsigned char _ubuf[3];
+  unsigned char _nbuf[1];
+
+
+  struct __sbuf _lb;
+
+
+  int _blksize;
+  int _offset;
+
+
+  struct _reent *_data;
+
+
+
+  _flock_t _lock;
+
+};
+# 249 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+typedef struct __sFILE __FILE;
+
+
+struct _glue
+{
+  struct _glue *_next;
+  int _niobs;
+  __FILE *_iobs;
+};
+# 280 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+struct _rand48 {
+  unsigned short _seed[3];
+  unsigned short _mult[3];
+  unsigned short _add;
+
+
+
+
+};
+# 532 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+struct _reent
+{
+  int _errno;
+
+
+
+
+  __FILE *_stdin, *_stdout, *_stderr;
+
+  int _inc;
+  char _emergency[25];
+
+  int _current_category;
+  const char *_current_locale;
+
+  int __sdidinit;
+
+  void (*__cleanup) (struct _reent *);
+
+
+  struct _Bigint *_result;
+  int _result_k;
+  struct _Bigint *_p5s;
+  struct _Bigint **_freelist;
+
+
+  int _cvtlen;
+  char *_cvtbuf;
+
+  union
+    {
+      struct
+        {
+          unsigned int _unused_rand;
+          char * _strtok_last;
+          char _asctime_buf[26];
+          struct __tm _localtime_buf;
+          int _gamma_signgam;
+          __extension__ unsigned long long _rand_next;
+          struct _rand48 _r48;
+          _mbstate_t _mblen_state;
+          _mbstate_t _mbtowc_state;
+          _mbstate_t _wctomb_state;
+          char _l64a_buf[8];
+          char _signal_buf[24];
+          int _getdate_err;
+          _mbstate_t _mbrlen_state;
+          _mbstate_t _mbrtowc_state;
+          _mbstate_t _mbsrtowcs_state;
+          _mbstate_t _wcrtomb_state;
+          _mbstate_t _wcsrtombs_state;
+        } _reent;
+
+
+
+      struct
+        {
+
+          unsigned char * _nextf[30];
+          unsigned int _nmalloc[30];
+        } _unused;
+    } _new;
+
+
+  struct _atexit *_atexit;
+  struct _atexit _atexit0;
+
+
+  void (**(_sig_func))(int);
+
+
+
+
+  struct _glue __sglue;
+  __FILE __sf[3];
+};
+# 728 "/usr/local/arm-thumb-elf/sys-include/sys/reent.h" 3 4
+extern struct _reent *_impure_ptr ;
+
+void _reclaim_reent (struct _reent *);
+# 12 "/usr/local/arm-thumb-elf/sys-include/time.h" 2 3 4
+
+
+
+
+
+
+# 1 "/usr/local/arm-thumb-elf/sys-include/machine/time.h" 1 3 4
+# 19 "/usr/local/arm-thumb-elf/sys-include/time.h" 2 3 4
+# 27 "/usr/local/arm-thumb-elf/sys-include/time.h" 3 4
+# 1 "/usr/local/lib/gcc-lib/arm-thumb-elf/3.3.6/include/stddef.h" 1 3 4
+# 213 "/usr/local/lib/gcc-lib/arm-thumb-elf/3.3.6/include/stddef.h" 3 4
+typedef long unsigned int size_t;
+# 28 "/usr/local/arm-thumb-elf/sys-include/time.h" 2 3 4
+
+# 1 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 1 3 4
+# 24 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 3 4
+typedef short int __int16_t;
+typedef unsigned short int __uint16_t;
+
+
+
+
+
+typedef int __int32_t;
+typedef unsigned int __uint32_t;
+
+
+
+
+
+
+__extension__ typedef long long __int64_t;
+__extension__ typedef unsigned long long __uint64_t;
+# 59 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 3 4
+# 1 "/usr/local/lib/gcc-lib/arm-thumb-elf/3.3.6/include/stddef.h" 1 3 4
+# 151 "/usr/local/lib/gcc-lib/arm-thumb-elf/3.3.6/include/stddef.h" 3 4
+typedef long int ptrdiff_t;
+# 325 "/usr/local/lib/gcc-lib/arm-thumb-elf/3.3.6/include/stddef.h" 3 4
+typedef int wchar_t;
+# 60 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 2 3 4
+# 1 "/usr/local/arm-thumb-elf/sys-include/machine/types.h" 1 3 4
+# 36 "/usr/local/arm-thumb-elf/sys-include/machine/types.h" 3 4
+typedef long int __off_t;
+typedef int __pid_t;
+
+__extension__ typedef long long int __loff_t;
+# 61 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 2 3 4
+# 82 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 3 4
+typedef unsigned char u_char;
+typedef unsigned short u_short;
+typedef unsigned int u_int;
+typedef unsigned long u_long;
+
+
+
+typedef unsigned short ushort;
+typedef unsigned int uint;
+
+
+
+typedef unsigned long clock_t;
+
+
+
+
+typedef long time_t;
+
+
+
+
+struct timespec {
+  time_t tv_sec;
+  long tv_nsec;
+};
+
+struct itimerspec {
+  struct timespec it_interval;
+  struct timespec it_value;
+};
+
+
+typedef long daddr_t;
+typedef char * caddr_t;
+
+
+
+
+
+
+
+typedef unsigned short ino_t;
+# 158 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 3 4
+typedef short dev_t;
+
+
+
+
+typedef long off_t;
+
+typedef unsigned short uid_t;
+typedef unsigned short gid_t;
+
+
+typedef int pid_t;
+typedef long key_t;
+typedef _ssize_t ssize_t;
+# 184 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 3 4
+typedef unsigned int mode_t __attribute__ ((__mode__ (__SI__)));
+
+
+
+typedef unsigned short nlink_t;
+# 210 "/usr/local/arm-thumb-elf/sys-include/sys/types.h" 3 4
+typedef long fd_mask;
+
+
+
+
+
+
+
+typedef struct _types_fd_set {
+        fd_mask fds_bits[(((64)+(((sizeof (fd_mask) * 8))-1))/((sizeof (fd_mask) * 8)))];
+} _types_fd_set;
+# 30 "/usr/local/arm-thumb-elf/sys-include/time.h" 2 3 4
+
+
+
+struct tm
+{
+  int tm_sec;
+  int tm_min;
+  int tm_hour;
+  int tm_mday;
+  int tm_mon;
+  int tm_year;
+  int tm_wday;
+  int tm_yday;
+  int tm_isdst;
+};
+
+clock_t clock (void);
+double difftime (time_t _time2, time_t _time1);
+time_t mktime (struct tm *_timeptr);
+time_t time (time_t *_timer);
+
+char *asctime (const struct tm *_tblock);
+char *ctime (const time_t *_time);
+struct tm *gmtime (const time_t *_timer);
+struct tm *localtime (const time_t *_timer);
+
+size_t strftime (char *_s, size_t _maxsize, const char *_fmt, const struct tm *_t);
+
+char *asctime_r (const struct tm *, char *);
+char *ctime_r (const time_t *, char *);
+struct tm *gmtime_r (const time_t *, struct tm *);
+struct tm *localtime_r (const time_t *, struct tm *);
+
+
+
+
+
+
+
+
+char *strptime (const char *, const char *, struct tm *);
+void tzset (void);
+void _tzset_r (struct _reent *);
+# 98 "/usr/local/arm-thumb-elf/sys-include/time.h" 3 4
+extern time_t _timezone;
+extern int _daylight;
+extern char *_tzname[2];
+# 126 "/usr/local/arm-thumb-elf/sys-include/time.h" 3 4
+# 1 "/usr/local/arm-thumb-elf/sys-include/sys/features.h" 1 3 4
+# 127 "/usr/local/arm-thumb-elf/sys-include/time.h" 2 3 4
+# 3 "myhandler.h" 2
+
 
 
 
@@ -688,6 +1106,9 @@ int maxAlienLeft = 10;
 
 
 int pressedButtons[8] = {};
+int alienLaserPositions[10][3];
+int alienlaserCounter = 0;
+int alienlaserTimeCounter = 0;
 
 int endcount;
 int saved_counter[20] ={};
@@ -784,12 +1205,12 @@ void Handler(void)
             x = 240 - 50; spriteCounter = 300;
             if(pressedButtons[6] == 1){
                   yhigh = yhigh-10;
-                  if (yhigh < 10) yhigh = 10;
+
                   pressedButtons[6] = 0;
                 }
             if(pressedButtons[7] == 1){
                   yhigh = yhigh+10;
-                  if (yhigh > 160 - entryno*10) yhigh = 160;
+
                   pressedButtons[7] = 0;
                 }
 
@@ -878,21 +1299,21 @@ void Handler(void)
         pressedButtons[6] = 0;
 
 
+        spriteCounter = 10100;
+
         for( i = 0; i < 10; i++){
           if(laserPositions[i][0] == 1){
             laserPositions[i][2] = laserPositions[i][2] - 2;
-          }
-          if(laserPositions[i][0] == 0){
-            deactivateLaser(i);
-          }
             drawSprite(40 +4, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
-            spriteCounter++;
-
+          }
 
 
           if(laserPositions[i][2] < -20){
-            deactivateLaser(i);
+            deactivateLaser(i, spriteCounter);
           }
+
+          spriteCounter++;
+
         }
 
 
@@ -920,7 +1341,7 @@ void Handler(void)
             for(j = 0; j < laserCounter; j++){
                 if(laserPositions[j][1] >= alienPositions[i][1]-8 && laserPositions[j][1] < alienPositions[i][1]+8 && laserPositions[j][2] == alienPositions[i][2]){
                     if(alienPositions[i][0] == 1){
-                      deactivateLaser(j);
+                      deactivateLaser(j, 10100+j);
                       alienPositions[i][0] = 0;
                       endcount++;
                     }
@@ -941,13 +1362,35 @@ void Handler(void)
             alienPositions[i][0] = 1;
             }
         }
+
+
+
+       alienlaserTimeCounter++;
+       if(alienlaserTimeCounter > 50){
+         createAlienLaser();
+         alienlaserTimeCounter = 0;
+       }
+
+       spriteCounter = 10200;
+       for( i = 0; i < 10; i++){
+         if(alienLaserPositions[i][0] == 1){
+           alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
+           drawSprite(40 +4, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+         }
+
+
+         if(alienLaserPositions[i][2] > 200){
+           deactivateAlienLaser(i, 10200 + i);
+         }
+         spriteCounter++;
+       }
     }
 
     *(u16*)0x4000202 = Flag;
     *(u16*)0x4000208 = 0x01;
 }
 
-int checkbutton(void)
+void checkbutton(void)
 {
 
     u16 buttons = (0x3FF & (~*(volatile u16*)0x4000130));
@@ -1004,9 +1447,44 @@ void createLaser(void){
   }
 }
 
-void deactivateLaser(int i){
+void deactivateLaser(int i, int spriteNum){
   laserPositions[i][0] = 0;
   laserPositions[i][2] = -20;
+  drawSprite(40 +4, spriteNum, laserPositions[i][1], laserPositions[i][2]);
+
+}
+
+void createAlienLaser(void){
+  int attackingAlien = -1;
+  int breakCounter = 0;
+
+  while(attackingAlien == -1){
+    attackingAlien = rand();
+    attackingAlien = attackingAlien % 10;
+    breakCounter++;
+    if(alienPositions[attackingAlien][0] == 0){
+      attackingAlien = -1;
+    }
+    if(breakCounter > 10){
+      break;
+    }
+  }
+  if(attackingAlien != -1){
+    alienLaserPositions[alienlaserCounter][0] = 1;
+    alienLaserPositions[alienlaserCounter][1] = alienPositions[attackingAlien][1];
+    alienLaserPositions[alienlaserCounter][2] = alienPositions[attackingAlien][2];
+    alienlaserCounter++;
+    if(alienlaserCounter > 9){
+      alienlaserCounter = 0;
+    }
+  }
+}
+
+void deactivateAlienLaser(int i, int spriteNum){
+  alienLaserPositions[i][0] = 0;
+  alienLaserPositions[i][2] = 200;
+  drawSprite(40 +4, spriteNum, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+
 }
 # 9 "main.c" 2
 # 20 "main.c"
