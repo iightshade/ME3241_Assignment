@@ -1077,7 +1077,7 @@ int pos = 0;
 int playerX = 240/2, playerY = 160 -20;
 
 int menu_point = 160/2 + 1*20-20;
-int menumap = 1, gamemap = 0, highscore = 0;
+int menumap = 1, gamemap = 0, highscore = 0, credits = 0;;
 int CS = 0;
 
 int NAlien;
@@ -1166,76 +1166,109 @@ void Handler(void)
             drawSprite(37, c, 240/2 - 5*steps, menu_point);
 
             if (menu_point == (160/2 + 1*20-20) && pressedButtons[0] == 1){
-                menumap = 0; gamemap = 1; highscore = 0; CS=1; pressedButtons[0] = 0;
+                menumap = 0; gamemap = 1; highscore = 0; credits = 0; CS=1; pressedButtons[0] = 0;
             }
             if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
-                menumap = 0; gamemap = 0; highscore = 1; CS=1; pressedButtons[0] = 0;
+                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0;
+            }
+            if (menu_point == (160/2 + 3*20-20) && pressedButtons[0] == 1){
+                menumap = 0; gamemap = 0; highscore = 0; credits = 1; CS=1; pressedButtons[0] = 0;
             }
         }
 
     }
 
-    if (highscore == 1){
-        if (CS==1){ClearScreen();CS--;}
         if ((*(u16*)0x4000202 & 0x20) == 0x20){
-            int ones, tens, min_ones, min_tens;
-            char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>";
-            steps = 10; linecount = 1;
-            while (ch[i]!='\0'){d[i]=ch[i]; i++;}
+            if (highscore == 1){
+                if (CS==1){ClearScreen();CS--;}
+                int ones, tens, min_ones, min_tens;
+                char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>";
+                steps = 10; linecount = 1; i = 0;
+                while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
-            for(j=0;j<=i-1;j++){
-                if (d[j]==62){
-                    l[linecount]=j-mod;
-                    mod = j; linecount ++;
+                for(j=0;j<=i-1;j++){
+                    if (d[j]==62){
+                        l[linecount]=j-mod;
+                        mod = j; linecount ++;
+                        }
                     }
-                }
 
-            for(j=1;j<=linecount;j++){
-                x = 240/2 - 100;
-                y = 160/2 - 20 + j*20-20;
+                for(j=1;j<=linecount;j++){
+                    x = 240/2 - 100;
+                    y = 160/2 - 20 + j*20-20;
 
-                for(k=0;k<=l[j]-1;k++){
-                    drawSprite(d[c]-64,c,(x+k*steps),y);
-                    c++;
+                    for(k=0;k<=l[j]-1;k++){
+                        drawSprite(d[c]-64,c,(x+k*steps),y);
+                        c++;
+                        }
                     }
+
+                checkbutton();
+
+                x = 240 - 50; spriteCounter = 300;
+                if(pressedButtons[6] == 1){
+                      yhigh = yhigh-10;
+
+                      pressedButtons[6] = 0;
+                    }
+                if(pressedButtons[7] == 1){
+                      yhigh = yhigh+10;
+
+                      pressedButtons[7] = 0;
+                    }
+
+                for (j=0;j<entryno;j++){
+
+                    spriteCounter += 5;
+                    ones = saved_counter[j]%10;
+                    tens = saved_counter[j]/10%6;
+                    min_ones = saved_counter[j]/60%10;
+                    min_tens = saved_counter[j]/600;
+
+                    drawSprite(j+1+27,spriteCounter+5,x-5*steps-7,yhigh+j*10);
+
+                    drawSprite(ones+27,spriteCounter+1,x,yhigh+j*10);
+                    drawSprite(tens+27,spriteCounter+2,x-steps,yhigh+j*10);
+                    drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,yhigh+j*10);
+                    drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,yhigh+j*10);
+
                 }
 
-            checkbutton();
-
-            x = 240 - 50; spriteCounter = 300;
-            if(pressedButtons[6] == 1){
-                  yhigh = yhigh-10;
-
-                  pressedButtons[6] = 0;
+                if(pressedButtons[1] == 1){
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
                 }
-            if(pressedButtons[7] == 1){
-                  yhigh = yhigh+10;
-
-                  pressedButtons[7] = 0;
-                }
-
-            for (j=0;j<entryno;j++){
-
-                spriteCounter += 5;
-                ones = saved_counter[j]%10;
-                tens = saved_counter[j]/10%6;
-                min_ones = saved_counter[j]/60%10;
-                min_tens = saved_counter[j]/600;
-
-                drawSprite(j+1+27,spriteCounter+5,x-5*steps-7,yhigh+j*10);
-
-                drawSprite(ones+27,spriteCounter+1,x,yhigh+j*10);
-                drawSprite(tens+27,spriteCounter+2,x-steps,yhigh+j*10);
-                drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,yhigh+j*10);
-                drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,yhigh+j*10);
-
             }
+            if (credits == 1){
+                if (CS==1){ClearScreen();CS--;}
+                int ones, tens, min_ones, min_tens;
+                char ch[50]=" THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>";
+                steps = 10; linecount = 1; i = 0; mod = 0; c = 0;
+                while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
-            if(pressedButtons[1] == 1){
-            ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; pressedButtons[1] = 0; yhigh = 10;
+                for(j=0;j<=i-1;j++){
+                    if (d[j]==62){
+                        l[linecount]=j-mod;
+                        mod = j; linecount ++;
+                        }
+                    }
+
+                for(j=1;j<=linecount;j++){
+                    x = 240/2 - 120;
+                    y = 160/2 - 20 + j*20-20;
+
+                    for(k=0;k<=l[j]-1;k++){
+                        drawSprite(d[c]-64,c,(x+k*steps),y);
+                        c++;
+                        }
+                    }
+
+                checkbutton();
+                if(pressedButtons[1] == 1){
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
+                }
+
             }
         }
-    }
 
 
     if (gamemap == 1){
@@ -1356,14 +1389,6 @@ void Handler(void)
          }
       }
 
-      if(endcount == totalNumAliens){
-        ClearScreen(); saved_counter[entryno] = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; endcount = 0; laserCounter = 0; entryno++;
-        for(i = 0; i < totalNumAliens; i++){
-            alienPositions[i][0] = 1;
-            }
-        }
-
-
 
        alienlaserTimeCounter++;
        if(alienlaserTimeCounter > 50){
@@ -1384,6 +1409,13 @@ void Handler(void)
          }
          spriteCounter++;
        }
+
+        if(endcount == totalNumAliens){
+        ClearScreen(); saved_counter[entryno] = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; entryno++;
+        for(i = 0; i < totalNumAliens; i++){
+            alienPositions[i][0] = 1;
+            }
+        }
     }
 
     *(u16*)0x4000202 = Flag;
@@ -1487,7 +1519,7 @@ void deactivateAlienLaser(int i, int spriteNum){
 
 }
 # 9 "main.c" 2
-# 20 "main.c"
+# 21 "main.c"
 int main(void)
 {
 

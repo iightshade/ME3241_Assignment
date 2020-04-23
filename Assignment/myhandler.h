@@ -10,7 +10,7 @@ int pos = 0;
 int playerX = SCREEN_WIDTH/2, playerY = SCREEN_HEIGHT-20;
 
 int menu_point = SCREEN_HEIGHT/2 + 1*20-20;
-int menumap = 1, gamemap = 0, highscore = 0;
+int menumap = 1, gamemap = 0, highscore = 0, credits = 0;;
 int CS = 0;
 
 int NAlien;
@@ -99,76 +99,109 @@ void Handler(void)
             drawSprite(BUTTON_CURSOR, c,  SCREEN_WIDTH/2 - 5*steps, menu_point);
 
             if (menu_point == (SCREEN_HEIGHT/2 + 1*20-20) && pressedButtons[0] == 1){
-                menumap = 0; gamemap = 1; highscore = 0; CS=1; pressedButtons[0] = 0;
+                menumap = 0; gamemap = 1; highscore = 0; credits = 0; CS=1; pressedButtons[0] = 0;
             }
             if (menu_point == (SCREEN_HEIGHT/2 + 2*20-20) && pressedButtons[0] == 1){
-                menumap = 0; gamemap = 0; highscore = 1; CS=1; pressedButtons[0] = 0;
+                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0;
+            }
+            if (menu_point == (SCREEN_HEIGHT/2 + 3*20-20) && pressedButtons[0] == 1){
+                menumap = 0; gamemap = 0; highscore = 0; credits = 1; CS=1; pressedButtons[0] = 0;
             }
         }
 
     }
 
-    if (highscore == 1){
-        if (CS==1){ClearScreen();CS--;}
-        if ((REG_IF & INT_TIMER2) == INT_TIMER2){
-            int ones, tens, min_ones, min_tens;
-            char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>"; //all caps, > to change line
-            steps = 10; linecount = 1;
-            while (ch[i]!='\0'){d[i]=ch[i]; i++;}
+        if ((REG_IF & INT_TIMER2) == INT_TIMER2){ // Highscore and Credits
+            if (highscore == 1){
+                if (CS==1){ClearScreen();CS--;}
+                int ones, tens, min_ones, min_tens;
+                char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>"; //all caps, > to change line 
+                steps = 10; linecount = 1; i = 0;
+                while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
-            for(j=0;j<=i-1;j++){ //run through all the letters in ch[]
-                if (d[j]==62){
-                    l[linecount]=j-mod; //letters in 1 line
-                    mod = j; linecount ++;
+                for(j=0;j<=i-1;j++){ //run through all the letters in ch[]
+                    if (d[j]==62){
+                        l[linecount]=j-mod; //letters in 1 line
+                        mod = j; linecount ++;
+                        }
                     }
-                }
 
-            for(j=1;j<=linecount;j++){
-                x = SCREEN_WIDTH/2 - 100;
-                y = SCREEN_HEIGHT/2 - 20 + j*20-20;
+                for(j=1;j<=linecount;j++){
+                    x = SCREEN_WIDTH/2 - 100;
+                    y = SCREEN_HEIGHT/2 - 20 + j*20-20;
 
-                for(k=0;k<=l[j]-1;k++){
-                    drawSprite(d[c]-64,c,(x+k*steps),y);
-                    c++;
+                    for(k=0;k<=l[j]-1;k++){
+                        drawSprite(d[c]-64,c,(x+k*steps),y);
+                        c++;
+                        }
                     }
+                
+                checkbutton();
+
+                x = SCREEN_WIDTH - 50; spriteCounter = 300;
+                if(pressedButtons[6] == 1){
+                      yhigh = yhigh-10;
+                      // if (yhigh < 10) yhigh = 10;
+                      pressedButtons[6] = 0;
+                    }
+                if(pressedButtons[7] == 1){
+                      yhigh = yhigh+10;
+                      // if (yhigh > SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT;
+                      pressedButtons[7] = 0;
+                    }
+
+                for (j=0;j<entryno;j++){
+                    
+                    spriteCounter += 5;
+                    ones = saved_counter[j]%10;
+                    tens = saved_counter[j]/10%6;
+                    min_ones = saved_counter[j]/60%10;
+                    min_tens = saved_counter[j]/600;
+
+                    drawSprite(j+1+NUMBER,spriteCounter+5,x-5*steps-7,yhigh+j*10);
+
+                    drawSprite(ones+NUMBER,spriteCounter+1,x,yhigh+j*10);
+                    drawSprite(tens+NUMBER,spriteCounter+2,x-steps,yhigh+j*10);
+                    drawSprite(min_ones+NUMBER,spriteCounter+3,x-2*steps-7,yhigh+j*10);
+                    drawSprite(min_tens+NUMBER,spriteCounter+4,x-3*steps-7,yhigh+j*10);
+
                 }
 
-            checkbutton();
-
-            x = SCREEN_WIDTH - 50; spriteCounter = 300;
-            if(pressedButtons[6] == 1){
-                  yhigh = yhigh-10;
-                  // if (yhigh < 10) yhigh = 10;
-                  pressedButtons[6] = 0;
+                if(pressedButtons[1] == 1){
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10; 
                 }
-            if(pressedButtons[7] == 1){
-                  yhigh = yhigh+10;
-                  // if (yhigh > SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT;
-                  pressedButtons[7] = 0;
-                }
-
-            for (j=0;j<entryno;j++){
-
-                spriteCounter += 5;
-                ones = saved_counter[j]%10;
-                tens = saved_counter[j]/10%6;
-                min_ones = saved_counter[j]/60%10;
-                min_tens = saved_counter[j]/600;
-
-                drawSprite(j+1+NUMBER,spriteCounter+5,x-5*steps-7,yhigh+j*10);
-
-                drawSprite(ones+NUMBER,spriteCounter+1,x,yhigh+j*10);
-                drawSprite(tens+NUMBER,spriteCounter+2,x-steps,yhigh+j*10);
-                drawSprite(min_ones+NUMBER,spriteCounter+3,x-2*steps-7,yhigh+j*10);
-                drawSprite(min_tens+NUMBER,spriteCounter+4,x-3*steps-7,yhigh+j*10);
-
             }
+            if (credits == 1){
+                if (CS==1){ClearScreen();CS--;}
+                int ones, tens, min_ones, min_tens;
+                char ch[50]=" THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>"; //all caps, > to change line 
+                steps = 10; linecount = 1; i = 0; mod = 0; c = 0;
+                while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
-            if(pressedButtons[1] == 1){
-            ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; pressedButtons[1] = 0; yhigh = 10;
+                for(j=0;j<=i-1;j++){ //run through all the letters in ch[]
+                    if (d[j]==62){
+                        l[linecount]=j-mod; //letters in 1 line
+                        mod = j; linecount ++;
+                        }
+                    }
+
+                for(j=1;j<=linecount;j++){
+                    x = SCREEN_WIDTH/2 - 120;
+                    y = SCREEN_HEIGHT/2 - 20 + j*20-20;
+
+                    for(k=0;k<=l[j]-1;k++){
+                        drawSprite(d[c]-64,c,(x+k*steps),y);
+                        c++;
+                        }
+                    }
+                
+                checkbutton();
+                if(pressedButtons[1] == 1){
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10; 
+                }
+
             }
         }
-    }
 
 
     if (gamemap == 1){
@@ -289,14 +322,6 @@ void Handler(void)
          }
       }
 
-      if(endcount == totalNumAliens){
-        ClearScreen(); saved_counter[entryno] = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; endcount = 0; laserCounter = 0; entryno++;
-        for(i = 0; i < totalNumAliens; i++){
-            alienPositions[i][0] = 1;
-            }
-        }
-
-
        // Alien laser //
        alienlaserTimeCounter++;                 // Rate of Fire by the aliens
        if(alienlaserTimeCounter > 50){          //Create the alien laser randomly from an active alien
@@ -317,6 +342,13 @@ void Handler(void)
          }
          spriteCounter++;
        }
+
+        if(endcount == totalNumAliens){
+        ClearScreen(); saved_counter[entryno] = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; entryno++;
+        for(i = 0; i < totalNumAliens; i++){
+            alienPositions[i][0] = 1;
+            }
+        }
     }
 
     REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
