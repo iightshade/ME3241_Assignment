@@ -3864,8 +3864,8 @@ Handler:
 	ldrh	r2, [r3, #0]
 	tst	r2, #32
 	beq	.L96
-	ldr	r2, .L293+148
-	ldr	r5, [r2, #0]	@  linecount,  highscore
+	ldr	r1, .L293+164
+	ldr	r5, [r1, #0]	@  linecount,  highscore
 	cmp	r5, #1	@  linecount
 	beq	.L266
 .L97:
@@ -3892,7 +3892,7 @@ Handler:
 	ldmea	fp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
 	bx	lr
 .L268:
-	ldr	r4, .L293+144
+	ldr	r4, .L293+148
 	ldr	r3, [r4, #0]	@  CS
 	cmp	r3, #1
 	beq	.L269
@@ -3955,14 +3955,17 @@ Handler:
 	ldr	r3, [r7, #0]	@  totalNumAliens
 	cmp	r2, r3
 	bne	.L150
-	bl	ClearScreen
+	ldr	r0, .L293+144
+	mov	lr, pc
+	bx	r0
 	ldr	r4, .L293+20
+	bl	ClearScreen
 	ldr	lr, .L293+24
 	ldr	r0, [r4, #0]	@  entryno
 	ldr	ip, [lr, #0]	@  counter
 	ldr	r3, .L293+28
 	str	ip, [r3, r0, asl #2]	@  saved_counter
-	ldr	r3, .L293+148
+	ldr	r3, .L293+164
 	mov	r1, #0	@  i
 	add	r2, r0, #1
 	ldr	r5, [r7, #0]	@  i,  totalNumAliens
@@ -4427,7 +4430,7 @@ Handler:
 	str	r3, [r4, #0]	@  CS
 	b	.L151
 .L267:
-	ldr	r5, .L293+144
+	ldr	r5, .L293+148
 	ldr	r3, [r5, #0]	@  CS
 	cmp	r3, #1
 	beq	.L284
@@ -4546,7 +4549,7 @@ Handler:
 	bl	ClearScreen
 	ldr	r7, .L293+156
 	ldr	r2, .L293+116
-	ldr	ip, .L293+148
+	ldr	ip, .L293+164
 	ldr	lr, .L293+152
 	ldr	r0, .L293+160
 	mov	r3, #0
@@ -4573,7 +4576,7 @@ Handler:
 	str	r3, [r5, #0]	@  CS
 	b	.L128
 .L266:
-	ldr	r4, .L293+144
+	ldr	r4, .L293+148
 	ldr	r3, [r4, #0]	@  CS
 	cmp	r3, #1
 	beq	.L286
@@ -4803,7 +4806,7 @@ Handler:
 	ldr	r0, .L293+140
 	ldr	r1, .L293+156
 	ldr	r2, .L293+160
-	ldr	r7, .L293+148
+	ldr	r7, .L293+164
 	ldr	ip, .L293+152
 	mov	r3, #0
 	str	r3, [r0, #4]	@  pressedButtons
@@ -4882,11 +4885,12 @@ Handler:
 	.word	checkbutton
 	.word	menu_point
 	.word	pressedButtons
+	.word	cleanButtons
 	.word	CS
-	.word	highscore
 	.word	credits
 	.word	menumap
 	.word	gamemap
+	.word	highscore
 .L265:
 	tst	r0, #2097152
 	beq	.L67
@@ -5034,59 +5038,68 @@ Handler:
 	ldr	r3, [r5, #0]	@  menu_point
 	cmp	r3, #120
 	bne	.L67
-	ldr	r2, .L293+140
-	ldr	r1, [r2, #0]	@  pressedButtons
-	cmp	r1, #1
+	ldr	r1, .L293+140
+	ldr	r4, [r1, #0]	@  pressedButtons
+	cmp	r4, #1
 	bne	.L67
-	ldr	r2, .L293+144
-	ldr	lr, .L293+152
-	str	r1, [r2, #0]	@  CS
-	ldr	ip, .L293+140
-	ldr	r2, .L293+148
-	str	r1, [lr, #0]	@  credits
-	ldr	r0, .L293+156
-	ldr	r1, .L293+160
-	mov	r3, #0
-	str	r3, [ip, #0]	@  pressedButtons
-	str	r3, [r2, #0]	@  highscore
-	str	r3, [r0, #0]	@  menumap
-	str	r3, [r1, #0]	@  gamemap
+	ldr	r0, .L293+144
+	mov	lr, pc
+	bx	r0
+	ldr	r3, .L293+148
+	str	r4, [r3, #0]	@  CS
+	ldr	r3, .L293+140
+	mov	r2, #0
+	str	r2, [r3, #0]	@  pressedButtons
+	ldr	ip, .L293+152
+	ldr	r3, .L293+164
+	ldr	lr, .L293+156
+	ldr	r0, .L293+160
+	str	r2, [r3, #0]	@  highscore
+	str	r4, [ip, #0]	@  credits
+	str	r2, [lr, #0]	@  menumap
+	str	r2, [r0, #0]	@  gamemap
 	b	.L67
 .L292:
-	ldr	r3, .L293+140
-	ldr	r0, [r3, #0]	@  pressedButtons
-	cmp	r0, #1
+	ldr	r2, .L293+140
+	ldr	r4, [r2, #0]	@  pressedButtons
+	cmp	r4, #1
 	bne	.L94
-	ldr	r1, .L293+148
-	ldr	r2, .L293+144
-	str	r0, [r1, #0]	@  highscore
-	str	r0, [r2, #0]	@  CS
-	ldr	ip, .L293+152
-	ldr	lr, .L293+140
-	ldr	r0, .L293+156
-	ldr	r1, .L293+160
-	mov	r3, #0
-	str	r3, [ip, #0]	@  credits
-	str	r3, [lr, #0]	@  pressedButtons
-	str	r3, [r0, #0]	@  menumap
-	str	r3, [r1, #0]	@  gamemap
+	ldr	r0, .L293+144
+	mov	lr, pc
+	bx	r0
+	ldr	r3, .L293+148
+	ldr	r2, .L293+164
+	str	r4, [r3, #0]	@  CS
+	ldr	ip, .L293+140
+	ldr	r3, .L293+152
+	ldr	lr, .L293+156
+	ldr	r0, .L293+160
+	mov	r1, #0
+	str	r4, [r2, #0]	@  highscore
+	str	r1, [r3, #0]	@  credits
+	str	r1, [ip, #0]	@  pressedButtons
+	str	r1, [lr, #0]	@  menumap
+	str	r1, [r0, #0]	@  gamemap
 	b	.L94
 .L291:
-	ldr	r1, [r6, #0]	@  pressedButtons
-	cmp	r1, #1
+	ldr	r4, [r6, #0]	@  pressedButtons
+	cmp	r4, #1
 	bne	.L93
-	ldr	r2, .L293+144
-	str	r1, [r2, #0]	@  CS
-	ldr	r2, .L293+148
-	mov	r3, #0
-	str	r3, [r2, #0]	@  highscore
+	ldr	r0, .L293+144
+	mov	lr, pc
+	bx	r0
+	ldr	r3, .L293+148
 	ldr	lr, .L293+152
+	str	r4, [r3, #0]	@  CS
 	ldr	r0, .L293+156
-	ldr	r2, .L293+160
-	str	r3, [r6, #0]	@  pressedButtons
-	str	r3, [lr, #0]	@  credits
-	str	r3, [r0, #0]	@  menumap
-	str	r1, [r2, #0]	@  gamemap
+	ldr	r3, .L293+164
+	ldr	r1, .L293+160
+	mov	r2, #0
+	str	r2, [r6, #0]	@  pressedButtons
+	str	r2, [r3, #0]	@  highscore
+	str	r2, [lr, #0]	@  credits
+	str	r2, [r0, #0]	@  menumap
+	str	r4, [r1, #0]	@  gamemap
 	b	.L93
 .L290:
 	str	r1, [r0, #-240]	@  l
@@ -5305,6 +5318,29 @@ deactivateAlienLaser:
 	.word	alienLaserPositions
 	.size	deactivateAlienLaser, .-deactivateAlienLaser
 	.align	2
+	.global	cleanButtons
+	.type	cleanButtons, %function
+cleanButtons:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 0, uses_anonymous_args = 0
+	@ link register save eliminated.
+	mov	r3, #0	@  i
+	ldr	r1, .L337
+	@ lr needed for prologue
+	mov	r2, r3	@  i,  i
+.L334:
+	str	r2, [r1, r3, asl #2]	@  i,  pressedButtons
+	add	r3, r3, #1	@  i,  i
+	cmp	r3, #7	@  i
+	ble	.L334
+	bx	lr
+.L338:
+	.align	2
+.L337:
+	.word	pressedButtons
+	.size	cleanButtons, .-cleanButtons
+	.align	2
 	.global	main
 	.type	main, %function
 main:
@@ -5378,16 +5414,16 @@ main:
 	add	r0, r0, #67108866
 	ldrh	r1, [r0, #0]
 	mov	r2, #50331648
-	ldr	r3, .L333
+	ldr	r3, .L343
 	orr	r1, r1, #195
 	add	r2, r2, #32512
 	str	r3, [r2, #252]
 	strh	r1, [r0, #0]	@ movhi 
-.L330:
-	b	.L330
-.L334:
+.L340:
+	b	.L340
+.L344:
 	.align	2
-.L333:
+.L343:
 	.word	Handler
 	.size	main, .-main
 	.comm	NAlien,4,4

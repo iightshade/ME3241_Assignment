@@ -1166,12 +1166,15 @@ void Handler(void)
             drawSprite(37, c, 240/2 - 5*steps, menu_point);
 
             if (menu_point == (160/2 + 1*20-20) && pressedButtons[0] == 1){
+                cleanButtons();
                 menumap = 0; gamemap = 1; highscore = 0; credits = 0; CS=1; pressedButtons[0] = 0;
             }
             if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
+                cleanButtons();
                 menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0;
             }
             if (menu_point == (160/2 + 3*20-20) && pressedButtons[0] == 1){
+                cleanButtons();
                 menumap = 0; gamemap = 0; highscore = 0; credits = 1; CS=1; pressedButtons[0] = 0;
             }
         }
@@ -1179,6 +1182,8 @@ void Handler(void)
     }
 
         if ((*(u16*)0x4000202 & 0x20) == 0x20){
+
+
             if (highscore == 1){
                 if (CS==1){ClearScreen();CS--;}
                 int ones, tens, min_ones, min_tens;
@@ -1238,6 +1243,8 @@ void Handler(void)
                 ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
                 }
             }
+
+
             if (credits == 1){
                 if (CS==1){ClearScreen();CS--;}
                 int ones, tens, min_ones, min_tens;
@@ -1410,7 +1417,9 @@ void Handler(void)
          spriteCounter++;
        }
 
+
         if(endcount == totalNumAliens){
+        cleanButtons();
         ClearScreen(); saved_counter[entryno] = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; entryno++;
         for(i = 0; i < totalNumAliens; i++){
             alienPositions[i][0] = 1;
@@ -1466,7 +1475,6 @@ void checkbutton(void)
        pressedButtons[7] = 1;
     }
 
-         return 0;
 }
 
 void createLaser(void){
@@ -1516,6 +1524,13 @@ void deactivateAlienLaser(int i, int spriteNum){
   alienLaserPositions[i][0] = 0;
   alienLaserPositions[i][2] = 200;
   drawSprite(40 +4, spriteNum, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+}
+
+void cleanButtons(void){
+  int i;
+  for(i = 0; i <= 7; i++){
+    pressedButtons[i] = 0;
+  }
 
 }
 # 9 "main.c" 2
