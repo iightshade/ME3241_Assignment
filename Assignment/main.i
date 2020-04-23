@@ -640,8 +640,8 @@ void popSprite(int sprites, char dir, int count, int x, int y)
 void ClearScreen()
 {
     int x,y,c=0;
-    for (x = 0; x < 240; x++){
-        for (y = 0; y < 160; y++){
+    for (x = 0; x < 240 +20; x++){
+        for (y = 0; y < 160 +20; y++){
                 drawSprite(0,c,x,y); c++;
                 }
             }
@@ -690,8 +690,9 @@ int maxAlienLeft = 10;
 int pressedButtons[8] = {};
 
 int endcount;
-int saved_counter;
-
+int saved_counter[20] ={};
+int entryno = 0;
+int yhigh = 10;
 
 void Handler(void)
 {
@@ -747,10 +748,72 @@ void Handler(void)
                 menumap = 0; gamemap = 1; highscore = 0; CS=1; pressedButtons[0] = 0;
             }
             if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
-                menumap = 0; gamemap = 0; highscore = 1; CS=1;pressedButtons[0] = 0;
+                menumap = 0; gamemap = 0; highscore = 1; CS=1; pressedButtons[0] = 0;
             }
         }
 
+    }
+
+    if (highscore == 1){
+        if (CS==1){ClearScreen();CS--;}
+        if ((*(u16*)0x4000202 & 0x20) == 0x20){
+            int ones, tens, min_ones, min_tens;
+            char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>";
+            steps = 10; linecount = 1;
+            while (ch[i]!='\0'){d[i]=ch[i]; i++;}
+
+            for(j=0;j<=i-1;j++){
+                if (d[j]==62){
+                    l[linecount]=j-mod;
+                    mod = j; linecount ++;
+                    }
+                }
+
+            for(j=1;j<=linecount;j++){
+                x = 240/2 - 100;
+                y = 160/2 - 20 + j*20-20;
+
+                for(k=0;k<=l[j]-1;k++){
+                    drawSprite(d[c]-64,c,(x+k*steps),y);
+                    c++;
+                    }
+                }
+
+            checkbutton();
+
+            x = 240 - 50; spriteCounter = 300;
+            if(pressedButtons[6] == 1){
+                  yhigh = yhigh-10;
+                  if (yhigh < 10) yhigh = 10;
+                  pressedButtons[6] = 0;
+                }
+            if(pressedButtons[7] == 1){
+                  yhigh = yhigh+10;
+                  if (yhigh > 160 - entryno*10) yhigh = 160;
+                  pressedButtons[7] = 0;
+                }
+
+            for (j=0;j<entryno;j++){
+
+                spriteCounter += 5;
+                ones = saved_counter[j]%10;
+                tens = saved_counter[j]/10%6;
+                min_ones = saved_counter[j]/60%10;
+                min_tens = saved_counter[j]/600;
+
+                drawSprite(j+1+27,spriteCounter+5,x-5*steps-7,yhigh+j*10);
+
+                drawSprite(ones+27,spriteCounter+1,x,yhigh+j*10);
+                drawSprite(tens+27,spriteCounter+2,x-steps,yhigh+j*10);
+                drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,yhigh+j*10);
+                drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,yhigh+j*10);
+
+            }
+
+            if(pressedButtons[1] == 1){
+            ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; pressedButtons[1] = 0; yhigh = 10;
+            }
+        }
     }
 
 
@@ -763,6 +826,7 @@ void Handler(void)
         steps = 7; spriteCounter = 0;
 
         x = 240 - 15; y = 10;
+
         ones = counter%10;
         tens = counter/10%6;
         min_ones = counter/60%10;
@@ -854,7 +918,7 @@ void Handler(void)
 
             NAlien = 200;
             for(j = 0; j < laserCounter; j++){
-                if(laserPositions[j][1] >= alienPositions[i][1] && laserPositions[j][1] < alienPositions[i][1]+16 && laserPositions[j][2] == alienPositions[i][2]){
+                if(laserPositions[j][1] >= alienPositions[i][1]-8 && laserPositions[j][1] < alienPositions[i][1]+8 && laserPositions[j][2] == alienPositions[i][2]){
                     if(alienPositions[i][0] == 1){
                       deactivateLaser(j);
                       alienPositions[i][0] = 0;
@@ -872,7 +936,7 @@ void Handler(void)
       }
 
       if(endcount == totalNumAliens){
-        ClearScreen(); saved_counter = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; endcount = 0; laserCounter = 0;
+        ClearScreen(); saved_counter[entryno] = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; endcount = 0; laserCounter = 0; entryno++;
         for(i = 0; i < totalNumAliens; i++){
             alienPositions[i][0] = 1;
             }
@@ -945,13 +1009,12 @@ void deactivateLaser(int i){
   laserPositions[i][2] = -20;
 }
 # 9 "main.c" 2
-# 21 "main.c"
+# 20 "main.c"
 int main(void)
 {
 
 
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
-
 
 
     *(unsigned short *) 0x5000200 = 0;
@@ -963,7 +1026,7 @@ int main(void)
 
     *(u16*)0x4000208 = 0x0;
     (*(unsigned int*)0x3007FFC) = (int)&Handler;
-    *(u16*)0x4000200 |= 0x8 | 0x10 | 0x20 | 0x1000;
+    *(u16*)0x4000200 |= 0x8 | 0x10 | 0x20 | 0x40 | 0x1000;
     *(volatile u16*)0x4000132 |= 0x7FFF;
     *(u16*)0x4000208 = 0x1;
 
@@ -976,6 +1039,9 @@ int main(void)
 
     *(u16*)0x4000108 = 64509;
     *(u16*)0x400010A |= 0x0003 | 0x0080 | 0x0040;
+
+    *(u16*)0x400010C = 64509;
+    *(u16*)0x400010E |= 0x0003 | 0x0080 | 0x0040;
 
     while(1);
 
