@@ -298,15 +298,15 @@ void Handler(void)
 
 
        // Alien laser //
-       alienlaserTimeCounter++; // Rate of Fire
-       if(alienlaserTimeCounter > 50){
+       alienlaserTimeCounter++;                 // Rate of Fire by the aliens
+       if(alienlaserTimeCounter > 50){          //Create the alien laser randomly from an active alien
          createAlienLaser();
          alienlaserTimeCounter = 0;
        }
 
        spriteCounter = 10200;
-       for( i = 0; i < 10; i++){                   // Maximum number of lasers that can exist
-         if(alienLaserPositions[i][0] == 1){            // if laser is active its moves
+       for( i = 0; i < 10; i++){                        // Maximum number of alien lasers that can exist
+         if(alienLaserPositions[i][0] == 1){            // if laser is active it moves
            alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
            drawSprite(LASER, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
          }
@@ -380,18 +380,18 @@ void createLaser(void){
   }
 }
 
-void deactivateLaser(int i, int spriteNum){
-  laserPositions[i][0] = 0;
+void deactivateLaser(int i, int spriteNum){       // To deactivate player's laser,  provide the row and spritenumber
+  laserPositions[i][0] = 0;                       // Player's laser starts at 10100
   laserPositions[i][2] = -20;
   drawSprite(LASER, spriteNum, laserPositions[i][1], laserPositions[i][2]);
 
 }
 
-void createAlienLaser(void){
+void createAlienLaser(void){                  // Create alien's laser
   int attackingAlien = -1;
   int breakCounter = 0;
   // srand(time(0));
-  while(attackingAlien == -1){
+  while(attackingAlien == -1){                  // Choose alien position between 0-9
     attackingAlien = rand();
     attackingAlien = attackingAlien % 10;
     breakCounter++;
@@ -402,19 +402,19 @@ void createAlienLaser(void){
       break;
     }
   }
-  if(attackingAlien != -1){
+  if(attackingAlien != -1){                       // Create the alien laser
     alienLaserPositions[alienlaserCounter][0] = 1;
     alienLaserPositions[alienlaserCounter][1] = alienPositions[attackingAlien][1];
     alienLaserPositions[alienlaserCounter][2] = alienPositions[attackingAlien][2];
     alienlaserCounter++;
-    if(alienlaserCounter > 9){
+    if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
       alienlaserCounter = 0;
     }
   }
 }
 
-void deactivateAlienLaser(int i, int spriteNum){
-  alienLaserPositions[i][0] = 0;
+void deactivateAlienLaser(int i, int spriteNum){        //To deactivate alien's laser, provide the row and spritenumber
+  alienLaserPositions[i][0] = 0;                        // Alien's laser starts at 10200
   alienLaserPositions[i][2] = 200;
   drawSprite(LASER, spriteNum, alienLaserPositions[i][1], alienLaserPositions[i][2]);
 
