@@ -43,7 +43,7 @@ void Handler(void)
 {
     u16 Flag; int x,y,steps,a1,a2; int newline = 0;
     int d[50]={},l[10]={},i=0,j,linecount=1,k,    c=0,mod=0; //l[] = letters in line
-    
+
     a1 = 0; a2 = 1;
 
     REG_IME = 0x00; // Stop all other interrupt handling, while we handle this current one
@@ -124,9 +124,9 @@ void Handler(void)
         counter++;
         }
 
-        
+
         if ((REG_IF & INT_TIMER1) == INT_TIMER1){ // TODO: replace XXX with the specific interrupt you are handling
-        
+
         checkbutton();
         spriteCounter = 10001;
 
@@ -149,27 +149,29 @@ void Handler(void)
         // Create laser positions //
         // [0] = Active [1] = X  [2] = Y
         laserTimeCounter++; // Rate of Fire
-        if(laserTimeCounter > 25){ 
+        if(laserTimeCounter > 25){
           if(pressedButtons[6] == 1){ // Activation of Laser
             createLaser();
             laserTimeCounter = 0;
           }
         }
-        pressedButtons[6] = 0; // Deactivation of Laser
+        pressedButtons[6] = 0;                    // Reset laser button
 
 
-        for( i = 0; i < laserCounter; i++){
-          if(laserPositions[i][0] == 1){ // if laser is active its moves
+        for( i = 0; i < 10; i++){                   // Maximum number of lasers that can exist
+          if(laserPositions[i][0] == 1){            // if laser is active its moves
             laserPositions[i][2] = laserPositions[i][2] - 2;
           }
-
+          if(laserPositions[i][0] == 0){
+            deactivateLaser(i);
+          }
             drawSprite(LASER, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
             spriteCounter++;
-            
+
 
           // Deactivate lasers out of screen
           if(laserPositions[i][2] < -20){
-            laserPositions[i][0] = 0;
+            deactivateLaser(i);
           }
         }
 
@@ -177,7 +179,7 @@ void Handler(void)
         // Update alien positions //
         // [0] = Active [1] = X  [2] = Y
         alienTimer++;
-        if(alienTimer == 3){ 
+        if(alienTimer == 3){
           if(alienPositions[9][1] > maxAlienRight){ // Move L once hit the maximum right frame
             aliensMove = -1;
           }
@@ -197,12 +199,14 @@ void Handler(void)
             NAlien = 200; // must be the same counter not reproduce
             for(j = 0; j < laserCounter; j++){
                 if(laserPositions[j][1] >= alienPositions[i][1] && laserPositions[j][1] < alienPositions[i][1]+16 && laserPositions[j][2] == alienPositions[i][2]){
-                    alienPositions[i][0] = 0;
-                    // laserPositions[j][0] = 0;
+                    if(alienPositions[i][0] == 1){
+                      deactivateLaser(j);
+                      alienPositions[i][0] = 0;
                     }
+                  }
                 }
           if(alienPositions[i][0] == 1){
-            drawSprite(ALIEN1, NAlien + i, alienPositions[i][1], alienPositions[i][2]); 
+            drawSprite(ALIEN1, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
             }
           if(alienPositions[i][0] == 0){
             drawSprite(SPACE, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
@@ -263,13 +267,20 @@ int checkbutton(void)
 }
 
 void createLaser(void){
-  laserPositions[laserCounter][0] = 1;
-  laserPositions[laserCounter][1] = playerX;
-  laserPositions[laserCounter][2] = playerY;
-  laserCounter++;
-  if(laserCounter > 10){
-    laserCounter = 0;
+  if(gamemap == 1){
+    laserPositions[laserCounter][0] = 1;
+    laserPositions[laserCounter][1] = playerX;
+    laserPositions[laserCounter][2] = playerY;
+    laserCounter++;
+    if(laserCounter > 9){
+      laserCounter = 0;
+    }
   }
+}
+
+void deactivateLaser(int i){
+  laserPositions[i][0] = 0;
+  laserPositions[i][2] = -20;
 }
 
 

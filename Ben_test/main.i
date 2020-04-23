@@ -809,18 +809,20 @@ void Handler(void)
         pressedButtons[6] = 0;
 
 
-        for( i = 0; i < laserCounter; i++){
+        for( i = 0; i < 10; i++){
           if(laserPositions[i][0] == 1){
             laserPositions[i][2] = laserPositions[i][2] - 2;
           }
-
+          if(laserPositions[i][0] == 0){
+            deactivateLaser(i);
+          }
             drawSprite(40 +4, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
             spriteCounter++;
 
 
 
           if(laserPositions[i][2] < -20){
-            laserPositions[i][0] = 0;
+            deactivateLaser(i);
           }
         }
 
@@ -848,9 +850,11 @@ void Handler(void)
             NAlien = 200;
             for(j = 0; j < laserCounter; j++){
                 if(laserPositions[j][1] >= alienPositions[i][1] && laserPositions[j][1] < alienPositions[i][1]+16 && laserPositions[j][2] == alienPositions[i][2]){
-                    alienPositions[i][0] = 0;
-
+                    if(alienPositions[i][0] == 1){
+                      deactivateLaser(j);
+                      alienPositions[i][0] = 0;
                     }
+                  }
                 }
           if(alienPositions[i][0] == 1){
             drawSprite(40 +4 +4, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
@@ -914,13 +918,20 @@ int checkbutton(void)
 }
 
 void createLaser(void){
-  laserPositions[laserCounter][0] = 1;
-  laserPositions[laserCounter][1] = playerX;
-  laserPositions[laserCounter][2] = playerY;
-  laserCounter++;
-  if(laserCounter > 10){
-    laserCounter = 0;
+  if(gamemap == 1){
+    laserPositions[laserCounter][0] = 1;
+    laserPositions[laserCounter][1] = playerX;
+    laserPositions[laserCounter][2] = playerY;
+    laserCounter++;
+    if(laserCounter > 9){
+      laserCounter = 0;
+    }
   }
+}
+
+void deactivateLaser(int i){
+  laserPositions[i][0] = 0;
+  laserPositions[i][2] = -20;
 }
 # 9 "main.c" 2
 # 21 "main.c"
