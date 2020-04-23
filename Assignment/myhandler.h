@@ -115,7 +115,7 @@ void Handler(void)
             if (highscore == 1){
                 if (CS==1){ClearScreen();CS--;}
                 int ones, tens, min_ones, min_tens;
-                char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>"; //all caps, > to change line 
+                char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>"; //all caps, > to change line
                 steps = 10; linecount = 1; i = 0;
                 while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
@@ -135,7 +135,7 @@ void Handler(void)
                         c++;
                         }
                     }
-                
+
                 checkbutton();
 
                 x = SCREEN_WIDTH - 50; spriteCounter = 300;
@@ -151,7 +151,7 @@ void Handler(void)
                     }
 
                 for (j=0;j<entryno;j++){
-                    
+
                     spriteCounter += 5;
                     ones = saved_counter[j]%10;
                     tens = saved_counter[j]/10%6;
@@ -168,13 +168,13 @@ void Handler(void)
                 }
 
                 if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10; 
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
                 }
             }
             if (credits == 1){
                 if (CS==1){ClearScreen();CS--;}
                 int ones, tens, min_ones, min_tens;
-                char ch[50]=" THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>"; //all caps, > to change line 
+                char ch[50]=" THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>"; //all caps, > to change line
                 steps = 10; linecount = 1; i = 0; mod = 0; c = 0;
                 while (ch[i]!='\0'){d[i]=ch[i]; i++;}
 
@@ -194,10 +194,10 @@ void Handler(void)
                         c++;
                         }
                     }
-                
+
                 checkbutton();
                 if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10; 
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
                 }
 
             }
@@ -450,4 +450,10 @@ void deactivateAlienLaser(int i, int spriteNum){        //To deactivate alien's 
   alienLaserPositions[i][2] = 200;
   drawSprite(LASER, spriteNum, alienLaserPositions[i][1], alienLaserPositions[i][2]);
 
+}
+
+void cleanButtons(void){
+  for( i = 0; i <= 7; i++){
+    pressedButtons[i] = 0;
+  }
 }
