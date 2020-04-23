@@ -47,6 +47,7 @@ int endcount;
 int saved_counter[20] ={};
 int entryno = 0;
 int yhigh = 10;
+int lives = 3;
 
 void Handler(void)
 {
@@ -357,7 +358,7 @@ void Handler(void)
 
        // Alien laser //
        alienlaserTimeCounter++;                 // Rate of Fire by the aliens
-       if(alienlaserTimeCounter > 50){          //Create the alien laser randomly from an active alien
+       if(alienlaserTimeCounter > 150){          //Create the alien laser randomly from an active alien
          createAlienLaser();
          alienlaserTimeCounter = 0;
        }
@@ -366,6 +367,11 @@ void Handler(void)
        for( i = 0; i < 10; i++){                        // Maximum number of alien lasers that can exist
          if(alienLaserPositions[i][0] == 1){            // if laser is active it moves
            alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
+           if(alienLaserPositions[i][1] >= playerX-8 && alienLaserPositions[i][1] < playerX+8 && alienLaserPositions[i][2] == playerY){
+                      deactivateAlienLaser(i, 10200 + i);
+                      lives--;
+                  }
+
            drawSprite(LASER, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
          }
 
@@ -377,9 +383,10 @@ void Handler(void)
        }
 
       // End of game //
-        if(endcount == totalNumAliens){
+        if(endcount == totalNumAliens || lives == 0){
         cleanButtons();
-        ClearScreen(); saved_counter[entryno] = counter; counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; entryno++;
+        if (endcount == totalNumAliens){entryno++; saved_counter[entryno] = counter;}
+        ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
         for(i = 0; i < totalNumAliens; i++){
             alienPositions[i][0] = 1;
             }
