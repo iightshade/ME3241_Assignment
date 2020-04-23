@@ -3,10 +3,10 @@
 // -----------------------------------------------------------------------------
 #include "sprites8.h"
 #include "sprites16.h"
+#include "sprites32.h"
 #include "gba.h"
 #include "gbalib.h"
 #include "myhandler.h"
-
 
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
@@ -19,7 +19,9 @@
 // Project Entry Point
 // -----------------------------------------------------------------------------
 int main(void)
-{
+{    
+
+
     // Set Mode 2
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
 

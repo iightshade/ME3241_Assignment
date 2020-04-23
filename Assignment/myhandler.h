@@ -64,7 +64,7 @@ void Handler(void)
             //MENU------------------------------------------------------
 
             if (menumap == 1){ 
-            char ch[50]=" STAR>INVADERS>"; //all caps, > to change line
+            char ch[50]=" STAR>WARS>"; //all caps, > to change line
             steps = 10;
 
             while (ch[i]!='\0'){d[i]=ch[i]; i++;}
@@ -85,7 +85,13 @@ void Handler(void)
                     c++;
                 }
             }
-            drawSprite(SPACESHIP, c, SCREEN_WIDTH/2 + 30, 20 +1*20);
+            drawSprite(DEATHSTAR4, c+3, SCREEN_WIDTH/2 + 10, 20 +1*20);
+            drawSprite(DEATHSTAR3, c+2, SCREEN_WIDTH/2 + 10- 1*16, 20 +1*20);
+            drawSprite(DEATHSTAR2, c+1, SCREEN_WIDTH/2 + 10, 20 +1*20-1*16);
+            drawSprite(DEATHSTAR1, c, SCREEN_WIDTH/2 + 10- 1*16, 20 +1*20-1*16);
+
+            drawSprite(SPACESHIP, c+4, SCREEN_WIDTH/2 + 40, 20 +1*20);
+
             char ch1[50]=" NEW GAME>HIGHSCORE>CREDITS>"; //all caps, > to change line
             i=0; mod=0; linecount=1; c=30;
             while (ch1[i]!='\0'){d1[i]=ch1[i]; i++;}
@@ -348,7 +354,7 @@ void Handler(void)
                   }
                 }
           if(alienPositions[i][0] == 1){
-            drawSprite(ALIEN1, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
+            drawSprite(STARDESTROYER, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
             }
           if(alienPositions[i][0] == 0){
             drawSprite(SPACE, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
@@ -385,7 +391,7 @@ void Handler(void)
       // End of game //
         if(endcount == totalNumAliens || lives == 0){
         cleanButtons();
-        if (endcount == totalNumAliens){entryno++; saved_counter[entryno] = counter;}
+        if (endcount == totalNumAliens){saved_counter[entryno] = counter; entryno++;}
         ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
         for(i = 0; i < totalNumAliens; i++){
             alienPositions[i][0] = 1;
