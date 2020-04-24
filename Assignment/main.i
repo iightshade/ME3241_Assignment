@@ -635,80 +635,80 @@ u16 sprites32[] = {
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,10,
-    0,0,0,0,0,0,10,1,
-    0,0,0,0,0,10,1,1,
-    0,0,0,0,10,1,1,1,
+    0,0,0,0,0,0,0,1,
+    0,0,0,0,0,1,1,1,
+    0,0,0,0,0,1,1,1,
+    0,0,0,0,1,1,1,1,
 
 
     0,0,0,0,0,0,0,0,
-    0,0,0,0,10,10,10,10,
-    0,0,10,10,1,1,1,1,
-    0,10,1,1,1,1,1,1,
-    10,1,1,1,1,1,1,1,
+    0,0,0,0,1,1,1,1,
+    0,0,1,1,1,1,1,1,
+    0,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
 
-    0,0,0,0,10,1,1,1,
-    0,0,0,10,1,1,1,1,
-    0,0,10,1,1,1,1,1,
-    0,10,1,1,1,1,1,1,
-    10,1,1,1,1,1,1,1,
-    10,1,1,1,1,1,1,1,
-    10,1,1,1,1,1,1,1,
-    10,1,1,1,1,1,1,1,
-
-
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
+    0,0,0,0,1,1,1,1,
+    0,0,0,1,1,1,1,1,
+    0,0,1,1,1,1,1,1,
+    0,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
 
 
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
 
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    1,1,0,0,0,0,0,0,
-    1,1,1,1,0,0,0,0,
-    1,1,1,1,1,1,0,0,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
 
 
     0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
+    1,0,0,0,0,0,0,0,
+    1,1,1,0,0,0,0,0,
+    1,1,1,1,1,0,0,0,
+    1,1,1,1,1,1,1,0,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+
+
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
     1,1,0,0,0,0,0,0,
-
-
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-
-
     1,1,1,0,0,0,0,0,
     1,1,1,0,0,0,0,0,
+
+
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+
+
     1,1,1,1,0,0,0,0,
-    1,1,1,1,0,0,0,0,
+    1,1,1,1,1,0,0,0,
     1,1,1,1,1,0,0,0,
     1,1,1,1,1,1,0,0,
     1,1,1,1,1,1,0,0,
-    1,1,1,1,1,1,0,0,
+    1,1,1,1,1,1,1,0,
+    1,1,1,1,1,1,1,0,
+    1,1,1,1,1,1,1,0,
 
 
 
@@ -1314,9 +1314,9 @@ int alienPositions[10][3]= {
     {1, 110, 50},
 };
 int bossPositions[3][3] = {
-  {5, 30, 30},
-  {5, 60, 30},
-  {5, 90, 30}
+  {5, 30, 50},
+  {20, 60, 50},
+  {5, 106, 50}
 };
 int numBosses = 3;
 int alienTimer = 0;
@@ -1540,7 +1540,7 @@ void Handler(void)
         int ones, tens, min_ones, min_tens, distx;
         steps = 7; spriteCounter = 0;
 
-        x = 240 - 15; y = 10;
+        x = 240 - 15; y = 16;
 
         ones = counter%10;
         tens = counter/10%6;
@@ -1554,9 +1554,15 @@ void Handler(void)
 
         char ch[50]="LIVES>";
         while (ch[i]!='\0') {d[i]=ch[i]; i++;}
-        x = distx-100; spriteCounter = 100;
-        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+10+k,(x+k*steps),y);
+        x = distx-130; spriteCounter = 100;
+        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+5+k,(x+k*steps),y);
         counter++;
+        }
+
+        spriteCounter = 1050;
+        for(k=0;k<3;k++){
+            drawSprite(40, k+spriteCounter, (k*2*steps+40+x), y-5);
+            for(i=0;i<3-lives;i++) drawSprite(0, i+spriteCounter, (i*2*steps+40+x), y-5);
         }
 
 
@@ -1692,7 +1698,7 @@ void Handler(void)
 
          for(i = 0; i <= 2; i++){
 
-             NAlien = 200;
+             NAlien = 300;
              for(j = 0; j < laserCounter; j++){
                  if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
                      if(bossPositions[i][0] >= 1){
@@ -1705,15 +1711,31 @@ void Handler(void)
                    }
                  }
            if(bossPositions[i][0] >= 1){
-             drawSprite(40 +4 +4 +4, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
+            if(i==1){
+             if(bossPositions[1][0] >= 1){
+                drawSprite(68, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
+                drawSprite(64, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
+                drawSprite(60, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
+                drawSprite(56, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
+                }
+            }
+             else drawSprite(40 +4 +4 +4, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
            if(bossPositions[i][0] == 0){
+            if(i==1){
+             if(bossPositions[1][0] == 0){
+                drawSprite(0, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
+                drawSprite(0, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
+                drawSprite(0, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
+                drawSprite(0, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
+                }
+            }
              drawSprite(0, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
           }
 
           alienlaserTimeCounter++;
-          if(alienlaserTimeCounter > 150){
+          if(alienlaserTimeCounter > 50){
             createBossLaser();
             alienlaserTimeCounter = 0;
           }
@@ -1914,10 +1936,9 @@ void createBossLaser(void){
   }
 }
 # 10 "main.c" 2
-# 22 "main.c"
+# 21 "main.c"
 int main(void)
 {
-
 
 
     *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;

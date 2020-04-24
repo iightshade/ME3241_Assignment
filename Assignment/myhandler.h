@@ -32,9 +32,9 @@ int alienPositions[10][3]= {
     {1, 110, 50},
 };
 int bossPositions[3][3] = {
-  {5, 30, 30},
-  {5, 60, 30},
-  {5, 90, 30}
+  {5, 30, 50},
+  {20, 60, 50},
+  {5, 106, 50}
 };
 int numBosses = 3;
 int alienTimer = 0;
@@ -258,7 +258,7 @@ void Handler(void)
         int ones, tens, min_ones, min_tens, distx;
         steps = 7; spriteCounter = 0;
 
-        x = SCREEN_WIDTH - 15; y = 10;
+        x = SCREEN_WIDTH - 15; y = 16;
 
         ones = counter%10;
         tens = counter/10%6;
@@ -272,9 +272,15 @@ void Handler(void)
 
         char ch[50]="LIVES>"; //all caps, > to change line
         while (ch[i]!='\0') {d[i]=ch[i]; i++;}
-        x = distx-100; spriteCounter = 100;
-        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+10+k,(x+k*steps),y);
+        x = distx-130; spriteCounter = 100;
+        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+5+k,(x+k*steps),y);
         counter++;
+        }
+
+        spriteCounter = 1050;
+        for(k=0;k<3;k++){
+            drawSprite(SPACESHIP, k+spriteCounter, (k*2*steps+40+x), y-5);
+            for(i=0;i<3-lives;i++) drawSprite(SPACE, i+spriteCounter, (i*2*steps+40+x), y-5);
         }
 
 
@@ -410,7 +416,7 @@ void Handler(void)
          // [0] = Health [1] = X  [2] = Y
          for(i = 0; i <= 2; i++){
              //Using a standard fixed sprite number for Aliens
-             NAlien = 200; // must be the same counter not reproduce
+             NAlien = 300; // must be the same counter not reproduce
              for(j = 0; j < laserCounter; j++){
                  if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
                      if(bossPositions[i][0] >= 1){
@@ -423,15 +429,31 @@ void Handler(void)
                    }
                  }
            if(bossPositions[i][0] >= 1){
-             drawSprite(STARDESTROYER, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
+            if(i==1){
+             if(bossPositions[1][0] >= 1){
+                drawSprite(DEATHSTAR4, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
+                drawSprite(DEATHSTAR3, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
+                drawSprite(DEATHSTAR2, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
+                drawSprite(DEATHSTAR1, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
+                }
+            }
+             else drawSprite(STARDESTROYER, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
            if(bossPositions[i][0] == 0){
+            if(i==1){
+             if(bossPositions[1][0] == 0){
+                drawSprite(SPACE, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
+                drawSprite(SPACE, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
+                drawSprite(SPACE, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
+                drawSprite(SPACE, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
+                }
+            }
              drawSprite(SPACE, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
           }
           // Boss lasers //
           alienlaserTimeCounter++;                 // Rate of Fire by the aliens
-          if(alienlaserTimeCounter > 150){          //Create the alien laser randomly from an active alien
+          if(alienlaserTimeCounter > 50){          //Create the alien laser randomly from an active alien
             createBossLaser();
             alienlaserTimeCounter = 0;
           }
