@@ -272,7 +272,7 @@ void Handler(void)
 
         char ch[50]="LIVES>"; //all caps, > to change line
         while (ch[i]!='\0') {d[i]=ch[i]; i++;}
-        x = distx-100;
+        x = distx-100; spriteCounter = 100;
         for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+10+k,(x+k*steps),y);
         counter++;
         }
@@ -456,7 +456,7 @@ void Handler(void)
       // End of game* //
       if(endcount == (totalNumAliens + numBosses) || lives <= 0){
       cleanButtons();
-      if (endcount == (totalNumAliens + numBosses)){entryno++; saved_counter[entryno] = counter;}
+      if (endcount == (totalNumAliens + numBosses)){saved_counter[entryno] = counter; entryno++;}
       ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
       for(i = 0; i < totalNumAliens; i++){
           alienPositions[i][0] = 1;
