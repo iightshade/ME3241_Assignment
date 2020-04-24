@@ -406,15 +406,15 @@ void Handler(void)
          for(i = 0; i <= 2; i++){
              //Using a standard fixed sprite number for Aliens
              NAlien = 200; // must be the same counter not reproduce
-             // for(j = 0; j < laserCounter; j++){
-             //     if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
-             //         if(bossPositions[i][0] >= 1){
-             //           deactivateLaser(j, 10100+j);
-             //           bossPositions[i][0] = 0;
-             //           endcount++;
-             //         }
-             //       }
-             //     }
+             for(j = 0; j < laserCounter; j++){
+                 if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
+                     if(bossPositions[i][0] >= 1){
+                       deactivateLaser(j, 10100+j);
+                       bossPositions[i][0] = 0;
+                       endcount++;
+                     }
+                   }
+                 }
            if(bossPositions[i][0] >= 1){
              drawSprite(LASER, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
@@ -590,8 +590,9 @@ void createBossLaser(void){                  // Create alien's laser
   }
 
   laserSize = (rand() % 3) + 1;
+  // Laser size determines the number of lasers fired
 
-  if(attackingAlien != -1){                       // Create the alien laser
+  if(attackingAlien != -1){                       // Create the alien laser.
     // Laser size 1
     alienLaserPositions[alienlaserCounter][0] = 1;
     alienLaserPositions[alienlaserCounter][1] = bossPositions[attackingAlien][1];

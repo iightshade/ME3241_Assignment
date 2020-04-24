@@ -3852,19 +3852,19 @@ lives:
 	.type	Handler, %function
 Handler:
 	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 592
+	@ args = 0, pretend = 0, frame = 588
 	@ frame_needed = 1, uses_anonymous_args = 0
 	mov	ip, sp
 	stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
 	sub	fp, ip, #-4294967292
-	sub	sp, sp, #592
-	ldr	r3, .L367+148
+	sub	sp, sp, #588
+	ldr	r3, .L378
 	mov	r1, #0
 	mov	r2, #200
 	sub	r0, fp, #240
 	mov	lr, pc
 	bx	r3
-	ldr	r8, .L367+148
+	ldr	r8, .L378
 	mov	r1, #0
 	mov	r2, #200
 	sub	r0, fp, #440
@@ -3899,26 +3899,26 @@ Handler:
 	str	r1, [fp, #-608]	@  c,  mod
 	str	r2, [fp, #-588]	@  Flag
 	beq	.L67
-	ldr	r0, .L367+172
+	ldr	r0, .L378+176
 	ldr	r3, [r0, #0]	@  menumap
 	cmp	r3, lr
-	beq	.L331
+	beq	.L341
 .L68:
-	ldr	r1, .L367+180
+	ldr	r1, .L378+184
 	ldr	r5, [r1, #0]	@  linecount,  highscore
 	cmp	r5, #1	@  linecount
-	beq	.L332
+	beq	.L342
 .L116:
-	ldr	r1, .L367+176
+	ldr	r1, .L378+180
 	ldr	r4, [r1, #0]	@  linecount,  credits
 	cmp	r4, #1	@  linecount
-	beq	.L333
+	beq	.L343
 .L67:
-	ldr	r0, .L367+184
+	ldr	r0, .L378+188
 	ldr	r0, [r0, #0]	@  gamemap
 	cmp	r0, #1
 	str	r0, [fp, #-620]
-	beq	.L334
+	beq	.L344
 .L169:
 	sub	r0, fp, #512
 	mov	r3, #512
@@ -3931,50 +3931,50 @@ Handler:
 	strh	r1, [r2, #0]	@ movhi 
 	ldmea	fp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
 	bx	lr
-.L334:
-	ldr	r4, .L367+168
+.L344:
+	ldr	r4, .L378+172
 	ldr	r3, [r4, #0]	@  CS
 	cmp	r3, #1
-	beq	.L335
+	beq	.L345
 .L170:
 	mov	r3, #512
 	add	r3, r3, #67108866
 	ldrh	r2, [r3, #0]
 	tst	r2, #8
-	bne	.L336
+	bne	.L346
 .L171:
 	mov	r3, #512
 	add	r3, r3, #67108866
 	ldrh	r2, [r3, #0]
 	tst	r2, #16
 	beq	.L169
-	ldr	r0, .L367+152
+	ldr	r0, .L378+156
 	mov	lr, pc
 	bx	r0
-	ldr	r3, .L367+160
+	ldr	r3, .L378+164
 	ldr	r2, [r3, #16]	@  pressedButtons
-	ldr	r8, .L367+128
+	ldr	r8, .L378+132
 	mov	r3, #9984
 	add	r3, r3, #17
 	cmp	r2, #1
 	str	r3, [r8, #0]	@  spriteCounter
-	beq	.L337
+	beq	.L347
 .L182:
-	ldr	r0, .L367+160
+	ldr	r0, .L378+164
 	ldr	r3, [r0, #20]	@  pressedButtons
 	cmp	r3, #1
-	beq	.L338
+	beq	.L348
 .L184:
-	ldr	r2, .L367+128
-	ldr	r3, .L367
-	ldr	r8, .L367+4
+	ldr	r2, .L378+132
+	ldr	r3, .L378+4
+	ldr	r8, .L378+8
 	ldr	r1, [r2, #0]	@  c,  spriteCounter
-	ldr	r4, .L367+8
+	ldr	r4, .L378+12
 	ldr	r2, [r3, #0]	@  x,  playerX
 	mov	r0, #40
 	ldr	r3, [r8, #0]	@  y,  playerY
 	bl	drawSprite
-	ldr	ip, .L367+128
+	ldr	ip, .L378+132
 	ldr	r2, [r4, #0]	@  laserTimeCounter
 	ldr	r3, [ip, #0]	@  spriteCounter
 	add	r2, r2, #1
@@ -3983,79 +3983,78 @@ Handler:
 	str	r3, [ip, #0]	@  spriteCounter
 	str	r2, [r4, #0]	@  laserTimeCounter
 	ble	.L186
-	ldr	lr, .L367+160
+	ldr	lr, .L378+164
 	ldr	r3, [lr, #24]	@  pressedButtons
 	cmp	r3, #1
-	beq	.L339
+	beq	.L349
 .L186:
 	mov	r3, #10048
-	ldr	r0, .L367+160
-	ldr	r1, .L367+128
+	ldr	r0, .L378+164
+	ldr	r1, .L378+132
 	mov	r2, #0	@  i
 	add	r3, r3, #52
 	str	r2, [r0, #24]	@  i,  pressedButtons
 	str	r3, [r1, #0]	@  spriteCounter
 	str	r2, [fp, #-600]	@  i,  i
-	ldr	sl, .L367+12
 	mov	r5, r2	@  i,  i
 .L194:
-	ldr	r3, [r5, sl]	@  laserPositions
+	ldr	r2, .L378+16
+	ldr	r3, [r5, r2]	@  laserPositions
 	cmp	r3, #1
-	add	r4, r5, sl	@  i
+	add	r4, r5, r2	@  i
 	mov	r0, #44
 	add	r5, r5, #12	@  i,  i
-	beq	.L340
+	beq	.L350
 .L192:
 	ldr	r0, [fp, #-600]	@  i
 	ldr	r3, [r4, #8]	@  laserPositions
 	add	r8, r0, #1
 	cmn	r3, #20
 	str	r8, [fp, #-600]	@  i
-	blt	.L341
+	blt	.L351
 .L193:
-	ldr	lr, .L367+128
+	ldr	lr, .L378+132
 	ldr	r0, [fp, #-600]	@  i
 	ldr	r3, [lr, #0]	@  spriteCounter
 	cmp	r0, #9
 	add	r3, r3, #1
 	str	r3, [lr, #0]	@  spriteCounter
 	ble	.L194
-	ldr	r1, .L367+16
-	ldr	r2, .L367+20
+	ldr	r1, .L378+20
+	ldr	r2, .L378+24
 	ldr	r3, [r1, #0]	@  endcount
 	ldr	r0, [r2, #0]	@  totalNumAliens
 	cmp	r3, r0
-	ldrge	r9, .L367+24
 	bge	.L195
-	ldr	ip, .L367+28
+	ldr	ip, .L378+28
 	ldr	r3, [ip, #0]	@  alienTimer
 	add	r3, r3, #1
 	cmp	r3, #3
 	str	r3, [ip, #0]	@  alienTimer
-	beq	.L342
+	beq	.L352
 .L196:
-	ldr	r1, .L367+20
+	ldr	r1, .L378+24
 	ldr	r3, [r1, #0]	@  totalNumAliens
 	mov	r2, #0
 	cmp	r2, r3
 	str	r2, [fp, #-600]	@  i
-	bge	.L308
-	ldr	r7, .L367+32
+	bge	.L315
+	ldr	r7, .L378+32
 	mov	r8, r2	@  i
 .L217:
-	ldr	r3, .L367+36
+	ldr	r3, .L378+36
 	ldr	r2, [r3, #0]	@  laserCounter
 	mov	r9, #0	@  j
-	ldr	ip, .L367+40
+	ldr	ip, .L378+40
 	mov	r3, #200
 	cmp	r9, r2	@  j
 	str	r3, [ip, #0]	@  NAlien
-	bge	.L310
+	bge	.L317
 	mov	r5, #10048	@  c
-	str	r8, [fp, #-628]	@  i
+	ldr	r4, .L378+16
+	mov	sl, r8	@  i,  i
 	mov	r6, r7
 	add	r5, r5, #52	@  c,  c
-	mov	r4, sl
 .L214:
 	ldr	r3, [r6, #4]	@  alienPositions
 	ldr	r2, [r4, #4]	@  laserPositions
@@ -4068,25 +4067,25 @@ Handler:
 	ldr	r2, [r4, #8]	@  laserPositions
 	ldr	r3, [r6, #8]	@  alienPositions
 	cmp	r2, r3
-	beq	.L343
+	beq	.L353
 .L210:
-	ldr	r1, .L367+36
-	ldr	r3, [r1, #0]	@  laserCounter
+	ldr	r2, .L378+36
+	ldr	r3, [r2, #0]	@  laserCounter
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, r3	@  j
 	add	r4, r4, #12
 	add	r5, r5, #1	@  c,  c
 	blt	.L214
-.L310:
-	ldr	r2, .L367+32
-	ldr	r0, [r8, r2]	@  i,  alienPositions
+.L317:
+	ldr	r3, .L378+32
+	ldr	r0, [r8, r3]	@  i,  alienPositions
 	cmp	r0, #1	@  i
-	beq	.L344
+	beq	.L354
 .L215:
 	cmp	r0, #0	@  i
-	beq	.L345
+	beq	.L355
 .L206:
-	ldr	lr, .L367+20
+	ldr	lr, .L378+24
 	ldr	r0, [fp, #-600]	@  i
 	ldr	r3, [lr, #0]	@  totalNumAliens
 	add	r0, r0, #1
@@ -4095,22 +4094,21 @@ Handler:
 	add	r8, r8, #12	@  i,  i
 	add	r7, r7, #12
 	blt	.L217
-.L308:
-	ldr	r4, .L367+44
+.L315:
+	ldr	r4, .L378+44
 	ldr	r3, [r4, #0]	@  alienlaserTimeCounter
 	add	r3, r3, #1
 	cmp	r3, #150
 	str	r3, [r4, #0]	@  alienlaserTimeCounter
-	bgt	.L346
+	bgt	.L356
 .L218:
 	mov	r3, #10176	@  c
-	ldr	r1, .L367+128
+	ldr	r1, .L378+132
 	add	r3, r3, #24	@  c,  c
 	mov	r2, #0
 	str	r3, [r1, #0]	@  c,  spriteCounter
-	ldr	r9, .L367+24
-	ldr	r7, .L367+48
-	ldr	r4, .L367+52
+	ldr	r7, .L378+48
+	ldr	r4, .L378+52
 	str	r2, [fp, #-600]	@  i
 	mov	r5, r3	@  c,  c
 	mov	r6, r3	@  c,  c
@@ -4118,9 +4116,9 @@ Handler:
 	ldr	r3, [r4, #0]	@  alienLaserPositions
 	cmp	r3, #1
 	mov	r0, #44
-	beq	.L347
+	beq	.L357
 .L223:
-	ldr	r8, .L367
+	ldr	r8, .L378+4
 	ldr	r3, [r8, #0]	@  playerX
 	ldr	r2, [r4, #4]	@  alienLaserPositions
 	add	r1, r3, #8
@@ -4129,119 +4127,153 @@ Handler:
 	blt	.L224
 	cmp	r2, r1
 	bge	.L224
-	ldr	ip, .L367+4
+	ldr	ip, .L378+8
 	ldr	r2, [r4, #8]	@  alienLaserPositions
 	ldr	r3, [ip, #0]	@  playerY
 	cmp	r2, r3
 	mov	r1, r6	@  c
 	ldr	r0, [fp, #-600]	@  i
-	beq	.L348
+	beq	.L358
 .L224:
 	ldr	r3, [r4, #8]	@  alienLaserPositions
 	ldr	r0, [fp, #-600]	@  i
 	cmp	r3, #200
-	add	lr, r0, #1
-	mov	r1, r5	@  c
+	add	r1, r0, #1
+	str	r1, [fp, #-600]	@  i
 	add	r6, r6, #1	@  c,  c
-	str	lr, [fp, #-600]	@  i
-	add	r5, r5, #1	@  c,  c
+	mov	r1, r5	@  c
 	add	r4, r4, #12
-	bgt	.L349
+	add	r5, r5, #1	@  c,  c
+	bgt	.L359
 .L225:
-	ldr	r0, .L367+128
-	ldr	r1, [fp, #-600]	@  i
-	ldr	r3, [r0, #0]	@  spriteCounter
-	cmp	r1, #9
+	ldr	r2, .L378+132
+	ldr	r8, [fp, #-600]	@  i
+	ldr	r3, [r2, #0]	@  spriteCounter
+	cmp	r8, #9
 	add	r3, r3, #1
-	str	r3, [r0, #0]	@  spriteCounter
+	str	r3, [r2, #0]	@  spriteCounter
 	ble	.L226
 .L195:
-	ldr	r3, .L367+16
-	ldr	r8, .L367+20
-	ldr	r2, [r3, #0]	@  endcount
-	ldr	r3, [r8, #0]	@  totalNumAliens
+	ldr	ip, .L378+20
+	ldr	lr, .L378+24
+	ldr	r2, [ip, #0]	@  endcount
+	ldr	r3, [lr, #0]	@  totalNumAliens
 	cmp	r2, r3
 	blt	.L227
-	ldr	ip, .L367+28
+	ldr	ip, .L378+28
 	ldr	r3, [ip, #0]	@  alienTimer
 	add	r3, r3, #1
 	cmp	r3, #3
 	str	r3, [ip, #0]	@  alienTimer
-	ldrne	r6, .L367+56
-	beq	.L350
+	beq	.L360
 .L228:
-	mov	r1, #0
-	ldr	r7, .L367+40
-	str	r1, [fp, #-600]	@  i
-	mov	r5, r1	@  i
-.L242:
-	ldr	r3, [fp, #-600]	@  i
-	ldr	r2, [r5, r6]	@  i,  bossPositions
-	ldr	r8, .L367+40
-	add	r1, r3, #200	@  c
-	cmp	r2, #0	@  i
+	mov	ip, #0
+	str	ip, [fp, #-600]	@  i
+	ldr	r7, .L378+56
+	mov	r8, ip	@  i
+.L249:
+	ldr	lr, .L378+36
+	ldr	r2, [lr, #0]	@  laserCounter
+	mov	r9, #0	@  j
+	ldr	r0, .L378+40
 	mov	r3, #200
+	cmp	r9, r2	@  j
+	str	r3, [r0, #0]	@  NAlien
+	bge	.L324
+	mov	r5, #10048	@  c
+	ldr	r4, .L378+16
+	mov	sl, r8	@  i,  i
+	mov	r6, r7
+	add	r5, r5, #52	@  c,  c
+.L246:
+	ldr	r3, [r6, #4]	@  bossPositions
+	ldr	r2, [r4, #4]	@  laserPositions
+	add	r1, r3, #8
+	sub	r3, r3, #8
+	cmp	r2, r3
+	blt	.L242
+	cmp	r2, r1
+	bge	.L242
+	ldr	r2, [r4, #8]	@  laserPositions
+	ldr	r3, [r6, #8]	@  bossPositions
+	cmp	r2, r3
+	beq	.L361
+.L242:
+	ldr	r0, .L378+36
+	ldr	r3, [r0, #0]	@  laserCounter
+	add	r9, r9, #1	@  j,  j
+	cmp	r9, r3	@  j
+	add	r4, r4, #12
+	add	r5, r5, #1	@  c,  c
+	blt	.L246
+.L324:
+	ldr	r1, .L378+56
+	ldr	r0, [r8, r1]	@  i,  bossPositions
+	cmp	r0, #0	@  i
+	ble	.L247
+	ldr	r2, .L378+40
+	ldr	ip, [fp, #-600]	@  i
+	ldr	r1, [r2, #0]	@  NAlien
 	mov	r0, #44
-	str	r3, [r8, #0]	@  NAlien
-	add	r4, r5, r6	@  i
-	ble	.L240
-	ldmib	r4, {r2, r3}	@ phole ldm
+	ldmib	r7, {r2, r3}	@ phole ldm
+	add	r1, r1, ip	@  c
 	bl	drawSprite
-	ldr	r2, [r5, r6]	@  i,  bossPositions
-.L240:
-	cmp	r2, #0	@  i
-	mov	r0, r2	@  i
-	add	r5, r5, #12	@  i,  i
-	beq	.L351
+	ldr	lr, .L378+56
+	ldr	r0, [r8, lr]	@  i,  bossPositions
+.L247:
+	cmp	r0, #0	@  i
+	beq	.L362
 .L238:
 	ldr	lr, [fp, #-600]	@  i
 	add	lr, lr, #1
 	cmp	lr, #2
 	str	lr, [fp, #-600]	@  i
-	ble	.L242
-	ldr	r4, .L367+44
+	add	r8, r8, #12	@  i,  i
+	add	r7, r7, #12
+	ble	.L249
+	ldr	r4, .L378+44
 	ldr	r3, [r4, #0]	@  alienlaserTimeCounter
 	add	r3, r3, #1
 	cmp	r3, #150
 	str	r3, [r4, #0]	@  alienlaserTimeCounter
-	bgt	.L352
-.L243:
+	bgt	.L363
+.L250:
 	mov	r3, #10176	@  c
-	ldr	r0, .L367+128
+	ldr	r0, .L378+132
 	add	r3, r3, #24	@  c,  c
 	mov	r1, #0
-	ldr	r8, .L367+52
+	ldr	r8, .L378+52
 	str	r3, [r0, #0]	@  c,  spriteCounter
 	str	r1, [fp, #-600]	@  i
-	ldr	sl, .L367+48
+	ldr	sl, .L378+48
 	mov	r6, r3	@  c,  c
 	mov	r7, r3	@  c,  c
 	mov	r4, r8
 	mov	r5, r1	@  i
-.L251:
+.L258:
 	ldr	r3, [r5, r8]	@  alienLaserPositions
 	cmp	r3, #1
 	add	r5, r5, #12	@  i,  i
 	mov	r0, #44
-	beq	.L353
-.L248:
-	ldr	ip, .L367
+	beq	.L364
+.L255:
+	ldr	ip, .L378+4
 	ldr	r3, [ip, #0]	@  playerX
 	ldr	r2, [r4, #4]	@  alienLaserPositions
 	add	r1, r3, #8
 	sub	r3, r3, #8
 	cmp	r2, r3
-	blt	.L249
+	blt	.L256
 	cmp	r2, r1
-	bge	.L249
-	ldr	lr, .L367+4
+	bge	.L256
+	ldr	lr, .L378+8
 	ldr	r2, [r4, #8]	@  alienLaserPositions
 	ldr	r3, [lr, #0]	@  playerY
 	cmp	r2, r3
 	mov	r1, r7	@  c
 	ldr	r0, [fp, #-600]	@  i
-	beq	.L354
-.L249:
+	beq	.L365
+.L256:
 	ldr	r3, [r4, #8]	@  alienLaserPositions
 	ldr	r0, [fp, #-600]	@  i
 	cmp	r3, #200
@@ -4251,19 +4283,19 @@ Handler:
 	mov	r1, r6	@  c
 	add	r4, r4, #12
 	add	r6, r6, #1	@  c,  c
-	bgt	.L355
-.L250:
-	ldr	r2, .L367+128
+	bgt	.L366
+.L257:
+	ldr	r2, .L378+132
 	ldr	ip, [fp, #-600]	@  i
 	ldr	r3, [r2, #0]	@  spriteCounter
 	cmp	ip, #9
 	add	r3, r3, #1
 	str	r3, [r2, #0]	@  spriteCounter
-	ble	.L251
+	ble	.L258
 .L227:
-	ldr	lr, .L367+20
-	ldr	r4, .L367+60
-	ldr	r0, .L367+16
+	ldr	lr, .L378+24
+	ldr	r4, .L378+60
+	ldr	r0, .L378+20
 	ldr	r3, [lr, #0]	@  totalNumAliens
 	ldr	r2, [r4, #0]	@  numBosses
 	ldr	r1, [r0, #0]	@  endcount
@@ -4271,12 +4303,13 @@ Handler:
 	cmp	r1, r3
 	mov	r6, r0
 	mov	r5, lr
-	beq	.L253
-	ldr	r3, [r9, #0]	@  lives
+	beq	.L260
+	ldr	r1, .L378+64
+	ldr	r3, [r1, #0]	@  lives
 	cmp	r3, #0
 	bgt	.L169
-.L253:
-	ldr	r0, .L367+164
+.L260:
+	ldr	r0, .L378+168
 	mov	lr, pc
 	bx	r0
 	ldr	r3, [r5, #0]	@  totalNumAliens
@@ -4284,146 +4317,169 @@ Handler:
 	ldr	r1, [r6, #0]	@  endcount
 	add	r3, r3, r2
 	cmp	r1, r3
-	beq	.L356
-.L254:
+	beq	.L367
+.L261:
+	ldr	r8, .L378+64
 	bl	ClearScreen
 	mov	r3, #3
-	str	r3, [r9, #0]	@  lives
-	ldr	r3, .L367+64
-	mov	r1, #0	@  i
-	str	r1, [r3, #0]	@  i,  counter
-	ldr	r3, .L367+172
+	str	r3, [r8, #0]	@  lives
+	ldr	r3, .L378+176
 	mov	ip, #1
+	ldr	r2, .L378+188
 	str	ip, [r3, #0]	@  menumap
-	ldr	r3, .L367+180
+	ldr	r3, .L378+184
+	mov	r1, #0	@  i
 	ldr	r0, [r5, #0]	@  i,  totalNumAliens
-	ldr	r8, .L367+184
+	ldr	lr, .L378+68
+	str	r1, [r2, #0]	@  i,  gamemap
 	str	r1, [r3, #0]	@  i,  highscore
-	ldr	r2, .L367+176
-	ldr	r3, .L367+36
+	ldr	r2, .L378+180
+	ldr	r3, .L378+36
 	cmp	r1, r0	@  i,  i
-	str	r1, [r8, #0]	@  i,  gamemap
+	str	r1, [lr, #0]	@  i,  counter
 	str	r1, [r2, #0]	@  i,  credits
 	str	r1, [r6, #0]	@  i,  endcount
 	str	r1, [r3, #0]	@  i,  laserCounter
-	bge	.L318
-	ldr	r3, .L367+32
+	bge	.L327
+	ldr	r3, .L378+32
 	str	r0, [fp, #-600]	@  i,  i
 	mov	r2, ip
-.L259:
-	ldr	ip, [fp, #-600]	@  i
-	subs	ip, ip, #1
+.L266:
+	ldr	r8, [fp, #-600]	@  i
+	subs	r8, r8, #1
 	str	r2, [r3, #0]	@  alienPositions
-	str	ip, [fp, #-600]	@  i
+	str	r8, [fp, #-600]	@  i
 	add	r3, r3, #12
-	bne	.L259
-.L318:
+	bne	.L266
+.L327:
 	ldr	r0, [r4, #0]	@  i,  numBosses
 	cmp	r0, #0	@  i
 	ble	.L169
-	ldr	ip, .L367+56
+	ldr	ip, .L378+56
 	str	r0, [fp, #-600]	@  i,  i
 	mov	r3, #1
-.L264:
+.L271:
 	ldr	lr, [fp, #-600]	@  i
 	subs	lr, lr, #1
 	str	r3, [ip, #0]	@  bossPositions
 	str	lr, [fp, #-600]	@  i
 	add	ip, ip, #12
-	bne	.L264
+	bne	.L271
 	b	.L169
-.L356:
-	ldr	r0, .L367+132
-	ldr	r2, .L367+64
+.L367:
+	ldr	r0, .L378+136
+	ldr	r2, .L378+68
 	ldr	r3, [r0, #0]	@  entryno
 	ldr	r1, [r2, #0]	@  counter
-	ldr	r2, .L367+108
+	ldr	r2, .L378+112
 	add	r3, r3, #1
 	str	r1, [r2, r3, asl #2]	@  saved_counter
 	str	r3, [r0, #0]	@  entryno
-	b	.L254
-.L355:
+	b	.L261
+.L366:
 	mov	lr, pc
 	bx	sl
-	b	.L250
-.L354:
+	b	.L257
+.L365:
 	mov	lr, pc
 	bx	sl
-	ldr	r3, [r9, #0]	@  lives
+	ldr	r0, .L378+64
+	ldr	r3, [r0, #0]	@  lives
 	sub	r3, r3, #1
-	str	r3, [r9, #0]	@  lives
-	b	.L249
-.L353:
+	str	r3, [r0, #0]	@  lives
+	b	.L256
+.L364:
 	ldr	ip, [r4, #8]	@  alienLaserPositions
-	ldr	r3, .L367+128
+	ldr	r3, .L378+132
 	add	ip, ip, #2	@  y
 	ldr	r1, [r3, #0]	@  c,  spriteCounter
 	ldr	r2, [r4, #4]	@  x,  alienLaserPositions
 	mov	r3, ip	@  y
 	str	ip, [r4, #8]	@  y,  alienLaserPositions
 	bl	drawSprite
-	b	.L248
-.L352:
-	ldr	r0, .L367+68
+	b	.L255
+.L363:
+	ldr	r0, .L378+72
 	mov	lr, pc
 	bx	r0
 	mov	r3, #0
 	str	r3, [r4, #0]	@  alienlaserTimeCounter
-	b	.L243
-.L351:
-	ldr	r1, [r7, #0]	@  NAlien
+	b	.L250
+.L362:
+	ldr	r2, .L378+40
 	ldr	ip, [fp, #-600]	@  i
-	ldmib	r4, {r2, r3}	@ phole ldm
+	ldr	r1, [r2, #0]	@  NAlien
+	ldmib	r7, {r2, r3}	@ phole ldm
 	add	r1, r1, ip	@  c
 	bl	drawSprite
 	b	.L238
-.L350:
-	ldr	r3, .L367+72
-	ldr	r6, .L367+56
+.L361:
+	ldr	r2, .L378+56
+	ldr	r3, [sl, r2]	@  bossPositions
+	cmp	r3, #0
+	mov	r0, r9	@  j
+	mov	r1, r5	@  c
+	ble	.L242
+	ldr	r3, .L378+76
+	mov	lr, pc
+	bx	r3
+	ldr	r3, .L378+20
+	ldr	r2, [r3, #0]	@  endcount
+	ldr	ip, .L378+56
+	ldr	lr, .L378+20
+	add	r2, r2, #1
+	mov	r3, #0
+	str	r3, [sl, ip]	@  bossPositions
+	str	r2, [lr, #0]	@  endcount
+	b	.L242
+.L360:
+	ldr	r3, .L378+80
+	ldr	r0, .L378+56
 	ldr	r1, [r3, #0]	@  maxAlienRight
-	ldr	r2, [r6, #28]	@  bossPositions
+	ldr	r2, [r0, #28]	@  bossPositions
 	cmp	r2, r1
-	ldrgt	lr, .L367+76
+	ldrgt	lr, .L378+84
 	mvngt	r3, #0
-	mov	r2, r6
+	mov	r2, r0
 	strgt	r3, [lr, #0]	@  aliensMove
 	ldr	r3, [r2, #4]	@  bossPositions
-	ldr	r2, .L367+80
+	ldr	r2, .L378+88
 	ldr	r1, [r2, #0]	@  maxAlienLeft
-	ldrle	lr, .L367+76
+	ldrle	lr, .L378+84
 	cmp	r3, r1
 	movlt	r3, #1
 	strlt	r3, [lr, #0]	@  aliensMove
+	mov	r3, #2
 	ldr	r1, [lr, #0]	@  aliensMove
-	mov	lr, #2
-	str	lr, [fp, #-600]	@  i
-	mov	r2, r6
+	ldr	r2, .L378+56
+	str	r3, [fp, #-600]	@  i
 .L235:
 	ldr	r3, [r2, #4]	@  bossPositions
-	ldr	r0, [fp, #-600]	@  i
+	ldr	r8, [fp, #-600]	@  i
 	add	r3, r3, r1
-	subs	r0, r0, #1
+	subs	r8, r8, #1
 	str	r3, [r2, #4]	@  bossPositions
-	movmi	r3, #0
-	str	r0, [fp, #-600]	@  i
+	str	r8, [fp, #-600]	@  i
 	add	r2, r2, #12
-	strmi	r3, [ip, #0]	@  alienTimer
 	bpl	.L235
+	mov	r3, #0
+	str	r3, [ip, #0]	@  alienTimer
 	b	.L228
-.L349:
+.L359:
 	mov	lr, pc
 	bx	r7
 	b	.L225
-.L348:
+.L358:
 	mov	lr, pc
 	bx	r7
-	ldr	r3, [r9, #0]	@  lives
+	ldr	lr, .L378+64
+	ldr	r3, [lr, #0]	@  lives
 	sub	r3, r3, #1
-	str	r3, [r9, #0]	@  lives
+	str	r3, [lr, #0]	@  lives
 	b	.L224
-.L347:
+.L357:
 	ldr	ip, [r4, #8]	@  alienLaserPositions
-	ldr	r3, .L367+128
+	ldr	r3, .L378+132
 	add	ip, ip, #2	@  y
 	ldr	r1, [r3, #0]	@  c,  spriteCounter
 	ldr	r2, [r4, #4]	@  x,  alienLaserPositions
@@ -4431,77 +4487,74 @@ Handler:
 	str	ip, [r4, #8]	@  y,  alienLaserPositions
 	bl	drawSprite
 	b	.L223
-.L346:
-	ldr	r0, .L367+84
+.L356:
+	ldr	r0, .L378+92
 	mov	lr, pc
 	bx	r0
 	mov	r3, #0
 	str	r3, [r4, #0]	@  alienlaserTimeCounter
 	b	.L218
-.L345:
-	ldr	r2, .L367+40
+.L355:
+	ldr	r2, .L378+40
 	ldr	ip, [fp, #-600]	@  i
 	ldr	r1, [r2, #0]	@  NAlien
 	ldmib	r7, {r2, r3}	@ phole ldm
 	add	r1, r1, ip	@  c
 	bl	drawSprite
 	b	.L206
-.L344:
-	ldr	r3, .L367+40
-	ldr	ip, [fp, #-600]	@  i
-	ldr	r1, [r3, #0]	@  NAlien
+.L354:
+	ldr	ip, .L378+40
+	ldr	lr, [fp, #-600]	@  i
+	ldr	r1, [ip, #0]	@  NAlien
 	mov	r0, #48
+	add	r1, r1, lr	@  c
 	ldmib	r7, {r2, r3}	@ phole ldm
-	add	r1, r1, ip	@  c
 	bl	drawSprite
-	ldr	lr, .L367+32
-	ldr	r0, [r8, lr]	@  i,  alienPositions
+	ldr	r1, .L378+32
+	ldr	r0, [r8, r1]	@  i,  alienPositions
 	b	.L215
-.L343:
-	ldr	lr, [fp, #-628]
-	ldr	r2, .L367+32
-	ldr	r3, [lr, r2]	@  alienPositions
+.L353:
+	ldr	lr, .L378+32
+	ldr	r3, [sl, lr]	@  alienPositions
 	cmp	r3, #1
 	mov	r0, r9	@  j
 	mov	r1, r5	@  c
 	bne	.L210
-	ldr	r3, .L367+88
+	ldr	r3, .L378+76
 	mov	lr, pc
 	bx	r3
-	ldr	r3, .L367+16
-	ldr	r2, [r3, #0]	@  endcount
-	ldr	ip, [fp, #-628]
-	ldr	lr, .L367+32
-	ldr	r0, .L367+16
+	ldr	r0, .L378+20
+	ldr	r2, [r0, #0]	@  endcount
+	ldr	r1, .L378+32
 	add	r2, r2, #1
 	mov	r3, #0
-	str	r3, [ip, lr]	@  alienPositions
+	str	r3, [sl, r1]	@  alienPositions
 	str	r2, [r0, #0]	@  endcount
 	b	.L210
-.L342:
-	ldr	r3, .L367+72
+.L352:
+	ldr	r3, .L378+80
 	ldr	r1, [r3, #0]	@  maxAlienRight
-	ldr	r3, .L367+32
+	ldr	r3, .L378+32
 	ldr	r2, [r3, #112]	@  alienPositions
 	cmp	r2, r1
-	ldrgt	lr, .L367+76
+	ldrgt	lr, .L378+84
 	mvngt	r3, #0
 	strgt	r3, [lr, #0]	@  aliensMove
-	ldr	r8, .L367+32
-	ldr	r3, .L367+80
+	ldr	r8, .L378+32
+	ldr	r3, .L378+88
 	ldr	r2, [r8, #4]	@  alienPositions
 	ldr	r1, [r3, #0]	@  maxAlienLeft
 	cmp	r2, r1
-	ldrlt	lr, .L367+76
+	ldrlt	lr, .L378+84
 	movlt	r3, #1
 	strlt	r3, [lr, #0]	@  aliensMove
 	cmp	r0, #0
-	ble	.L306
-	ldr	lr, .L367+76
+	ble	.L313
+	ldr	lr, .L378+84
 	ldr	r1, [lr, #0]	@  aliensMove
-	ldr	lr, .L367+20
+	ldr	lr, .L378+24
 	ldr	lr, [lr, #0]	@  totalNumAliens
-	ldr	r2, .L367+32
+	ldr	r2, .L378+32
 	str	lr, [fp, #-600]	@  i
 .L203:
 	ldr	r3, [r2, #4]	@  alienPositions
@@ -4512,87 +4565,87 @@ Handler:
 	str	r0, [fp, #-600]	@  i
 	add	r2, r2, #12
 	bne	.L203
-.L306:
+.L313:
 	mov	r3, #0
 	str	r3, [ip, #0]	@  alienTimer
 	b	.L196
-.L341:
-	ldr	ip, .L367+128
-	ldr	r3, .L367+88
+.L351:
+	ldr	ip, .L378+132
+	ldr	r3, .L378+76
 	ldr	r1, [ip, #0]	@  c,  spriteCounter
 	mov	lr, pc
 	bx	r3
 	b	.L193
-.L340:
+.L350:
 	ldr	ip, [r4, #8]	@  laserPositions
-	ldr	r2, .L367+128
+	ldr	r3, .L378+132
 	sub	ip, ip, #2	@  y
-	ldr	r1, [r2, #0]	@  c,  spriteCounter
-	mov	r3, ip	@  y
+	ldr	r1, [r3, #0]	@  c,  spriteCounter
 	ldr	r2, [r4, #4]	@  x,  laserPositions
+	mov	r3, ip	@  y
 	str	ip, [r4, #8]	@  y,  laserPositions
 	bl	drawSprite
 	b	.L192
-.L339:
-	ldr	r0, .L367+92
+.L349:
+	ldr	r0, .L378+96
 	mov	lr, pc
 	bx	r0
 	mov	r3, #0
 	str	r3, [r4, #0]	@  laserTimeCounter
 	b	.L186
-.L338:
-	ldr	r1, .L367
-	ldr	r2, .L367+80
+.L348:
+	ldr	r1, .L378+4
+	ldr	r2, .L378+88
 	ldr	r3, [r1, #0]	@  playerX
 	ldr	r2, [r2, #0]	@  maxAlienLeft
 	sub	r3, r3, #1
 	cmp	r3, r2
 	str	r3, [r1, #0]	@  playerX
-	ldr	r3, .L367+160
+	ldr	r3, .L378+164
 	strlt	r2, [r1, #0]	@  playerX
 	mov	r2, #0
 	str	r2, [r3, #20]	@  pressedButtons
 	b	.L184
-.L337:
-	ldr	ip, .L367
-	ldr	r2, .L367+72
+.L347:
+	ldr	ip, .L378+4
+	ldr	r2, .L378+80
 	ldr	r3, [ip, #0]	@  playerX
 	ldr	r2, [r2, #0]	@  maxAlienRight
 	add	r3, r3, #1
-	ldr	lr, .L367+160
+	ldr	lr, .L378+164
 	cmp	r3, r2
 	str	r3, [ip, #0]	@  playerX
 	mov	r3, #0
 	strgt	r2, [ip, #0]	@  playerX
 	str	r3, [lr, #16]	@  pressedButtons
 	b	.L182
-.L336:
-	ldr	r2, .L367+64
-	ldr	lr, .L367+116
+.L346:
+	ldr	r2, .L378+68
+	ldr	lr, .L378+120
 	ldr	r1, [r2, #0]	@  counter
-	ldr	r3, .L367+112
+	ldr	r3, .L378+116
 	smull	r0, r2, lr, r1
 	smull	r8, ip, r3, r1
 	mov	r5, r1, asr #31
 	rsb	r2, r5, r2, asr #2	@  ones
-	ldr	r3, .L367+120
+	ldr	r3, .L378+124
 	add	ip, ip, r1
 	mov	r6, r2	@  ones,  ones
 	rsb	ip, r5, ip, asr #5
 	smull	r2, r4, r3, r6	@  ones
 	smull	r3, r0, lr, ip
-	ldr	r3, .L367+124
+	ldr	r3, .L378+128
 	smull	r8, r7, r3, r1
 	mov	r3, ip, asr #31
 	rsb	r0, r3, r0, asr #2
-	ldr	r3, .L367+128
+	ldr	r3, .L378+132
 	str	r0, [fp, #-624]	@  min_ones
 	mov	r8, #0
 	str	r8, [r3, #0]	@  spriteCounter
 	ldr	r3, [fp, #-624]	@  min_ones
 	add	r2, r6, r6, asl #2	@  ones,  ones
 	mov	sl, #10	@  y
-	ldr	r8, .L367+128
+	ldr	r8, .L378+132
 	sub	r2, r1, r2, asl #1	@  ones
 	sub	r9, r4, r6, asr #31	@  tens,  ones
 	mov	lr, #225
@@ -4628,7 +4681,7 @@ Handler:
 	mov	r3, sl	@  y
 	mov	r2, #197
 	bl	drawSprite
-	ldr	r3, .L367+96
+	ldr	r3, .L378+100
 	ldmia	r3, {r0, r1}
 	sub	ip, fp, #580
 	str	r0, [fp, #-584]
@@ -4639,7 +4692,7 @@ Handler:
 	mov	r0, r3	@  i
 	mov	r2, #43
 	strb	r4, [ip, #0]
-	ldr	r3, .L367+148
+	ldr	r3, .L378
 	mov	r1, #0
 	mov	lr, pc
 	bx	r3
@@ -4650,7 +4703,7 @@ Handler:
 	mov	lr, #7
 	cmp	r2, #0
 	str	lr, [fp, #-596]	@  steps
-	beq	.L300
+	beq	.L307
 	mov	r2, r3
 	mov	r1, r3
 	sub	r3, fp, #40
@@ -4667,18 +4720,18 @@ Handler:
 	add	r0, r0, #4
 	mov	r2, r1
 	bne	.L175
-.L300:
+.L307:
 	ldr	ip, [fp, #-600]	@  i
 	mov	r5, #0	@  k
 	sub	r7, ip, #1
 	mov	lr, #97
 	cmp	r5, r7	@  k
 	str	lr, [fp, #-592]	@  x
-	bgt	.L302
+	bgt	.L309
 	mov	r6, lr	@  x
 	sub	r4, fp, #40
 .L180:
-	ldr	r0, .L367+128
+	ldr	r0, .L378+132
 	ldr	r1, [r0, #0]	@  spriteCounter
 	ldr	r0, [r4, #-200]	@  d
 	add	r1, r1, r5	@  k
@@ -4693,25 +4746,25 @@ Handler:
 	add	r4, r4, #4
 	add	r6, r6, r1	@  x,  x
 	ble	.L180
-.L302:
-	ldr	r2, .L367+64
+.L309:
+	ldr	r2, .L378+68
 	ldr	r3, [r2, #0]	@  counter
 	add	r3, r3, #1
 	str	r3, [r2, #0]	@  counter
 	b	.L171
-.L335:
+.L345:
 	bl	ClearScreen
 	ldr	r3, [r4, #0]	@  CS
 	sub	r3, r3, #1
 	str	r3, [r4, #0]	@  CS
 	b	.L170
-.L333:
-	ldr	r5, .L367+168
+.L343:
+	ldr	r5, .L378+172
 	ldr	r3, [r5, #0]	@  CS
 	cmp	r3, #1
-	beq	.L357
+	beq	.L368
 .L147:
-	ldr	lr, .L367+100
+	ldr	lr, .L378+104
 	ldmia	lr!, {r0, r1, r2, r3}
 	sub	ip, fp, #584
 	stmia	ip!, {r0, r1, r2, r3}
@@ -4731,7 +4784,7 @@ Handler:
 	str	r3, [fp, #-596]	@  steps
 	str	r2, [fp, #-608]	@  mod
 	mov	r6, r2	@  c
-	beq	.L292
+	beq	.L299
 	sub	ip, fp, #40
 	sub	lr, fp, #40
 	sub	r4, fp, #40
@@ -4749,12 +4802,12 @@ Handler:
 	add	r4, r4, #4
 	mov	ip, lr
 	bne	.L151
-.L292:
+.L299:
 	ldr	lr, [fp, #-600]	@  i
 	mov	r9, #0	@  j
 	sub	ip, lr, #1
 	cmp	r9, ip	@  j
-	bgt	.L294
+	bgt	.L301
 	ldr	r3, [fp, #-604]	@  linecount
 	sub	r1, fp, #40
 	sub	r2, fp, #40
@@ -4765,16 +4818,16 @@ Handler:
 	cmp	r3, #62
 	rsb	r1, r8, r9	@  j
 	add	r2, r2, #4
-	beq	.L358
+	beq	.L369
 .L154:
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, ip	@  j
 	ble	.L157
-.L294:
+.L301:
 	ldr	r0, [fp, #-604]	@  linecount
 	mov	r9, #1	@  j
 	cmp	r9, r0	@  j
-	bgt	.L296
+	bgt	.L303
 	mov	r1, #0
 	str	r1, [fp, #-592]	@  x
 	mov	r8, #60	@  y
@@ -4787,7 +4840,7 @@ Handler:
 	sub	r3, r3, #1
 	cmp	r5, r3	@  k
 	mov	sl, r8	@  y,  y
-	bgt	.L298
+	bgt	.L305
 	mov	r4, r5	@  x,  k
 .L166:
 	sub	ip, fp, #40
@@ -4808,27 +4861,27 @@ Handler:
 	add	r6, r6, #1	@  c,  c
 	add	r4, r4, r0	@  x,  x
 	ble	.L166
-.L298:
+.L305:
 	ldr	r1, [fp, #-604]	@  linecount
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, r1	@  j
 	add	r8, r8, #20	@  y,  y
 	ble	.L167
-.L296:
-	ldr	r5, .L367+160
-	ldr	r0, .L367+152
+.L303:
+	ldr	r5, .L378+164
+	ldr	r0, .L378+156
 	mov	lr, pc
 	bx	r0
 	ldr	r4, [r5, #4]	@  pressedButtons
 	cmp	r4, #1
 	bne	.L67
 	bl	ClearScreen
-	ldr	r2, .L367+172
-	ldr	r8, .L367+180
+	ldr	r2, .L378+176
+	ldr	r8, .L378+184
 	str	r4, [r2, #0]	@  menumap
-	ldr	ip, .L367+176
-	ldr	r2, .L367+136
-	ldr	lr, .L367+184
+	ldr	ip, .L378+180
+	ldr	r2, .L378+140
+	ldr	lr, .L378+188
 	mov	r3, #0
 	mov	r1, #10
 	str	r3, [r5, #4]	@  pressedButtons
@@ -4837,7 +4890,7 @@ Handler:
 	str	r3, [ip, #0]	@  credits
 	str	r3, [lr, #0]	@  gamemap
 	b	.L67
-.L358:
+.L369:
 	ldr	lr, [fp, #-604]	@  linecount
 	add	lr, lr, #1
 	str	lr, [fp, #-604]	@  linecount
@@ -4845,22 +4898,22 @@ Handler:
 	str	r1, [r0, #-440]	@  l
 	add	r0, r0, #4
 	b	.L154
-.L357:
+.L368:
 	bl	ClearScreen
 	ldr	r3, [r5, #0]	@  CS
 	sub	r3, r3, #1
 	str	r3, [r5, #0]	@  CS
 	b	.L147
-.L368:
+.L379:
 	.align	2
-.L367:
+.L378:
+	.word	memset
 	.word	playerX
 	.word	playerY
 	.word	laserTimeCounter
 	.word	laserPositions
 	.word	endcount
 	.word	totalNumAliens
-	.word	lives
 	.word	alienTimer
 	.word	alienPositions
 	.word	laserCounter
@@ -4870,13 +4923,14 @@ Handler:
 	.word	alienLaserPositions
 	.word	bossPositions
 	.word	numBosses
+	.word	lives
 	.word	counter
 	.word	createBossLaser
+	.word	deactivateLaser
 	.word	maxAlienRight
 	.word	aliensMove
 	.word	maxAlienLeft
 	.word	createAlienLaser
-	.word	deactivateLaser
 	.word	createLaser
 	.word	.LC4
 	.word	.LC3
@@ -4901,13 +4955,13 @@ Handler:
 	.word	credits
 	.word	highscore
 	.word	gamemap
-.L332:
-	ldr	r4, .L367+168
+.L342:
+	ldr	r4, .L378+172
 	ldr	r3, [r4, #0]	@  CS
 	cmp	r3, #1
-	beq	.L359
+	beq	.L370
 .L117:
-	ldr	ip, .L367+104
+	ldr	ip, .L378+108
 	ldmia	ip!, {r0, r1, r2, r3}
 	sub	r4, fp, #584
 	stmia	r4!, {r0, r1, r2, r3}
@@ -4918,7 +4972,7 @@ Handler:
 	mov	r2, #21
 	strb	r3, [r4, #0]
 	sub	r0, r0, #3	@  i,  i
-	ldr	r3, .L367+148
+	ldr	r3, .L378+152
 	mov	r1, r6	@  c
 	mov	lr, pc
 	bx	r3
@@ -4929,7 +4983,7 @@ Handler:
 	str	r5, [fp, #-604]	@  linecount,  linecount
 	str	r8, [fp, #-596]	@  steps
 	str	r6, [fp, #-600]	@  c,  i
-	beq	.L282
+	beq	.L289
 	sub	ip, fp, #40
 	sub	r4, fp, #40
 	sub	lr, fp, #40
@@ -4947,12 +5001,12 @@ Handler:
 	str	r0, [fp, #-600]	@  i
 	add	lr, lr, #4
 	bne	.L121
-.L282:
+.L289:
 	ldr	r1, [fp, #-600]	@  i
 	mov	r9, #0	@  j
 	sub	ip, r1, #1
 	cmp	r9, ip	@  j
-	bgt	.L284
+	bgt	.L291
 	ldr	r8, [fp, #-604]	@  linecount
 	sub	r3, fp, #40
 	sub	r2, fp, #40
@@ -4963,16 +5017,16 @@ Handler:
 	cmp	r3, #62
 	rsb	r1, lr, r9	@  j
 	add	r2, r2, #4
-	beq	.L360
+	beq	.L371
 .L124:
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, ip	@  j
 	ble	.L127
-.L284:
+.L291:
 	ldr	r2, [fp, #-604]	@  linecount
 	mov	r9, #1	@  j
 	cmp	r9, r2	@  j
-	bgt	.L286
+	bgt	.L293
 	mov	r8, #60	@  y
 .L137:
 	mov	r7, r9, asl #2	@  j
@@ -4982,7 +5036,7 @@ Handler:
 	cmp	r2, #1
 	mov	sl, r8	@  y,  y
 	mov	r5, #0	@  k
-	bmi	.L288
+	bmi	.L295
 	mov	r4, #20	@  x
 .L136:
 	sub	lr, fp, #40
@@ -5003,63 +5057,63 @@ Handler:
 	add	r6, r6, #1	@  c,  c
 	add	r4, r4, r1	@  x,  x
 	ble	.L136
-.L288:
+.L295:
 	ldr	r2, [fp, #-604]	@  linecount
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, r2	@  j
 	add	r8, r8, #20	@  y,  y
 	ble	.L137
-.L286:
-	ldr	r0, .L367+152
+.L293:
+	ldr	r0, .L378+156
 	mov	lr, pc
 	bx	r0
-	ldr	r3, .L367+160
+	ldr	r3, .L378+164
 	ldr	r2, [r3, #24]	@  pressedButtons
-	ldr	r8, .L367+128
+	ldr	r8, .L378+132
 	mov	r3, #300
 	cmp	r2, #1
 	str	r3, [r8, #0]	@  spriteCounter
-	beq	.L361
+	beq	.L372
 .L138:
-	ldr	r0, .L367+160
+	ldr	r0, .L378+164
 	ldr	r3, [r0, #28]	@  pressedButtons
 	cmp	r3, #1
-	beq	.L362
+	beq	.L373
 .L139:
-	ldr	r2, .L367+132
+	ldr	r2, .L378+136
 	ldr	r3, [r2, #0]	@  entryno
 	mov	r9, #0	@  j
 	cmp	r9, r3	@  j
-	bge	.L290
-	str	r9, [fp, #-632]	@  j
+	bge	.L297
+	str	r9, [fp, #-628]	@  j
 .L144:
-	ldr	r3, .L367+108
+	ldr	r3, .L378+112
 	ldr	r6, [r3, r9, asl #2]	@  saved_counter
-	ldr	r3, .L367+112
-	ldr	ip, .L367+116
+	ldr	r3, .L378+116
+	ldr	ip, .L378+120
 	smull	r8, lr, r3, r6
 	smull	r0, r2, ip, r6
 	mov	r1, r6, asr #31
-	ldr	r3, .L367+120
+	ldr	r3, .L378+124
 	add	lr, lr, r6
 	rsb	r5, r1, r2, asr #2	@  ones
 	rsb	lr, r1, lr, asr #5
 	smull	r2, r0, r3, r5	@  ones
 	str	r1, [fp, #-612]
 	smull	r3, r1, ip, lr
-	ldr	r3, .L367+124
+	ldr	r3, .L378+128
 	smull	r8, sl, r3, r6
-	ldr	r2, .L367+128
-	ldr	r8, .L367+136
+	ldr	r2, .L378+132
+	ldr	r8, .L378+140
 	ldr	ip, [r2, #0]	@  spriteCounter
 	mov	r2, lr, asr #31
 	rsb	r4, r2, r1, asr #2	@  min_ones
-	ldr	r2, .L367+128
+	ldr	r2, .L378+132
 	ldr	r3, [r8, #0]	@  yhigh
 	add	r1, ip, #10	@  c
 	sub	r8, r0, r5, asr #31	@  tens,  ones
 	add	ip, ip, #5
-	ldr	r0, [fp, #-632]
+	ldr	r0, [fp, #-628]
 	str	ip, [r2, #0]	@  spriteCounter
 	add	ip, r8, r8, asl #1	@  tens,  tens
 	sub	r8, r5, ip, asl #1	@  tens,  ones
@@ -5071,11 +5125,11 @@ Handler:
 	rsb	sl, ip, sl, asr #6	@  min_tens
 	sub	r4, lr, r4, asl #1	@  min_ones
 	bl	drawSprite
-	ldr	lr, .L367+128
-	ldr	r0, .L367+136
+	ldr	lr, .L378+132
+	ldr	r0, .L378+140
 	ldr	r1, [lr, #0]	@  spriteCounter
 	ldr	r3, [r0, #0]	@  yhigh
-	ldr	r2, [fp, #-632]
+	ldr	r2, [fp, #-628]
 	add	r7, r5, r5, asl #2	@  ones,  ones
 	sub	r5, r6, r7, asl #1	@  ones
 	add	r3, r3, r2	@  y
@@ -5083,9 +5137,9 @@ Handler:
 	add	r0, r5, #27	@  i,  ones
 	mov	r2, #190
 	bl	drawSprite
-	ldr	ip, .L367+136
-	ldr	r3, .L367+128
-	ldr	lr, [fp, #-632]
+	ldr	ip, .L378+140
+	ldr	r3, .L378+132
+	ldr	lr, [fp, #-628]
 	ldr	r1, [r3, #0]	@  spriteCounter
 	ldr	r3, [ip, #0]	@  yhigh
 	add	r0, r8, #27	@  i,  tens
@@ -5093,9 +5147,9 @@ Handler:
 	add	r1, r1, #2	@  c
 	mov	r2, #180
 	bl	drawSprite
-	ldr	r0, .L367+128
-	ldr	r2, .L367+136
-	ldr	r8, [fp, #-632]
+	ldr	r0, .L378+132
+	ldr	r2, .L378+140
+	ldr	r8, [fp, #-628]
 	ldr	r1, [r0, #0]	@  spriteCounter
 	ldr	r3, [r2, #0]	@  yhigh
 	add	r1, r1, #3	@  c
@@ -5103,8 +5157,8 @@ Handler:
 	add	r0, r4, #27	@  i,  min_ones
 	mov	r2, #163
 	bl	drawSprite
-	ldr	ip, .L367+128
-	ldr	lr, .L367+136
+	ldr	ip, .L378+132
+	ldr	lr, .L378+140
 	ldr	r1, [ip, #0]	@  spriteCounter
 	ldr	r3, [lr, #0]	@  yhigh
 	add	sl, sl, #27	@  min_tens
@@ -5114,27 +5168,27 @@ Handler:
 	mov	r2, #153
 	str	sl, [fp, #-616]
 	bl	drawSprite
-	ldr	r0, .L367+132
+	ldr	r0, .L378+136
 	ldr	r3, [r0, #0]	@  entryno
 	add	r9, r9, #1	@  j,  j
 	add	r8, r8, #10
 	cmp	r9, r3	@  j
-	str	r8, [fp, #-632]
+	str	r8, [fp, #-628]
 	blt	.L144
-.L290:
-	ldr	r1, .L367+160
+.L297:
+	ldr	r1, .L378+164
 	ldr	r4, [r1, #4]	@  pressedButtons
 	cmp	r4, #1
 	bne	.L116
 	bl	ClearScreen
-	ldr	r2, .L367+160
+	ldr	r2, .L378+164
 	mov	r3, #0
 	str	r3, [r2, #4]	@  pressedButtons
-	ldr	r8, .L367+172
-	ldr	r2, .L367+136
-	ldr	ip, .L367+184
-	ldr	lr, .L367+180
-	ldr	r0, .L367+176
+	ldr	r8, .L378+176
+	ldr	r2, .L378+140
+	ldr	ip, .L378+188
+	ldr	lr, .L378+184
+	ldr	r0, .L378+180
 	mov	r1, #10
 	str	r1, [r2, #0]	@  yhigh
 	str	r4, [r8, #0]	@  menumap
@@ -5142,24 +5196,24 @@ Handler:
 	str	r3, [lr, #0]	@  highscore
 	str	r3, [r0, #0]	@  credits
 	b	.L116
-.L362:
-	ldr	r1, .L367+136
+.L373:
+	ldr	r1, .L378+140
 	ldr	r3, [r1, #0]	@  yhigh
 	mov	r2, #0
 	add	r3, r3, #10
 	str	r3, [r1, #0]	@  yhigh
 	str	r2, [r0, #28]	@  pressedButtons
 	b	.L139
-.L361:
-	ldr	ip, .L367+136
+.L372:
+	ldr	ip, .L378+140
 	ldr	r3, [ip, #0]	@  yhigh
-	ldr	lr, .L367+160
+	ldr	lr, .L378+164
 	sub	r3, r3, #10
 	mov	r2, #0
 	str	r3, [ip, #0]	@  yhigh
 	str	r2, [lr, #24]	@  pressedButtons
 	b	.L138
-.L360:
+.L371:
 	str	r1, [r0, #-440]	@  l
 	ldr	r1, [fp, #-604]	@  linecount
 	add	r1, r1, #1
@@ -5167,14 +5221,14 @@ Handler:
 	str	r9, [fp, #-608]	@  j,  mod
 	add	r0, r0, #4
 	b	.L124
-.L359:
+.L370:
 	bl	ClearScreen
 	ldr	r3, [r4, #0]	@  CS
 	sub	r3, r3, #1
 	str	r3, [r4, #0]	@  CS
 	b	.L117
-.L331:
-	ldr	ip, .L367+140
+.L341:
+	ldr	ip, .L378+144
 	ldmia	ip, {r0, r1, r2, r3}
 	sub	lr, fp, #532
 	stmia	lr, {r0, r1, r2, r3}
@@ -5195,7 +5249,7 @@ Handler:
 	str	r2, [fp, #-492]	@  ch
 	str	r2, [fp, #-488]	@  ch
 	str	r3, [fp, #-596]	@  steps
-	beq	.L266
+	beq	.L273
 	sub	ip, fp, #40
 	sub	r4, fp, #40
 	sub	lr, fp, #40
@@ -5213,12 +5267,12 @@ Handler:
 	str	r8, [fp, #-600]	@  i
 	add	lr, lr, #4
 	bne	.L72
-.L266:
+.L273:
 	ldr	ip, [fp, #-600]	@  i
 	mov	r9, #0	@  j
 	sub	r0, ip, #1
 	cmp	r9, r0	@  j
-	bgt	.L268
+	bgt	.L275
 	ldr	r1, [fp, #-604]	@  linecount
 	sub	lr, fp, #40
 	sub	ip, fp, #40
@@ -5229,16 +5283,16 @@ Handler:
 	cmp	r3, #62
 	rsb	lr, r2, r9	@  j
 	add	ip, ip, #4
-	beq	.L363
+	beq	.L374
 .L75:
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, r0	@  j
 	ble	.L78
-.L268:
+.L275:
 	ldr	r8, [fp, #-604]	@  linecount
 	mov	r9, #1	@  j
 	cmp	r9, r8	@  j
-	bgt	.L270
+	bgt	.L277
 	mov	r8, #20
 .L88:
 	mov	r7, r9, asl #2	@  j
@@ -5250,7 +5304,7 @@ Handler:
 	str	lr, [fp, #-592]	@  x
 	add	sl, r8, #10	@  y
 	mov	r5, #0	@  k
-	bmi	.L272
+	bmi	.L279
 	mov	r4, lr	@  x
 .L87:
 	sub	r0, fp, #40
@@ -5271,19 +5325,19 @@ Handler:
 	add	r6, r6, #1	@  c,  c
 	add	r4, r4, r2	@  x,  x
 	ble	.L87
-.L272:
+.L279:
 	ldr	r3, [fp, #-604]	@  linecount
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, r3	@  j
 	add	r8, r8, #20
 	ble	.L88
-.L270:
+.L277:
 	mov	r0, #40
 	mov	r1, r6	@  c
 	mov	r2, #150
 	mov	r3, r0
 	bl	drawSprite
-	ldr	ip, .L367+144
+	ldr	ip, .L378+148
 	ldmia	ip!, {r0, r1, r2, r3}
 	sub	r4, fp, #584
 	stmia	r4!, {r0, r1, r2, r3}
@@ -5294,7 +5348,7 @@ Handler:
 	strb	r3, [r4, #0]
 	sub	r0, r0, #3	@  i,  i
 	mov	r1, #0
-	ldr	r8, .L367+148
+	ldr	r8, .L378+152
 	mov	lr, pc
 	bx	r8
 	sub	r3, fp, #584
@@ -5306,7 +5360,7 @@ Handler:
 	str	ip, [fp, #-608]	@  mod
 	str	lr, [fp, #-604]	@  linecount
 	mov	r6, #30	@  c
-	beq	.L274
+	beq	.L281
 	sub	ip, fp, #40
 	sub	r4, fp, #40
 	sub	lr, fp, #40
@@ -5324,12 +5378,12 @@ Handler:
 	str	r0, [fp, #-600]	@  i
 	add	lr, lr, #4
 	bne	.L92
-.L274:
+.L281:
 	ldr	r1, [fp, #-600]	@  i
 	mov	r9, #0	@  j
 	sub	ip, r1, #1
 	cmp	r9, ip	@  j
-	bgt	.L276
+	bgt	.L283
 	ldr	r8, [fp, #-604]	@  linecount
 	sub	r3, fp, #40
 	sub	r2, fp, #40
@@ -5340,16 +5394,16 @@ Handler:
 	cmp	r3, #62
 	rsb	r1, lr, r9	@  j
 	add	r2, r2, #4
-	beq	.L364
+	beq	.L375
 .L95:
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, ip	@  j
 	ble	.L98
-.L276:
+.L283:
 	ldr	r2, [fp, #-604]	@  linecount
 	mov	r9, #1	@  j
 	cmp	r9, r2	@  j
-	bgt	.L278
+	bgt	.L285
 	mov	r8, #80	@  y
 .L108:
 	mov	r7, r9, asl #2	@  j
@@ -5359,7 +5413,7 @@ Handler:
 	cmp	r2, #1
 	mov	sl, r8	@  y,  y
 	mov	r5, #0	@  k
-	bmi	.L280
+	bmi	.L287
 	mov	r4, #80	@  x
 .L107:
 	sub	lr, fp, #40
@@ -5380,27 +5434,27 @@ Handler:
 	add	r6, r6, #1	@  c,  c
 	add	r4, r4, r1	@  x,  x
 	ble	.L107
-.L280:
+.L287:
 	ldr	r2, [fp, #-604]	@  linecount
 	add	r9, r9, #1	@  j,  j
 	cmp	r9, r2	@  j
 	add	r8, r8, #20	@  y,  y
 	ble	.L108
-.L278:
-	ldr	r0, .L367+152
+.L285:
+	ldr	r0, .L378+156
 	mov	lr, pc
 	bx	r0
-	ldr	r8, .L367+160
+	ldr	r8, .L378+164
 	ldr	r3, [r8, #24]	@  pressedButtons
 	cmp	r3, #1
-	ldreq	r5, .L367+156
+	ldreq	r5, .L378+160
 	ldreq	r3, [r5, #0]	@  menu_point
 	mov	r7, r8
 	subeq	r3, r3, #20
 	streq	r3, [r5, #0]	@  menu_point
 	ldr	r3, [r7, #28]	@  pressedButtons
 	moveq	r2, #0
-	ldrne	r5, .L367+156
+	ldrne	r5, .L378+160
 	streq	r2, [r8, #24]	@  pressedButtons
 	cmp	r3, #1
 	ldreq	r3, [r5, #0]	@  menu_point
@@ -5412,7 +5466,7 @@ Handler:
 	cmp	r3, #120	@  y
 	movgt	r3, #120	@  y
 	strgt	r3, [r5, #0]	@  y,  menu_point
-	ldr	r4, .L367+156
+	ldr	r4, .L378+160
 	cmp	r3, #79	@  y
 	movle	r3, #80	@  y
 	strle	r3, [r4, #0]	@  y,  menu_point
@@ -5422,29 +5476,29 @@ Handler:
 	bl	drawSprite
 	ldr	r3, [r4, #0]	@  menu_point
 	cmp	r3, #80
-	beq	.L365
+	beq	.L376
 .L113:
 	ldr	r3, [r5, #0]	@  menu_point
 	cmp	r3, #100
-	beq	.L366
+	beq	.L377
 .L114:
 	ldr	r3, [r5, #0]	@  menu_point
 	cmp	r3, #120
 	bne	.L68
-	ldr	r1, .L367+160
+	ldr	r1, .L378+164
 	ldr	r4, [r1, #0]	@  pressedButtons
 	cmp	r4, #1
 	bne	.L68
-	ldr	r0, .L367+164
+	ldr	r0, .L378+168
 	mov	lr, pc
 	bx	r0
-	ldr	r3, .L367+168
-	ldr	r8, .L367+172
+	ldr	r3, .L378+172
+	ldr	r8, .L378+176
 	str	r4, [r3, #0]	@  CS
-	ldr	ip, .L367+184
-	ldr	r3, .L367+160
-	ldr	lr, .L367+180
-	ldr	r0, .L367+176
+	ldr	ip, .L378+188
+	ldr	r3, .L378+164
+	ldr	lr, .L378+184
+	ldr	r0, .L378+180
 	mov	r2, #0
 	str	r2, [r3, #0]	@  pressedButtons
 	str	r2, [r8, #0]	@  menumap
@@ -5452,21 +5506,21 @@ Handler:
 	str	r2, [lr, #0]	@  highscore
 	str	r4, [r0, #0]	@  credits
 	b	.L68
-.L366:
-	ldr	r2, .L367+160
+.L377:
+	ldr	r2, .L378+164
 	ldr	r4, [r2, #0]	@  pressedButtons
 	cmp	r4, #1
 	bne	.L114
-	ldr	r0, .L367+164
+	ldr	r0, .L378+168
 	mov	lr, pc
 	bx	r0
-	ldr	r3, .L367+168
-	ldr	r8, .L367+172
+	ldr	r3, .L378+172
+	ldr	r8, .L378+176
 	str	r4, [r3, #0]	@  CS
-	ldr	ip, .L367+184
-	ldr	r3, .L367+160
-	ldr	lr, .L367+180
-	ldr	r0, .L367+176
+	ldr	ip, .L378+188
+	ldr	r3, .L378+164
+	ldr	lr, .L378+184
+	ldr	r0, .L378+180
 	mov	r2, #0
 	str	r2, [r3, #0]	@  pressedButtons
 	str	r2, [r8, #0]	@  menumap
@@ -5474,18 +5528,18 @@ Handler:
 	str	r4, [lr, #0]	@  highscore
 	str	r2, [r0, #0]	@  credits
 	b	.L114
-.L365:
+.L376:
 	ldr	r4, [r7, #0]	@  pressedButtons
 	cmp	r4, #1
 	bne	.L113
-	ldr	r0, .L367+164
+	ldr	r0, .L378+168
 	mov	lr, pc
 	bx	r0
-	ldr	r3, .L367+168
-	ldr	ip, .L367+172
-	ldr	lr, .L367+184
-	ldr	r0, .L367+180
-	ldr	r1, .L367+176
+	ldr	r3, .L378+172
+	ldr	ip, .L378+176
+	ldr	lr, .L378+188
+	ldr	r0, .L378+184
+	ldr	r1, .L378+180
 	mov	r2, #0
 	str	r4, [r3, #0]	@  CS
 	str	r2, [r7, #0]	@  pressedButtons
@@ -5494,7 +5548,7 @@ Handler:
 	str	r2, [r0, #0]	@  highscore
 	str	r2, [r1, #0]	@  credits
 	b	.L113
-.L364:
+.L375:
 	str	r1, [r0, #-440]	@  l
 	ldr	r1, [fp, #-604]	@  linecount
 	add	r1, r1, #1
@@ -5502,7 +5556,7 @@ Handler:
 	str	r9, [fp, #-608]	@  j,  mod
 	add	r0, r0, #4
 	b	.L95
-.L363:
+.L374:
 	ldr	r3, [fp, #-604]	@  linecount
 	add	r3, r3, #1
 	str	r3, [fp, #-604]	@  linecount
@@ -5526,42 +5580,42 @@ checkbutton:
 	mov	r1, r3, asl #22
 	mov	r1, r1, lsr #22
 	tst	r1, #1
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	strne	r2, [r3, #0]	@  pressedButtons
 	tst	r1, #2
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	strne	r2, [r3, #4]	@  pressedButtons
 	tst	r1, #4
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	strne	r2, [r3, #8]	@  pressedButtons
 	tst	r1, #8
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	strne	r2, [r3, #12]	@  pressedButtons
 	tst	r1, #16
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	strne	r2, [r3, #16]	@  pressedButtons
 	tst	r1, #32
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	strne	r2, [r3, #20]	@  pressedButtons
 	tst	r1, #64
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	strne	r2, [r3, #24]	@  pressedButtons
 	tst	r1, #128
-	ldrne	r3, .L378
+	ldrne	r3, .L389
 	movne	r2, #1
 	@ lr needed for prologue
 	strne	r2, [r3, #28]	@  pressedButtons
 	bx	lr
-.L379:
+.L390:
 	.align	2
-.L378:
+.L389:
 	.word	pressedButtons
 	.size	checkbutton, .-checkbutton
 	.align	2
@@ -5572,11 +5626,11 @@ createLaser:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	stmfd	sp!, {r4, r5, lr}
-	ldr	r5, .L382
+	ldr	r5, .L393
 	ldr	r0, [r5, #0]	@  laserCounter
-	ldr	r3, .L382+4
-	ldr	r2, .L382+8
-	ldr	lr, .L382+12
+	ldr	r3, .L393+4
+	ldr	r2, .L393+8
+	ldr	lr, .L393+12
 	add	r1, r0, r0, asl #1
 	add	r0, r0, #1
 	mov	r1, r1, asl #2
@@ -5592,9 +5646,9 @@ createLaser:
 	strgt	r3, [r5, #0]	@  laserCounter
 	ldmfd	sp!, {r4, r5, lr}
 	bx	lr
-.L383:
+.L394:
 	.align	2
-.L382:
+.L393:
 	.word	laserCounter
 	.word	playerX
 	.word	playerY
@@ -5608,7 +5662,7 @@ deactivateLaser:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	str	lr, [sp, #-4]!
-	ldr	r2, .L385
+	ldr	r2, .L396
 	add	ip, r0, r0, asl #1	@  i,  i
 	mov	ip, ip, asl #2
 	mov	r3, #0
@@ -5621,9 +5675,9 @@ deactivateLaser:
 	str	lr, [ip, #8]	@  laserPositions
 	ldr	lr, [sp], #4
 	b	drawSprite
-.L386:
+.L397:
 	.align	2
-.L385:
+.L396:
 	.word	laserPositions
 	.size	deactivateLaser, .-deactivateLaser
 	.align	2
@@ -5635,15 +5689,15 @@ createAlienLaser:
 	@ frame_needed = 1, uses_anonymous_args = 0
 	mov	ip, sp
 	stmfd	sp!, {r4, r5, r6, r7, fp, ip, lr, pc}
-	ldr	r7, .L398
-	ldr	r6, .L398+4
+	ldr	r7, .L409
+	ldr	r6, .L409+4
 	sub	fp, ip, #-4294967292
 	mov	r4, #0	@  breakCounter
 	mov	r5, r7
-.L393:
+.L404:
 	mov	lr, pc
 	bx	r6
-	ldr	r2, .L398+8
+	ldr	r2, .L409+8
 	smull	r3, r1, r2, r0	@  attackingAlien
 	mov	r3, r0, asr #31	@  attackingAlien
 	rsb	r3, r3, r1, asr #2
@@ -5655,15 +5709,15 @@ createAlienLaser:
 	cmp	r3, #0
 	mvneq	r0, #0	@  attackingAlien
 	cmp	r4, #10	@  breakCounter
-	bgt	.L389
+	bgt	.L400
 	cmn	r0, #1	@  attackingAlien
-	beq	.L393
-.L397:
-	ldr	r5, .L398+12
+	beq	.L404
+.L408:
+	ldr	r5, .L409+12
 	ldr	r1, [r5, #0]	@  alienlaserCounter
 	add	r3, r0, r0, asl #1	@  attackingAlien,  attackingAlien
 	add	r3, r7, r3, asl #2
-	ldr	ip, .L398+16
+	ldr	ip, .L409+16
 	add	r2, r1, r1, asl #1
 	add	r1, r1, #1
 	mov	r2, r2, asl #2
@@ -5676,16 +5730,16 @@ createAlienLaser:
 	str	r1, [r5, #0]	@  alienlaserCounter
 	stmib	r0, {r4, lr}	@ phole stm
 	strgt	r3, [r5, #0]	@  alienlaserCounter
-.L387:
+.L398:
 	ldmea	fp, {r4, r5, r6, r7, fp, sp, lr}
 	bx	lr
-.L389:
+.L400:
 	cmn	r0, #1	@  attackingAlien
-	bne	.L397
-	b	.L387
-.L399:
+	bne	.L408
+	b	.L398
+.L410:
 	.align	2
-.L398:
+.L409:
 	.word	alienPositions
 	.word	rand
 	.word	1717986919
@@ -5700,7 +5754,7 @@ deactivateAlienLaser:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	str	lr, [sp, #-4]!
-	ldr	r2, .L401
+	ldr	r2, .L412
 	add	ip, r0, r0, asl #1	@  i,  i
 	mov	ip, ip, asl #2
 	mov	r3, #0
@@ -5713,9 +5767,9 @@ deactivateAlienLaser:
 	str	lr, [ip, #8]	@  alienLaserPositions
 	ldr	lr, [sp], #4
 	b	drawSprite
-.L402:
+.L413:
 	.align	2
-.L401:
+.L412:
 	.word	alienLaserPositions
 	.size	deactivateAlienLaser, .-deactivateAlienLaser
 	.align	2
@@ -5726,7 +5780,7 @@ removeAlien:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
-	ldr	r3, .L404
+	ldr	r3, .L415
 	add	r0, r0, r0, asl #1	@  i,  i
 	add	r3, r3, r0, asl #2
 	mov	r2, #200
@@ -5734,9 +5788,9 @@ removeAlien:
 	@ lr needed for prologue
 	stmib	r3, {r1, r2}	@ phole stm
 	bx	lr
-.L405:
+.L416:
 	.align	2
-.L404:
+.L415:
 	.word	alienPositions
 	.size	removeAlien, .-removeAlien
 	.align	2
@@ -5748,18 +5802,18 @@ cleanButtons:
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
 	mov	r3, #0	@  i
-	ldr	r1, .L414
+	ldr	r1, .L425
 	@ lr needed for prologue
 	mov	r2, r3	@  i,  i
-.L411:
+.L422:
 	str	r2, [r1, r3, asl #2]	@  i,  pressedButtons
 	add	r3, r3, #1	@  i,  i
 	cmp	r3, #7	@  i
-	ble	.L411
+	ble	.L422
 	bx	lr
-.L415:
+.L426:
 	.align	2
-.L414:
+.L425:
 	.word	pressedButtons
 	.size	cleanButtons, .-cleanButtons
 	.align	2
@@ -5771,14 +5825,14 @@ createBossLaser:
 	@ frame_needed = 1, uses_anonymous_args = 0
 	mov	ip, sp
 	stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
-	ldr	r7, .L428
-	ldr	r6, .L428+4
-	ldr	r8, .L428+8
+	ldr	r7, .L439
+	ldr	r6, .L439+4
+	ldr	r8, .L439+8
 	sub	fp, ip, #-4294967292
 	mov	r5, #0	@  breakCounter
 	mov	sl, r7
 	mov	r9, r6
-.L422:
+.L433:
 	mov	lr, pc
 	bx	r7
 	smull	r2, r3, r8, r0	@  attackingAlien
@@ -5791,10 +5845,10 @@ createBossLaser:
 	cmp	r3, #0
 	mvneq	r4, #0	@  attackingAlien
 	cmp	r5, #10	@  breakCounter
-	bgt	.L418
+	bgt	.L429
 	cmn	r4, #1	@  attackingAlien
-	beq	.L422
-.L418:
+	beq	.L433
+.L429:
 	mov	lr, pc
 	bx	sl
 	smull	r2, r3, r8, r0	@  attackingAlien
@@ -5803,12 +5857,12 @@ createBossLaser:
 	rsb	r0, r3, r0	@  attackingAlien
 	cmn	r4, #1	@  attackingAlien
 	add	r5, r0, #1	@  laserSize
-	beq	.L416
-	ldr	lr, .L428+12
+	beq	.L427
+	ldr	lr, .L439+12
 	ldr	r1, [lr, #0]	@  alienlaserCounter
 	add	r3, r4, r4, asl #1	@  attackingAlien,  attackingAlien
 	add	r3, r9, r3, asl #2
-	ldr	r6, .L428+16
+	ldr	r6, .L439+16
 	add	r2, r1, r1, asl #1
 	mov	r2, r2, asl #2
 	ldr	r4, [r3, #8]	@  bossPositions
@@ -5821,7 +5875,7 @@ createBossLaser:
 	str	r0, [lr, #0]	@  alienlaserCounter
 	str	r4, [r3, #8]	@  alienLaserPositions
 	str	ip, [r3, #4]	@  alienLaserPositions
-	ble	.L424
+	ble	.L435
 	add	r3, r0, r0, asl #1
 	mov	r3, r3, asl #2
 	add	r1, r3, r6
@@ -5830,9 +5884,9 @@ createBossLaser:
 	str	r7, [r3, r6]	@  alienLaserPositions
 	str	r0, [lr, #0]	@  alienlaserCounter
 	stmib	r1, {r2, r4}	@ phole stm
-.L424:
+.L435:
 	cmp	r5, #2	@  laserSize
-	ble	.L425
+	ble	.L436
 	ldr	r2, [lr, #0]	@  alienlaserCounter
 	add	r3, r2, r2, asl #1
 	mov	r3, r3, asl #2
@@ -5842,17 +5896,17 @@ createBossLaser:
 	str	r7, [r3, r6]	@  alienLaserPositions
 	str	r2, [lr, #0]	@  alienlaserCounter
 	stmib	r1, {r0, r4}	@ phole stm
-.L425:
+.L436:
 	ldr	r3, [lr, #0]	@  alienlaserCounter
 	cmp	r3, #9
 	movgt	r3, #0
 	strgt	r3, [lr, #0]	@  alienlaserCounter
-.L416:
+.L427:
 	ldmea	fp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
 	bx	lr
-.L429:
+.L440:
 	.align	2
-.L428:
+.L439:
 	.word	rand
 	.word	bossPositions
 	.word	1431655766
@@ -5933,16 +5987,16 @@ main:
 	add	r0, r0, #67108866
 	ldrh	r1, [r0, #0]
 	mov	r2, #50331648
-	ldr	r3, .L434
+	ldr	r3, .L445
 	orr	r1, r1, #195
 	add	r2, r2, #32512
 	str	r3, [r2, #252]
 	strh	r1, [r0, #0]	@ movhi 
-.L431:
-	b	.L431
-.L435:
+.L442:
+	b	.L442
+.L446:
 	.align	2
-.L434:
+.L445:
 	.word	Handler
 	.size	main, .-main
 	.comm	NAlien,4,4

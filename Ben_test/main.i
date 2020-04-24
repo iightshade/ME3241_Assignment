@@ -1473,7 +1473,15 @@ void Handler(void)
          for(i = 0; i <= 2; i++){
 
              NAlien = 200;
-# 418 "myhandler.h"
+             for(j = 0; j < laserCounter; j++){
+                 if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
+                     if(bossPositions[i][0] >= 1){
+                       deactivateLaser(j, 10100+j);
+                       bossPositions[i][0] = 0;
+                       endcount++;
+                     }
+                   }
+                 }
            if(bossPositions[i][0] >= 1){
              drawSprite(40 +4, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
