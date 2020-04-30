@@ -5,8 +5,9 @@
 #include "sprites16.h"
 #include "sprites32.h"
 #include "gba.h"
-#include "gbalib.h"
 #include "myhandler.h"
+
+
 
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
@@ -54,4 +55,5 @@ int main(void)
     while(1);
 
 	return 0;
+    
 }

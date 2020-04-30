@@ -633,164 +633,164 @@ u16 sprites32[] = {
 
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,1,
-    0,0,0,0,0,1,1,1,
-    0,0,0,0,0,1,1,1,
-    0,0,0,0,1,1,1,1,
+    0,0,0,0,0,0,4,4,
+    0,0,0,0,0,0,4,4,
+    0,0,0,0,4,4,3,3,
+    0,0,0,0,4,4,3,3,
+    0,0,4,4,4,4,4,4,
+    0,0,4,4,4,4,4,4,
+
+
+    0,0,4,4,4,4,4,4,
+    0,0,4,4,4,4,4,4,
+    4,4,3,3,3,3,1,1,
+    4,4,3,3,3,3,1,1,
+    3,3,3,3,3,3,3,3,
+    3,3,3,3,3,3,3,3,
+    4,4,4,4,4,4,3,3,
+    4,4,4,4,4,4,3,3,
+
+    0,0,4,4,3,3,3,3,
+    0,0,4,4,3,3,3,3,
+    4,4,3,3,3,3,3,3,
+    4,4,3,3,3,3,3,3,
+    4,4,3,3,3,3,3,3,
+    4,4,3,3,3,3,3,3,
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
+
+
+    3,3,1,1,1,1,1,1,
+    3,3,1,1,1,1,1,1,
+    1,1,1,1,3,3,1,1,
+    1,1,1,1,3,3,1,1,
+    1,1,1,1,3,3,1,1,
+    1,1,1,1,3,3,1,1,
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
+
+
+
+    4,4,4,4,4,4,0,0,
+    4,4,4,4,4,4,0,0,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,1,1,4,4,
+    1,1,4,4,4,4,1,1,
+    1,1,4,4,4,4,1,1,
+    4,4,3,3,3,3,4,4,
+    4,4,3,3,3,3,4,4,
 
 
     0,0,0,0,0,0,0,0,
-    0,0,0,0,1,1,1,1,
-    0,0,1,1,1,1,1,1,
-    0,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-
-    0,0,0,0,1,1,1,1,
-    0,0,0,1,1,1,1,1,
-    0,0,1,1,1,1,1,1,
-    0,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-
-
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-
-
-
     0,0,0,0,0,0,0,0,
-    1,0,0,0,0,0,0,0,
-    1,1,1,0,0,0,0,0,
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
+    4,4,0,0,0,0,0,0,
+    4,4,0,0,0,0,0,0,
+    1,1,4,4,0,0,0,0,
+    1,1,4,4,0,0,0,0,
+    1,1,1,1,4,4,0,0,
+    1,1,1,1,4,4,0,0,
 
 
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    1,1,0,0,0,0,0,0,
-    1,1,1,0,0,0,0,0,
-    1,1,1,0,0,0,0,0,
+    4,4,1,1,3,3,4,4,
+    4,4,1,1,3,3,4,4,
+    3,3,4,4,4,4,1,1,
+    3,3,4,4,4,4,1,1,
+    3,3,3,3,3,3,3,3,
+    3,3,3,3,3,3,3,3,
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
 
 
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-
-
-    1,1,1,1,0,0,0,0,
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,1,1,0,0,
-    1,1,1,1,1,1,0,0,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,1,0,
+    1,1,1,1,4,4,0,0,
+    1,1,1,1,4,4,0,0,
+    1,1,1,1,1,0,4,4,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,1,1,4,4,
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
 
 
 
-    0,1,1,1,1,1,1,1,
-    0,1,1,1,1,1,1,1,
-    0,0,1,1,1,1,1,1,
-    0,0,1,1,1,1,1,1,
-    0,0,1,1,1,1,1,1,
-    0,0,0,1,1,1,1,1,
-    0,0,0,0,1,1,1,1,
-    0,0,0,0,0,1,1,1,
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
+    4,4,3,3,3,3,3,3,
+    4,4,3,3,3,3,3,3,
+    4,4,3,3,3,3,3,3,
+    4,4,3,3,3,3,3,3,
+    0,0,4,4,3,3,3,3,
+    0,0,4,4,3,3,3,3,
 
 
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
+    3,3,1,1,1,1,1,1,
+    3,3,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
+    3,3,3,3,1,1,1,1,
+    3,3,3,3,1,1,1,1,
 
 
 
-    0,0,0,0,0,0,1,1,
-    0,0,0,0,0,0,0,1,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-
-
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    0,0,1,1,1,1,1,1,
-    0,0,0,0,1,1,1,1,
-    0,0,0,0,0,0,1,1,
+    0,0,4,4,3,3,4,4,
+    0,0,4,4,3,3,4,4,
+    0,0,0,0,4,4,3,3,
+    0,0,0,0,4,4,3,3,
+    0,0,0,0,0,0,4,4,
+    0,0,0,0,0,0,4,4,
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
 
 
-
-
-    1,1,0,0,0,0,1,1,
-    1,0,0,0,0,0,0,1,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    1,0,0,0,0,0,0,1,
-    1,1,0,0,0,0,1,1,
-
-
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,0,0,
-    1,1,1,1,1,1,0,0,
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,0,0,0,0,
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
+    3,3,3,3,1,1,1,1,
+    3,3,3,3,1,1,1,1,
+    4,4,3,3,1,1,1,1,
+    4,4,3,3,1,1,1,1,
+    0,0,4,4,4,4,4,4,
+    0,0,4,4,4,4,4,4,
 
 
 
+
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,0,0,
-    1,1,1,1,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
 
 
-    1,1,1,0,0,0,0,0,
-    1,1,1,0,0,0,0,0,
-    1,1,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,4,4,0,0,
+    1,1,1,1,4,4,0,0,
+
+
+
+    4,4,4,4,4,4,4,4,
+    4,4,4,4,4,4,4,4,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,4,4,
+    1,1,1,1,1,1,4,4,
+    4,4,4,4,4,4,0,0,
+    4,4,4,4,4,4,0,0,
+
+
+    4,4,4,4,4,4,0,0,
+    4,4,4,4,4,4,0,0,
+    1,1,4,4,0,0,0,0,
+    4,4,4,4,0,0,0,0,
+    4,4,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
@@ -798,72 +798,8 @@ u16 sprites32[] = {
 };
 # 7 "main.c" 2
 
-# 1 "gbalib.h" 1
-
-
-void drawSprite(int spritenumb, int N, int x, int y)
-{
-
-    *(unsigned short *)(0x7000000 + 8*N) = y | 0x2000;
-
-    if (spritenumb <= 37) {
-        *(unsigned short *)(0x7000004 + 8*N) = spritenumb*2;
-        *(unsigned short *)(0x7000002 + 8*N) = x;
-    }
-    else if (spritenumb >= 40){
-    {
-        *(unsigned short *)(0x7000002 + 8*N) = x | 0x4000;
-        *(unsigned short *)(0x7000004 + 8*N) = (spritenumb/4*8);
-        }
-
-    }
-}
-
-void fillPalette(void)
-{
-    int i;
-
-    for (i = 0; i < 20; i++)
-        ((unsigned short *) 0x5000200)[i] = palette[i];
-}
-
-void fillSprites(void)
-{
-    int i,numsprites;
-
-    numsprites = 50;
-    for (i = 0; i <= (37 -1)*8*8; i++) ((unsigned short *) 0x6010000)[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
-    for (i = 0; i <= (40*16*16); i++) {((unsigned short *) 0x6010000)[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
-
-}
-
-void popSprite(int sprites, char dir, int count, int x, int y)
-{
-    int i; int step = 240/count;
-    if (dir == 'L'){
-        for (i=0;i<240;i+=step){
-            drawSprite(sprites,i,(x+i)%240,y);
-        }
-    }
-    if (dir == 'R'){
-        for (i=240;i>0;i-=step){
-            drawSprite(sprites,i,(i-x)%240,y);
-        }
-    }
-}
-
-void ClearScreen()
-{
-    int x,y,c=0;
-    for (x = 0; x < 240 +20; x++){
-        for (y = 0; y < 160 +20; y++){
-                drawSprite(0,c,x,y); c++;
-                }
-            }
-
-}
-# 9 "main.c" 2
 # 1 "myhandler.h" 1
+# 1 "gbalib.h" 1
 
 # 1 "/usr/local/arm-thumb-elf/sys-include/time.h" 1 3 4
 # 10 "/usr/local/arm-thumb-elf/sys-include/time.h" 3 4
@@ -1281,9 +1217,7 @@ extern char *_tzname[2];
 # 126 "/usr/local/arm-thumb-elf/sys-include/time.h" 3 4
 # 1 "/usr/local/arm-thumb-elf/sys-include/sys/features.h" 1 3 4
 # 127 "/usr/local/arm-thumb-elf/sys-include/time.h" 2 3 4
-# 3 "myhandler.h" 2
-
-
+# 3 "gbalib.h" 2
 
 
 
@@ -1337,447 +1271,100 @@ int entryno = 0;
 int yhigh = 10;
 int lives = 3;
 
-void Handler(void)
+
+
+
+
+
+
+void ClearScreen()
 {
-    u16 Flag; int x,y,steps,a1,a2; int newline = 0;
-    int d[50]={},d1[50]={},l[10]={},i=0,j,linecount=1,k, c=0,mod=0;
-
-    a1 = 0; a2 = 1;
-
-    *(u16*)0x4000208 = 0x00;
-    Flag = *(u16*)0x4000202;
-
-    if ((*(u16*)0x4000202 & 0x20) == 0x20){
-
-
-
-            if (menumap == 1){
-            char ch[50]=" STAR>WARS>";
-            steps = 10;
-
-            while (ch[i]!='\0'){d[i]=ch[i]; i++;}
-
-            for(j=0;j<=i-1;j++){
-                if (d[j]==62){
-                    l[linecount]=j-mod;
-                    mod = j; linecount ++;
-                    }
-                }
-
-            for(j=1;j<=linecount;j++){
-                x = 240/2 - 10*steps + j*20;
-                y = 10 + j*20;
-
-                for(k=0;k<=l[j]-1;k++){
-                    drawSprite(d[c]-64,c,(x+k*steps),y);
-                    c++;
+    int x,y,c=0;
+    for (x = 0; x < 240 +20; x++){
+        for (y = 0; y < 160 +20; y++){
+                drawSprite(0,c,x,y); c++;
                 }
             }
-            drawSprite(68, c+3, 240/2 + 10, 20 +1*20);
-            drawSprite(64, c+2, 240/2 + 10- 1*16, 20 +1*20);
-            drawSprite(60, c+1, 240/2 + 10, 20 +1*20-1*16);
-            drawSprite(56, c, 240/2 + 10- 1*16, 20 +1*20-1*16);
 
-            drawSprite(40, c+4, 240/2 + 40, 20 +1*20);
+}
 
-            char ch1[50]=" NEW GAME>HIGHSCORE>CREDITS>";
-            i=0; mod=0; linecount=1; c=30;
-            while (ch1[i]!='\0'){d1[i]=ch1[i]; i++;}
+void ACSIIprint(int x, int y, char ch[50], int j_iclx, int j_icly, int steps, int c)
+{
+    int i=0,j,k,mod=0,xpos,ypos,linecount=1,d[50]={},l[10]={};
 
-            for(j=0;j<=i-1;j++){
-                if (d1[j]==62){
-                    l[linecount]=j-mod;
-                    mod = j; linecount ++;
-                    }
-                }
-
-            for(j=1;j<=linecount;j++){
-                x = 240/2 - 8/2*steps;
-                y = 160/2 + j*20-20;
-
-                for(k=0;k<=l[j]-1;k++){
-                    drawSprite(d1[c-30]-64,c,(x+k*steps),y);
-                    c++;
-                    }
-                }
-
-            checkbutton();
-
-            if(pressedButtons[6] == 1){
-                  menu_point = menu_point + (-pressedButtons[6])*20;
-                  pressedButtons[6] = 0;
-                }
-            if(pressedButtons[7] == 1){
-                  menu_point = menu_point + (pressedButtons[7])*20;
-                  pressedButtons[7] = 0;
-                }
-
-            if (menu_point > 160/2 + 3*20-20) menu_point = 160/2 + 3*20-20;
-            if (menu_point < 160/2 + 1*20-20) menu_point = 160/2 + 1*20-20;
-
-            drawSprite(37, c, 240/2 - 5*steps, menu_point);
-
-            if (menu_point == (160/2 + 1*20-20) && pressedButtons[0] == 1){
-                cleanButtons();
-                menumap = 0; gamemap = 1; highscore = 0; credits = 0; CS=1; pressedButtons[0] = 0;
-            }
-            if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
-                cleanButtons();
-                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0;
-            }
-            if (menu_point == (160/2 + 3*20-20) && pressedButtons[0] == 1){
-                cleanButtons();
-                menumap = 0; gamemap = 0; highscore = 0; credits = 1; CS=1; pressedButtons[0] = 0;
+    while (ch[i]!='\0'){d[i]=ch[i]; i++;}
+    for(j=0;j<=i-1;j++){
+        if (d[j]==62){
+            l[linecount]=j-mod;
+            mod = j; linecount ++;
             }
         }
+    i = 0;
+    for(j=1;j<=linecount;j++){
+        xpos = x + j_iclx*j*20;
+        ypos = y + j_icly*j*20;
 
-
-
-
-
-            if (highscore == 1){
-                if (CS==1){ClearScreen();CS--;}
-                int ones, tens, min_ones, min_tens; c = 0;
-                char ch[50]=" HIGHSCORE>SCOLL UP>OR DOWN>";
-                steps = 10; linecount = 1; i = 0;
-                while (ch[i]!='\0'){d[i]=ch[i]; i++;}
-
-                for(j=0;j<=i-1;j++){
-                    if (d[j]==62){
-                        l[linecount]=j-mod;
-                        mod = j; linecount ++;
-                        }
-                    }
-
-                for(j=1;j<=linecount;j++){
-                    x = 240/2 - 100;
-                    y = 160/2 - 20 + j*20-20;
-
-                    for(k=0;k<=l[j]-1;k++){
-                        drawSprite(d[c]-64,c,(x+k*steps),y);
-                        c++;
-                        }
-                    }
-
-                checkbutton();
-
-                x = 240 - 50; spriteCounter = 300;
-                if(pressedButtons[6] == 1){
-                      yhigh = yhigh-10;
-
-                      pressedButtons[6] = 0;
-                    }
-                if(pressedButtons[7] == 1){
-                      yhigh = yhigh+10;
-
-                      pressedButtons[7] = 0;
-                    }
-
-                for (j=0;j<entryno;j++){
-
-                    spriteCounter += 5;
-                    ones = saved_counter[j]%10;
-                    tens = saved_counter[j]/10%6;
-                    min_ones = saved_counter[j]/60%10;
-                    min_tens = saved_counter[j]/600;
-
-                    drawSprite(j+1+27,spriteCounter+5,x-5*steps-7,yhigh+j*10);
-
-                    drawSprite(ones+27,spriteCounter+1,x,yhigh+j*10);
-                    drawSprite(tens+27,spriteCounter+2,x-steps,yhigh+j*10);
-                    drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,yhigh+j*10);
-                    drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,yhigh+j*10);
-
-                }
-
-                if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
-                }
-            }
-
-
-
-
-
-            if (credits == 1){
-                if (CS==1){ClearScreen();CS--;}
-                int ones, tens, min_ones, min_tens;
-                char ch[50]=" THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>";
-                steps = 10; linecount = 1; i = 0; mod = 0; c = 0;
-                while (ch[i]!='\0'){d[i]=ch[i]; i++;}
-
-                for(j=0;j<=i-1;j++){
-                    if (d[j]==62){
-                        l[linecount]=j-mod;
-                        mod = j; linecount ++;
-                        }
-                    }
-
-                for(j=1;j<=linecount;j++){
-                    x = 240/2 - 120;
-                    y = 160/2 - 20 + j*20-20;
-
-                    for(k=0;k<=l[j]-1;k++){
-                        drawSprite(d[c]-64,c,(x+k*steps),y);
-                        c++;
-                        }
-                    }
-
-                checkbutton();
-                if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
-                }
-
+        for(k=0;k<=l[j]-1;k++){
+            drawSprite(d[i]-64,c,(xpos+k*steps),ypos);
+            c++; i++;
             }
         }
+}
 
+void drawSprite(int spritenumb, int N, int x, int y)
+{
 
-    if (gamemap == 1){
-        if (CS==1){ClearScreen();CS--;}
-        if ((*(u16*)0x4000202 & 0x8) == 0x8){
+    *(unsigned short *)(0x7000000 + 8*N) = y | 0x2000;
 
-
-        int ones, tens, min_ones, min_tens, distx;
-        steps = 7; spriteCounter = 0;
-
-        x = 240 - 15; y = 16;
-
-        ones = counter%10;
-        tens = counter/10%6;
-        min_ones = counter/60%10;
-        min_tens = counter/600;
-        drawSprite(ones+27,spriteCounter+1,x,y);
-        drawSprite(tens+27,spriteCounter+2,x-steps,y);
-        drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,y);
-        drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,y);
-        distx = x-3*steps-7;
-
-        char ch[50]="LIVES>";
-        while (ch[i]!='\0') {d[i]=ch[i]; i++;}
-        x = distx-130; spriteCounter = 100;
-        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+5+k,(x+k*steps),y);
-        counter++;
-        }
-
-        spriteCounter = 1050;
-        for(k=0;k<3;k++){
-            drawSprite(40, k+spriteCounter, (k*2*steps+40+x), y-5);
-            for(i=0;i<3-lives;i++) drawSprite(0, i+spriteCounter, (i*2*steps+40+x), y-5);
-        }
-
-
-        if ((*(u16*)0x4000202 & 0x10) == 0x10){
-
-        checkbutton();
-        spriteCounter = 10001;
-
-
-        if(pressedButtons[4] == 1){
-          playerX = playerX + 1;
-          if(playerX > maxAlienRight) playerX = maxAlienRight;
-          pressedButtons[4] = 0;
-        }
-        if(pressedButtons[5] == 1){
-          playerX = playerX - 1;
-          if(playerX < maxAlienLeft) playerX = maxAlienLeft;
-          pressedButtons[5] = 0;
-        }
-
-        drawSprite(40, spriteCounter, playerX, playerY);
-        spriteCounter++;
-
-
-
-
-        laserTimeCounter++;
-        if(laserTimeCounter > 25){
-          if(pressedButtons[6] == 1){
-            createLaser();
-            laserTimeCounter = 0;
-          }
-        }
-        pressedButtons[6] = 0;
-
-
-        spriteCounter = 10100;
-
-        for( i = 0; i < 10; i++){
-          if(laserPositions[i][0] == 1){
-            laserPositions[i][2] = laserPositions[i][2] - 2;
-            drawSprite(40 +4, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
-          }
-
-          if(laserPositions[i][2] < -20){
-            deactivateLaser(i, spriteCounter);
-          }
-          spriteCounter++;
-        }
-
-
-
-
-      if(endcount < totalNumAliens){
-        alienTimer++;
-        if(alienTimer == 3){
-          if(alienPositions[9][1] > maxAlienRight){
-            aliensMove = -1;
-          }
-          if(alienPositions[0][1] < maxAlienLeft){
-            aliensMove = 1;
-          }
-          for(i = 0; i < totalNumAliens; i++){
-            alienPositions[i][1] = alienPositions[i][1] + aliensMove;
-          }
-          alienTimer = 0;
-        }
-
-
-
-        for(i = 0; i < totalNumAliens; i++){
-
-            NAlien = 200;
-            for(j = 0; j < laserCounter; j++){
-                if(laserPositions[j][1] >= alienPositions[i][1]-8 && laserPositions[j][1] < alienPositions[i][1]+8 && laserPositions[j][2] == alienPositions[i][2]){
-                    if(alienPositions[i][0] == 1){
-                      deactivateLaser(j, 10100+j);
-                      alienPositions[i][0] = 0;
-                      endcount++;
-                    }
-                  }
-                }
-          if(alienPositions[i][0] == 1){
-            drawSprite(40 +4 +4, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
-            }
-          if(alienPositions[i][0] == 0){
-            drawSprite(0, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
-            }
-         }
-
-         alienlaserTimeCounter++;
-         if(alienlaserTimeCounter > 150){
-           createAlienLaser();
-           alienlaserTimeCounter = 0;
-         }
-
-         spriteCounter = 10200;
-         for( i = 0; i < 10; i++){
-           if(alienLaserPositions[i][0] == 1){
-             alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
-             drawSprite(40 +4, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
-           }
-           if(alienLaserPositions[i][1] >= playerX-8 && alienLaserPositions[i][1] < playerX+8 && alienLaserPositions[i][2] == playerY){
-              deactivateAlienLaser(i, 10200 + i);
-              lives--;
-            }
-           if(alienLaserPositions[i][2] > 200){
-             deactivateAlienLaser(i, 10200 + i);
-           }
-           spriteCounter++;
-         }
-      }
-
-
-
-       if(endcount >= totalNumAliens){
-
-         alienTimer++;
-         if(alienTimer == 3){
-           if(bossPositions[2][1] > maxAlienRight){
-             aliensMove = -1;
-           }
-           if(bossPositions[0][1] < maxAlienLeft){
-             aliensMove = 1;
-           }
-           for(i = 0; i < 3; i++){
-             bossPositions[i][1] = bossPositions[i][1] + aliensMove;
-           }
-           alienTimer = 0;
-         }
-
-
-
-         for(i = 0; i <= 2; i++){
-
-             NAlien = 300;
-             for(j = 0; j < laserCounter; j++){
-                 if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
-                     if(bossPositions[i][0] >= 1){
-                       deactivateLaser(j, 10100+j);
-                       bossPositions[i][0] = bossPositions[i][0] - 1;
-                       if(bossPositions[i][0] == 0){
-                         endcount++;
-                       }
-                     }
-                   }
-                 }
-           if(bossPositions[i][0] >= 1){
-            if(i==1){
-             if(bossPositions[1][0] >= 1){
-                drawSprite(68, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
-                drawSprite(64, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
-                drawSprite(60, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
-                drawSprite(56, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
-                }
-            }
-             else drawSprite(40 +4 +4 +4, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
-             }
-           if(bossPositions[i][0] == 0){
-            if(i==1){
-             if(bossPositions[1][0] == 0){
-                drawSprite(0, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
-                drawSprite(0, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
-                drawSprite(0, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
-                drawSprite(0, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
-                }
-            }
-             drawSprite(0, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
-             }
-          }
-
-          alienlaserTimeCounter++;
-          if(alienlaserTimeCounter > 50){
-            createBossLaser();
-            alienlaserTimeCounter = 0;
-          }
-
-          spriteCounter = 10200;
-          for( i = 0; i < 10; i++){
-            if(alienLaserPositions[i][0] == 1){
-              alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
-              drawSprite(40 +4, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
-            }
-            if(alienLaserPositions[i][1] >= playerX-8 && alienLaserPositions[i][1] < playerX+8 && alienLaserPositions[i][2] == playerY){
-               deactivateAlienLaser(i, 10200 + i);
-               lives--;
-             }
-            if(alienLaserPositions[i][2] > 200){
-              deactivateAlienLaser(i, 10200 + i);
-            }
-            spriteCounter++;
-          }
-      }
-
-
-      if(endcount == (totalNumAliens + numBosses) || lives <= 0){
-      cleanButtons();
-      if (endcount == (totalNumAliens + numBosses)){saved_counter[entryno] = counter; entryno++;}
-      ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
-      for(i = 0; i < totalNumAliens; i++){
-          alienPositions[i][0] = 1;
-          }
-      for(i = 0; i < numBosses; i++){
-        bossPositions[i][0] = 5;
-        }
-      for(i = 0; i < 10; i++){
-        deactivateLaser(i, 10100 + i);
-        }
-      }
+    if (spritenumb <= 37) {
+        *(unsigned short *)(0x7000004 + 8*N) = spritenumb*2;
+        *(unsigned short *)(0x7000002 + 8*N) = x;
     }
-  }
+    else if (spritenumb >= 40){
+    {
+        *(unsigned short *)(0x7000002 + 8*N) = x | 0x4000;
+        *(unsigned short *)(0x7000004 + 8*N) = (spritenumb/4*8);
+        }
 
-    *(u16*)0x4000202 = Flag;
-    *(u16*)0x4000208 = 0x01;
-  }
+    }
+}
+
+void fillPalette(void)
+{
+    int i;
+
+    for (i = 0; i < 20; i++)
+        ((unsigned short *) 0x5000200)[i] = palette[i];
+}
+
+void fillSprites(void)
+{
+    int i,numsprites;
+
+    numsprites = 50;
+    for (i = 0; i <= (37 -1)*8*8; i++) ((unsigned short *) 0x6010000)[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
+    for (i = 0; i <= (40*16*16); i++) {((unsigned short *) 0x6010000)[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
+
+}
+
+void popSprite(int sprites, char dir, int count, int x, int y)
+{
+    int i; int step = 240/count;
+    if (dir == 'L'){
+        for (i=0;i<240;i+=step){
+            drawSprite(sprites,i,(x+i)%240,y);
+        }
+    }
+    if (dir == 'R'){
+        for (i=240;i>0;i-=step){
+            drawSprite(sprites,i,(i-x)%240,y);
+        }
+    }
+}
+
+
+
+
 
 void checkbutton(void)
 {
@@ -1805,12 +1392,12 @@ void checkbutton(void)
     if ((buttons & 0x010) == 0x010)
     {
 
-                pressedButtons[4] = 1;
+        pressedButtons[4] = 1;
     }
     if ((buttons & 0x020) == 0x020)
     {
 
-                pressedButtons[5] = 1;
+        pressedButtons[5] = 1;
     }
     if ((buttons & 0x040) == 0x040)
     {
@@ -1824,6 +1411,11 @@ void checkbutton(void)
     }
 
 }
+
+
+
+
+
 
 void createLaser(void){
   laserPositions[laserCounter][0] = 1;
@@ -1935,8 +1527,418 @@ void createBossLaser(void){
     }
   }
 }
-# 10 "main.c" 2
-# 21 "main.c"
+# 2 "myhandler.h" 2
+# 11 "myhandler.h"
+void Handler(void)
+{
+    u16 Flag; int x,y,steps;
+    int d[50]={},d1[50]={},l[10]={},i=0,j,linecount=1,k,c;
+
+    *(u16*)0x4000208 = 0x00;
+    Flag = *(u16*)0x4000202;
+
+    if ((*(u16*)0x4000202 & 0x20) == 0x20){
+
+
+
+
+
+            if (menumap == 1){
+
+
+
+            x = 240/2 - 100; y = 10; c = 0;
+            ACSIIprint(x,y," STAR>WARS>", 1, 1, 10, c);
+
+
+
+            c = 10;
+            drawSprite(68, c+3, 240/2 + 10, 20 +1*20);
+            drawSprite(64, c+2, 240/2 + 10- 1*16, 20 +1*20);
+            drawSprite(60, c+1, 240/2 + 10, 20 +1*20-1*16);
+            drawSprite(56, c, 240/2 + 10- 1*16, 20 +1*20-1*16);
+
+            drawSprite(40, c+4, 240/2 + 40, 20 +1*20);
+
+
+
+            x = 240/2 - 40; y = 160/2 - 20; c = 30;
+            ACSIIprint(x,y," NEW GAME>HIGHSCORE>CREDITS>", 0, 1, 10, c);
+
+
+            checkbutton();
+
+            if(pressedButtons[6] == 1){ menu_point = menu_point + (-pressedButtons[6])*20; pressedButtons[6] = 0; }
+            if(pressedButtons[7] == 1){ menu_point = menu_point + (pressedButtons[7])*20; pressedButtons[7] = 0; }
+
+            if (menu_point > 160/2 + 3*20-20) menu_point = 160/2 + 3*20-20;
+            if (menu_point < 160/2 + 1*20-20) menu_point = 160/2 + 1*20-20;
+
+
+
+            c=60; drawSprite(37, c, 240/2 - 50, menu_point);
+
+            if (menu_point == (160/2 + 1*20-20) && pressedButtons[0] == 1){
+                cleanButtons();
+                menumap = 0; gamemap = 1; highscore = 0; credits = 0; CS=1; pressedButtons[0] = 0;
+            }
+            if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
+                cleanButtons();
+                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0;
+            }
+            if (menu_point == (160/2 + 3*20-20) && pressedButtons[0] == 1){
+                cleanButtons();
+                menumap = 0; gamemap = 0; highscore = 0; credits = 1; CS=1; pressedButtons[0] = 0;
+            }
+        }
+
+
+
+
+
+
+
+            if (highscore == 1){
+                if (CS==1){ClearScreen();CS--;}
+
+                int ones, tens, min_ones, min_tens;
+
+
+
+                x = 240/2 - 100; y = 160/2 - 40; c = 0;
+                ACSIIprint(x,y," HIGHSCORE>SCOLL UP>OR DOWN>", 0, 1, 10, c);
+
+                checkbutton();
+
+                x = 240 - 50;
+                if(pressedButtons[6] == 1){
+                      yhigh = yhigh-10;
+
+                      pressedButtons[6] = 0;
+                    }
+                if(pressedButtons[7] == 1){
+                      yhigh = yhigh+10;
+
+                      pressedButtons[7] = 0;
+                    }
+
+
+
+                c = 30;
+                for (j=0;j<entryno;j++){
+
+                    c += 5;
+                    ones = saved_counter[j]%10;
+                    tens = saved_counter[j]/10%6;
+                    min_ones = saved_counter[j]/60%10;
+                    min_tens = saved_counter[j]/600;
+
+                    drawSprite(j+1+27,c+5,x-50-7,yhigh+j*10);
+
+                    drawSprite(ones+27,c+1,x,yhigh+j*10);
+                    drawSprite(tens+27,c+2,x-10,yhigh+j*10);
+                    drawSprite(min_ones+27,c+3,x-20-7,yhigh+j*10);
+                    drawSprite(min_tens+27,c+4,x-30-7,yhigh+j*10);
+
+                }
+
+                if(pressedButtons[1] == 1){
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
+                }
+            }
+
+
+
+
+
+
+
+            if (credits == 1){
+                if (CS==1){ClearScreen();CS--;}
+
+
+
+                x = 240/2 - 120; y = 160/2 - 40; c = 0;
+                ACSIIprint(x,y," THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>", 0, 1, 10, c);
+
+                checkbutton();
+
+                if(pressedButtons[1] == 1){
+                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
+                }
+
+            }
+        }
+
+
+
+
+
+
+    if (gamemap == 1){
+        if (CS==1){ClearScreen();CS--;}
+
+
+        if ((*(u16*)0x4000202 & 0x8) == 0x8){
+
+
+
+
+
+        int ones, tens, min_ones, min_tens, distx, spriteCounter = 0;
+        steps = 7;
+
+        x = 240 - 15; y = 16;
+
+        ones = counter%10;
+        tens = counter/10%6;
+        min_ones = counter/60%10;
+        min_tens = counter/600;
+        drawSprite(ones+27,spriteCounter+1,x,y);
+        drawSprite(tens+27,spriteCounter+2,x-steps,y);
+        drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,y);
+        drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,y);
+        distx = x-3*steps-7;
+
+        char ch[50]=" LIVES>";
+        while (ch[i]!='\0') {d[i]=ch[i]; i++;}
+        x = distx-130; spriteCounter = 100;
+        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+5+k,(x+k*steps),y);
+
+        spriteCounter = 1050;
+        for(k=0;k<3;k++){
+            drawSprite(40, k+spriteCounter, (k*2*steps+40+x), y-5);
+            for(i=0;i<3-lives;i++) drawSprite(0, i+spriteCounter, (i*2*steps+40+x), y-5);
+            }
+
+        counter++;
+
+        }
+
+
+        if ((*(u16*)0x4000202 & 0x10) == 0x10){
+
+
+
+
+
+        checkbutton();
+        spriteCounter = 10001;
+
+
+        if(pressedButtons[4] == 1){
+          playerX = playerX + 1;
+          if(playerX > maxAlienRight) playerX = maxAlienRight;
+          pressedButtons[4] = 0;
+        }
+        if(pressedButtons[5] == 1){
+          playerX = playerX - 1;
+          if(playerX < maxAlienLeft) playerX = maxAlienLeft;
+          pressedButtons[5] = 0;
+        }
+
+        drawSprite(40, spriteCounter, playerX, playerY);
+        spriteCounter++;
+
+
+
+
+        laserTimeCounter++;
+        if(laserTimeCounter > 25){
+          if(pressedButtons[6] == 1){
+            createLaser();
+            laserTimeCounter = 0;
+          }
+        }
+        pressedButtons[6] = 0;
+
+
+        spriteCounter = 10100;
+
+        for( i = 0; i < 10; i++){
+          if(laserPositions[i][0] == 1){
+            laserPositions[i][2] = laserPositions[i][2] - 2;
+            drawSprite(40 +4, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
+          }
+
+          if(laserPositions[i][2] < -20){
+            deactivateLaser(i, spriteCounter);
+          }
+          spriteCounter++;
+        }
+
+
+
+
+
+
+      if(endcount < totalNumAliens){
+        alienTimer++;
+        if(alienTimer == 3){
+          if(alienPositions[9][1] > maxAlienRight){
+            aliensMove = -1;
+          }
+          if(alienPositions[0][1] < maxAlienLeft){
+            aliensMove = 1;
+          }
+          for(i = 0; i < totalNumAliens; i++){
+            alienPositions[i][1] = alienPositions[i][1] + aliensMove;
+          }
+          alienTimer = 0;
+        }
+
+
+
+        for(i = 0; i < totalNumAliens; i++){
+
+            NAlien = 200;
+            for(j = 0; j < laserCounter; j++){
+                if(laserPositions[j][1] >= alienPositions[i][1]-8 && laserPositions[j][1] < alienPositions[i][1]+8 && laserPositions[j][2] == alienPositions[i][2]){
+                    if(alienPositions[i][0] == 1){
+                      deactivateLaser(j, 10100+j);
+                      alienPositions[i][0] = 0;
+                      endcount++;
+                    }
+                  }
+                }
+          if(alienPositions[i][0] == 1){
+            drawSprite(40 +4 +4, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
+            }
+          if(alienPositions[i][0] == 0){
+            drawSprite(0, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
+            }
+         }
+
+         alienlaserTimeCounter++;
+         if(alienlaserTimeCounter > 150){
+           createAlienLaser();
+           alienlaserTimeCounter = 0;
+         }
+
+         spriteCounter = 10200;
+         for( i = 0; i < 10; i++){
+           if(alienLaserPositions[i][0] == 1){
+             alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
+             drawSprite(40 +4, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+           }
+           if(alienLaserPositions[i][1] >= playerX-8 && alienLaserPositions[i][1] < playerX+8 && alienLaserPositions[i][2] == playerY){
+              deactivateAlienLaser(i, 10200 + i);
+              lives--;
+            }
+           if(alienLaserPositions[i][2] > 200){
+             deactivateAlienLaser(i, 10200 + i);
+           }
+           spriteCounter++;
+         }
+      }
+
+
+
+
+
+
+       if(endcount >= totalNumAliens){
+
+         alienTimer++;
+         if(alienTimer == 3){
+           if(bossPositions[2][1] > maxAlienRight){
+             aliensMove = -1;
+           }
+           if(bossPositions[0][1] < maxAlienLeft){
+             aliensMove = 1;
+           }
+           for(i = 0; i < 3; i++){
+             bossPositions[i][1] = bossPositions[i][1] + aliensMove;
+           }
+           alienTimer = 0;
+         }
+
+
+
+         for(i = 0; i <= 2; i++){
+
+             NAlien = 300;
+             for(j = 0; j < laserCounter; j++){
+                 if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
+                     if(bossPositions[i][0] >= 1){
+                       deactivateLaser(j, 10100+j);
+                       bossPositions[i][0] = bossPositions[i][0] - 1;
+                       if(bossPositions[i][0] == 0){
+                         endcount++;
+                       }
+                     }
+                   }
+                 }
+           if(bossPositions[i][0] >= 1){
+            if(i==1){
+             if(bossPositions[1][0] >= 1){
+                drawSprite(68, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
+                drawSprite(64, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
+                drawSprite(60, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
+                drawSprite(56, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
+                }
+            }
+             else drawSprite(40 +4 +4 +4, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
+             }
+           if(bossPositions[i][0] == 0){
+            if(i==1){
+             if(bossPositions[1][0] == 0){
+                drawSprite(0, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
+                drawSprite(0, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
+                drawSprite(0, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
+                drawSprite(0, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
+                }
+            }
+             drawSprite(0, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
+             }
+          }
+
+          alienlaserTimeCounter++;
+          if(alienlaserTimeCounter > 50){
+            createBossLaser();
+            alienlaserTimeCounter = 0;
+          }
+
+          spriteCounter = 10200;
+          for( i = 0; i < 10; i++){
+            if(alienLaserPositions[i][0] == 1){
+              alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
+              drawSprite(40 +4, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+            }
+            if(alienLaserPositions[i][1] >= playerX-8 && alienLaserPositions[i][1] < playerX+8 && alienLaserPositions[i][2] == playerY){
+               deactivateAlienLaser(i, 10200 + i);
+               lives--;
+             }
+            if(alienLaserPositions[i][2] > 200){
+              deactivateAlienLaser(i, 10200 + i);
+            }
+            spriteCounter++;
+          }
+      }
+
+
+      if(endcount == (totalNumAliens + numBosses) || lives <= 0){
+      cleanButtons();
+      if (endcount == (totalNumAliens + numBosses)){saved_counter[entryno] = counter; entryno++;}
+      ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
+      for(i = 0; i < totalNumAliens; i++){
+          alienPositions[i][0] = 1;
+          }
+      for(i = 0; i < numBosses; i++){
+        bossPositions[i][0] = 5;
+        }
+      for(i = 0; i < 10; i++){
+        deactivateLaser(i, 10100 + i);
+        }
+      }
+    }
+  }
+
+    *(u16*)0x4000202 = Flag;
+    *(u16*)0x4000208 = 0x01;
+  }
+# 9 "main.c" 2
+# 22 "main.c"
 int main(void)
 {
 
@@ -1973,4 +1975,5 @@ int main(void)
     while(1);
 
         return 0;
+
 }
