@@ -584,43 +584,43 @@ u16 sprites16[] = {
 
 
 
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    0,1,1,1,1,1,1,1,
-    0,1,1,1,1,1,1,1,
-    0,1,1,1,1,1,1,1,
-    0,0,1,1,1,1,1,1,
-    0,0,1,1,1,1,1,1,
+    0,0,0,0,4,3,3,1,
+    0,0,0,0,0,4,3,3,
+    0,0,0,0,0,0,4,3,
+    0,0,0,0,4,4,1,3,
+    0,0,0,4,3,3,3,1,
+    0,0,0,4,3,3,1,1,
+    0,0,4,3,3,3,1,1,
+    4,3,3,1,3,3,3,3,
 
 
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,1,0,
-    1,1,1,1,1,1,0,0,
-    1,1,1,1,1,1,0,0,
+    1,1,1,4,0,0,0,0,
+    1,1,4,0,0,0,0,0,
+    1,4,0,0,0,0,0,0,
+    1,1,4,4,0,0,0,0,
+    1,1,1,1,4,0,0,0,
+    1,1,1,1,4,0,0,0,
+    1,1,1,1,1,4,0,0,
+    1,1,1,1,1,1,1,4,
 
-    0,0,0,1,1,1,1,1,
-    0,0,0,1,1,1,1,1,
-    0,0,0,0,1,1,1,1,
-    0,0,0,0,0,1,1,1,
-    0,0,0,0,0,1,1,1,
-    0,0,0,0,0,0,1,1,
-    0,0,0,0,0,0,1,1,
-    0,0,0,0,0,0,0,1,
+    4,3,3,1,3,3,3,3,
+    0,4,3,3,1,3,3,1,
+    0,0,4,1,3,1,3,3,
+    0,0,0,4,3,3,3,3,
+    0,0,0,0,4,1,3,3,
+    0,0,0,0,0,4,3,3,
+    0,0,0,0,0,0,4,3,
+    0,0,0,0,0,0,0,4,
 
 
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,1,0,0,0,
-    1,1,1,1,0,0,0,0,
-    1,1,1,0,0,0,0,0,
-    1,1,1,0,0,0,0,0,
-    1,1,0,0,0,0,0,0,
-    1,1,0,0,0,0,0,0,
-    1,0,0,0,0,0,0,0,
+    1,1,1,1,1,1,1,4,
+    1,1,1,1,1,1,4,0,
+    1,1,1,1,1,4,0,0,
+    1,1,1,1,4,0,0,0,
+    1,1,1,4,0,0,0,0,
+    1,1,4,0,0,0,0,0,
+    1,4,0,0,0,0,0,0,
+    4,0,0,0,0,0,0,0,
 
 };
 # 6 "main.c" 2
@@ -1221,6 +1221,7 @@ extern char *_tzname[2];
 
 
 
+int winlosecounter = 0;
 int counter = 0;
 int pos = 0;
 int playerX = 240/2, playerY = 160 -20;
@@ -1277,7 +1278,7 @@ int lives = 3;
 
 
 
-void ClearScreen()
+void ClearScreen(void)
 {
     int x,y,c=0;
     for (x = 0; x < 240 +20; x++){
@@ -1328,6 +1329,7 @@ void drawSprite(int spritenumb, int N, int x, int y)
 
     }
 }
+
 
 void fillPalette(void)
 {
@@ -1531,8 +1533,7 @@ void createBossLaser(void){
 # 11 "myhandler.h"
 void Handler(void)
 {
-    u16 Flag; int x,y,steps;
-    int d[50]={},d1[50]={},l[10]={},i=0,j,linecount=1,k,c;
+    u16 Flag; int x, y, steps, ones, tens, min_ones, min_tens, j, k, c, i=0;
 
     *(u16*)0x4000208 = 0x00;
     Flag = *(u16*)0x4000202;
@@ -1601,8 +1602,6 @@ void Handler(void)
             if (highscore == 1){
                 if (CS==1){ClearScreen();CS--;}
 
-                int ones, tens, min_ones, min_tens;
-
 
 
                 x = 240/2 - 100; y = 160/2 - 40; c = 0;
@@ -1613,7 +1612,7 @@ void Handler(void)
                 x = 240 - 50;
                 if(pressedButtons[6] == 1){
                       yhigh = yhigh-10;
-
+                      if (yhigh < 10) yhigh = 10;
                       pressedButtons[6] = 0;
                     }
                 if(pressedButtons[7] == 1){
@@ -1643,7 +1642,7 @@ void Handler(void)
                 }
 
                 if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
+                ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; yhigh = 10;
                 }
             }
 
@@ -1664,7 +1663,7 @@ void Handler(void)
                 checkbutton();
 
                 if(pressedButtons[1] == 1){
-                ClearScreen(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; pressedButtons[1] = 0; yhigh = 10;
+                ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; yhigh = 10;
                 }
 
             }
@@ -1685,30 +1684,28 @@ void Handler(void)
 
 
 
-        int ones, tens, min_ones, min_tens, distx, spriteCounter = 0;
+        int distx,
         steps = 7;
 
-        x = 240 - 15; y = 16;
+        x = 240 - 15; y = 16; c = 0;
 
         ones = counter%10;
         tens = counter/10%6;
         min_ones = counter/60%10;
         min_tens = counter/600;
-        drawSprite(ones+27,spriteCounter+1,x,y);
-        drawSprite(tens+27,spriteCounter+2,x-steps,y);
-        drawSprite(min_ones+27,spriteCounter+3,x-2*steps-7,y);
-        drawSprite(min_tens+27,spriteCounter+4,x-3*steps-7,y);
+        drawSprite(ones+27,c+1,x,y);
+        drawSprite(tens+27,c+2,x-steps,y);
+        drawSprite(min_ones+27,c+3,x-2*steps-7,y);
+        drawSprite(min_tens+27,c+4,x-3*steps-7,y);
         distx = x-3*steps-7;
 
-        char ch[50]=" LIVES>";
-        while (ch[i]!='\0') {d[i]=ch[i]; i++;}
-        x = distx-130; spriteCounter = 100;
-        for(k=0;k<=i-1;k++) drawSprite(d[k]-64,spriteCounter+5+k,(x+k*steps),y);
+        x = distx-130; c = 5;
+        ACSIIprint(x,y," LIVES>", 0, 0, 7, c);
 
-        spriteCounter = 1050;
+        spriteCounter = 20;
         for(k=0;k<3;k++){
-            drawSprite(40, k+spriteCounter, (k*2*steps+40+x), y-5);
-            for(i=0;i<3-lives;i++) drawSprite(0, i+spriteCounter, (i*2*steps+40+x), y-5);
+            drawSprite(40, k+spriteCounter, (k*2*steps+50+x), y-5);
+            for(i=0;i<3-lives;i++) drawSprite(0, i+spriteCounter, (i*2*steps+50+x), y-5);
             }
 
         counter++;
@@ -1723,7 +1720,7 @@ void Handler(void)
 
 
         checkbutton();
-        spriteCounter = 10001;
+        spriteCounter = 30;
 
 
         if(pressedButtons[4] == 1){
@@ -1738,7 +1735,6 @@ void Handler(void)
         }
 
         drawSprite(40, spriteCounter, playerX, playerY);
-        spriteCounter++;
 
 
 
@@ -1753,18 +1749,17 @@ void Handler(void)
         pressedButtons[6] = 0;
 
 
-        spriteCounter = 10100;
+        spriteCounter = 200;
 
         for( i = 0; i < 10; i++){
           if(laserPositions[i][0] == 1){
             laserPositions[i][2] = laserPositions[i][2] - 2;
-            drawSprite(40 +4, spriteCounter, laserPositions[i][1], laserPositions[i][2]);
+            drawSprite(40 +4, spriteCounter + i, laserPositions[i][1], laserPositions[i][2]);
           }
 
           if(laserPositions[i][2] < -20){
-            deactivateLaser(i, spriteCounter);
+            deactivateLaser(i, spriteCounter + i);
           }
-          spriteCounter++;
         }
 
 
@@ -1789,13 +1784,14 @@ void Handler(void)
 
 
 
+        spriteCounter = 200;
+        NAlien = 100;
         for(i = 0; i < totalNumAliens; i++){
 
-            NAlien = 200;
             for(j = 0; j < laserCounter; j++){
                 if(laserPositions[j][1] >= alienPositions[i][1]-8 && laserPositions[j][1] < alienPositions[i][1]+8 && laserPositions[j][2] == alienPositions[i][2]){
                     if(alienPositions[i][0] == 1){
-                      deactivateLaser(j, 10100+j);
+                      deactivateLaser(j, spriteCounter+j);
                       alienPositions[i][0] = 0;
                       endcount++;
                     }
@@ -1815,20 +1811,19 @@ void Handler(void)
            alienlaserTimeCounter = 0;
          }
 
-         spriteCounter = 10200;
+         spriteCounter = 500;
          for( i = 0; i < 10; i++){
            if(alienLaserPositions[i][0] == 1){
              alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
-             drawSprite(40 +4, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+             drawSprite(40 +4, spriteCounter + i, alienLaserPositions[i][1], alienLaserPositions[i][2]);
            }
            if(alienLaserPositions[i][1] >= playerX-8 && alienLaserPositions[i][1] < playerX+8 && alienLaserPositions[i][2] == playerY){
-              deactivateAlienLaser(i, 10200 + i);
+              deactivateAlienLaser(i, spriteCounter + i);
               lives--;
             }
            if(alienLaserPositions[i][2] > 200){
-             deactivateAlienLaser(i, 10200 + i);
+             deactivateAlienLaser(i, spriteCounter + i);
            }
-           spriteCounter++;
          }
       }
 
@@ -1855,13 +1850,14 @@ void Handler(void)
 
 
 
+         spriteCounter = 200;
+         NAlien = 100;
          for(i = 0; i <= 2; i++){
 
-             NAlien = 300;
              for(j = 0; j < laserCounter; j++){
                  if(laserPositions[j][1] >= bossPositions[i][1]-8 && laserPositions[j][1] < bossPositions[i][1]+8 && laserPositions[j][2] == bossPositions[i][2]){
                      if(bossPositions[i][0] >= 1){
-                       deactivateLaser(j, 10100+j);
+                       deactivateLaser(j, spriteCounter+j);
                        bossPositions[i][0] = bossPositions[i][0] - 1;
                        if(bossPositions[i][0] == 0){
                          endcount++;
@@ -1899,38 +1895,60 @@ void Handler(void)
             alienlaserTimeCounter = 0;
           }
 
-          spriteCounter = 10200;
+          spriteCounter = 500;
           for( i = 0; i < 10; i++){
             if(alienLaserPositions[i][0] == 1){
               alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
-              drawSprite(40 +4, spriteCounter, alienLaserPositions[i][1], alienLaserPositions[i][2]);
+              drawSprite(40 +4, spriteCounter + i, alienLaserPositions[i][1], alienLaserPositions[i][2]);
             }
             if(alienLaserPositions[i][1] >= playerX-8 && alienLaserPositions[i][1] < playerX+8 && alienLaserPositions[i][2] == playerY){
-               deactivateAlienLaser(i, 10200 + i);
+               deactivateAlienLaser(i, spriteCounter + i);
                lives--;
              }
             if(alienLaserPositions[i][2] > 200){
-              deactivateAlienLaser(i, 10200 + i);
+              deactivateAlienLaser(i, spriteCounter + i);
             }
-            spriteCounter++;
           }
       }
 
 
-      if(endcount == (totalNumAliens + numBosses) || lives <= 0){
-      cleanButtons();
-      if (endcount == (totalNumAliens + numBosses)){saved_counter[entryno] = counter; entryno++;}
-      ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
-      for(i = 0; i < totalNumAliens; i++){
-          alienPositions[i][0] = 1;
+          if (endcount == (totalNumAliens + numBosses)){
+
+              x = 240/2 - 40; y = 160/2; c = 300;
+              ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
+              winlosecounter++;
+
+              if(winlosecounter > 120) winlosecounter = 0;
           }
-      for(i = 0; i < numBosses; i++){
-        bossPositions[i][0] = 5;
+
+
+          if (lives <= 0){
+
+              x = 240/2 - 40; y = 160/2; c = 300;
+              ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
+              winlosecounter++;
+
+              if(winlosecounter > 120) winlosecounter = 0;
+          }
+
+
+      if((endcount == (totalNumAliens + numBosses) || lives <= 0) && winlosecounter == 0){
+          cleanButtons();
+          if (endcount == (totalNumAliens + numBosses)){saved_counter[entryno] = counter; entryno++;}
+          ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
+          for(i = 0; i < totalNumAliens; i++){
+              alienPositions[i][0] = 1;
+              }
+          for(i = 0; i < numBosses; i++){
+            bossPositions[i][0] = 5;
+            }
+          spriteCounter = 200;
+          for(i = 0; i < 10; i++){
+            deactivateLaser(i, spriteCounter + i);
+            }
         }
-      for(i = 0; i < 10; i++){
-        deactivateLaser(i, 10100 + i);
-        }
-      }
+
+
     }
   }
 

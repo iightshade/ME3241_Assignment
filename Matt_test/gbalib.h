@@ -3,6 +3,7 @@
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
 
 // Global Variable
+int winlosecounter = 0;
 int counter = 0;
 int pos = 0;
 int playerX = SCREEN_WIDTH/2, playerY = SCREEN_HEIGHT-20;
@@ -59,7 +60,7 @@ int lives = 3;
 ////////////////////////////////////// DISPLAY AND GRAPHICS /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ClearScreen()
+void ClearScreen(void)
 {
     int x,y,c=0;
     for (x = 0; x < SCREEN_WIDTH+20; x++){
@@ -110,6 +111,7 @@ void drawSprite(int spritenumb, int N, int x, int y)
 
     }
 }
+
 
 void fillPalette(void)
 {
@@ -266,7 +268,7 @@ void createBossLaser(void){                  // Create alien's laser
   int breakCounter = 0;
   int laserSize = 0;
   // srand(time(0));
-  while(attackingAlien == -1){                  // Choose alien position between 0-9
+  while(attackingAlien == -1){                  // Choose alien position between 0-2
     attackingAlien = rand();
     attackingAlien = attackingAlien % 3;
     breakCounter++;
