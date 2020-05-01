@@ -1349,20 +1349,6 @@ void fillSprites(void)
 
 }
 
-void popSprite(int sprites, char dir, int count, int x, int y)
-{
-    int i; int step = 240/count;
-    if (dir == 'L'){
-        for (i=0;i<240;i+=step){
-            drawSprite(sprites,i,(x+i)%240,y);
-        }
-    }
-    if (dir == 'R'){
-        for (i=240;i>0;i-=step){
-            drawSprite(sprites,i,(i-x)%240,y);
-        }
-    }
-}
 
 
 

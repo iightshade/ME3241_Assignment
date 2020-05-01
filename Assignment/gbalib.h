@@ -131,20 +131,6 @@ void fillSprites(void)
     
 }
 
-void popSprite(int sprites, char dir, int count, int x, int y)
-{   
-    int i; int step = SCREEN_WIDTH/count;
-    if (dir == 'L'){
-        for (i=0;i<240;i+=step){
-            drawSprite(sprites,i,(x+i)%SCREEN_WIDTH,y);
-        }
-    }
-    if (dir == 'R'){
-        for (i=SCREEN_WIDTH;i>0;i-=step){
-            drawSprite(sprites,i,(i-x)%SCREEN_WIDTH,y);
-        }
-    }
-}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////// BUTTONS //////////////////////////////////////////////////////////////////////
