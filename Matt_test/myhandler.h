@@ -86,7 +86,7 @@ void Handler(void)
 
                 checkbutton();
 
-                x = SCREEN_WIDTH - 50;
+                x = SCREEN_WIDTH - 50; 
                 if(pressedButtons[6] == 1){
                       yhigh = yhigh-10;
                       if (yhigh < 10) yhigh = 10;
@@ -133,7 +133,7 @@ void Handler(void)
                 if (CS==1){ClearScreen();CS--;}
 
                 // c = 0-50
-
+                
                 x = SCREEN_WIDTH/2 - 120; y = SCREEN_HEIGHT/2 - 40; c = 0;
                 ACSIIprint(x,y," THANK YOU FOR PLAYING>FROM BENJAMIN>AND MATTHEW>", 0, 1, 10, c);
 
@@ -161,7 +161,7 @@ void Handler(void)
 //////////////////////////////////////    LIVES & TIMER     /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        int distx,
+        int distx, 
         steps = 7;
 
         x = SCREEN_WIDTH - 15; y = 16; c = 0;
@@ -197,7 +197,7 @@ void Handler(void)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         checkbutton();
-        spriteCounter = playerSpriteCounter;
+        spriteCounter = 30;
 
         // Spaceship position //
         if(pressedButtons[4] == 1){
@@ -214,17 +214,19 @@ void Handler(void)
         drawSprite(SPACESHIP, spriteCounter, playerX, playerY);
 
 
-        // Create player laser //
+        // Create laser positions //
         // [0] = Active [1] = X  [2] = Y
-        laserTimeCounter++;
-        if(laserTimeCounter > 25 && pressedButtons[6] == 1){    // Rate of Fire
-            createLaser();                                      // Activation of Laser
+        laserTimeCounter++; // Rate of Fire
+        if(laserTimeCounter > 25){
+          if(pressedButtons[6] == 1){ // Activation of Laser
+            createLaser();
             laserTimeCounter = 0;
+          }
         }
-        pressedButtons[6] = 0;
+        pressedButtons[6] = 0; // Deactivation of Laser
 
-        // Update player laser positions //
-        spriteCounter = playerLaserSpriteCounter;
+
+        spriteCounter = 200;
 
         for( i = 0; i < 10; i++){                   // Maximum number of lasers that can exist
           if(laserPositions[i][0] == 1){            // if laser is active its moves
@@ -242,20 +244,26 @@ void Handler(void)
 
         // Update alien positions //
         // [0] = Active [1] = X  [2] = Y
-      if(endcount < numAliens){
-
-        // Update alien positions //
+      if(endcount < totalNumAliens){
         alienTimer++;
         if(alienTimer == 3){
-          enemyMove(numAliens, alienPositions);
+          if(alienPositions[9][1] > maxAlienRight){ // Move L once hit the maximum right frame
+            aliensMove = -1;
+          }
+          if(alienPositions[0][1] < maxAlienLeft){  // Move R once hit the maximum right frame
+            aliensMove = 1;
+          }
+          for(i = 0; i < totalNumAliens; i++){ // X position of all ALIENS moving together
+            alienPositions[i][1] = alienPositions[i][1] + aliensMove;
+          }
           alienTimer = 0;
         }
 
         // Print alien positions //
         // [0] = Active [1] = X  [2] = Y
-        spriteCounter = playerLaserSpriteCounter;
-        NAlien = alienSpriteCounter; // must be the same counter not reproduce
-        for(i = 0; i < numAliens; i++){
+        spriteCounter = 200;
+        NAlien = 100; // must be the same counter not reproduce
+        for(i = 0; i < totalNumAliens; i++){
             //Using a standard fixed sprite number for Aliens
             for(j = 0; j < laserCounter; j++){
                 if(laserPositions[j][1] >= alienPositions[i][1]-8 && laserPositions[j][1] < alienPositions[i][1]+8 && laserPositions[j][2] == alienPositions[i][2]){
@@ -273,7 +281,6 @@ void Handler(void)
             drawSprite(SPACE, NAlien + i, alienPositions[i][1], alienPositions[i][2]);
             }
          }
-
          // Alien laser //
          alienlaserTimeCounter++;                 // Rate of Fire by the aliens
          if(alienlaserTimeCounter > 150){          //Create the alien laser randomly from an active alien
@@ -281,7 +288,7 @@ void Handler(void)
            alienlaserTimeCounter = 0;
          }
 
-         spriteCounter = alienLaserSpriteCounter;
+         spriteCounter = 500;
          for( i = 0; i < 10; i++){
            if(alienLaserPositions[i][0] == 1){
              alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
@@ -302,19 +309,26 @@ void Handler(void)
 //////////////////////////////////////       STAGE 2        /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-       if(endcount >= numAliens){
-
+       if(endcount >= totalNumAliens){
          // Boss position
          alienTimer++;
          if(alienTimer == 3){
-           enemyMove(numBosses, bossPositions);
+           if(bossPositions[2][1] > maxAlienRight){ // Move L once hit the maximum right frame
+             aliensMove = -1;
+           }
+           if(bossPositions[0][1] < maxAlienLeft){  // Move R once hit the maximum right frame
+             aliensMove = 1;
+           }
+           for(i = 0; i < 3; i++){ // X position of all ALIENS moving together
+             bossPositions[i][1] = bossPositions[i][1] + aliensMove;
+           }
            alienTimer = 0;
          }
 
          // Print boss positions //
          // [0] = Health [1] = X  [2] = Y
-         spriteCounter = playerLaserSpriteCounter;
-         NAlien = alienSpriteCounter; // must be the same counter not reproduce
+         spriteCounter = 200;
+         NAlien = 100; // must be the same counter not reproduce
          for(i = 0; i <= 2; i++){
              //Using a standard fixed sprite number for Aliens
              for(j = 0; j < laserCounter; j++){
@@ -351,7 +365,6 @@ void Handler(void)
              drawSprite(SPACE, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
           }
-
           // Boss lasers //
           alienlaserTimeCounter++;                 // Rate of Fire by the aliens
           if(alienlaserTimeCounter > 50){          //Create the alien laser randomly from an active alien
@@ -359,7 +372,7 @@ void Handler(void)
             alienlaserTimeCounter = 0;
           }
 
-          spriteCounter = alienLaserSpriteCounter;
+          spriteCounter = 500;
           for( i = 0; i < 10; i++){
             if(alienLaserPositions[i][0] == 1){
               alienLaserPositions[i][2] = alienLaserPositions[i][2] + 2;
@@ -376,11 +389,11 @@ void Handler(void)
       }
 
           //YOU WIN
-          if (endcount == (numAliens + numBosses)){
+          if (endcount == (totalNumAliens + numBosses)){
 
               x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
               ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
-              winlosecounter++;
+              winlosecounter++; 
 
               if(winlosecounter > 120) winlosecounter = 0;
           }
@@ -390,17 +403,17 @@ void Handler(void)
 
               x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
               ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
-              winlosecounter++;
+              winlosecounter++; 
 
               if(winlosecounter > 120) winlosecounter = 0;
           }
 
       // End of game* //
-      if((endcount == (numAliens + numBosses) || lives <= 0) && winlosecounter == 0){
+      if((endcount == (totalNumAliens + numBosses) || lives <= 0) && winlosecounter == 0){
           cleanButtons();
-          if (endcount == (numAliens + numBosses)){saved_counter[entryno] = counter; entryno++;}
+          if (endcount == (totalNumAliens + numBosses)){saved_counter[entryno] = counter; entryno++;}
           ClearScreen(); counter = 0; menumap = 1; gamemap = 0; highscore = 0; credits = 0; endcount = 0; laserCounter = 0; lives = 3;
-          for(i = 0; i < numAliens; i++){
+          for(i = 0; i < totalNumAliens; i++){
               alienPositions[i][0] = 1;
               }
           for(i = 0; i < numBosses; i++){
@@ -419,3 +432,4 @@ void Handler(void)
     REG_IF = Flag; // Update interrupt table, to confirm we have handled this interrupt
     REG_IME = 0x01;  // Re-enable interrupt handling
   }
+
