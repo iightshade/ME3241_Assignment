@@ -1,7 +1,5 @@
 #include "gbalib.h"
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
-#define u32 unsigned int
-extern void fillRect(u32 x,u32 y, u32 width, u32 height, u32 color);
 
 
 //global variable
@@ -203,9 +201,9 @@ void Handler(void)
 
         // Spaceship position //
         if(pressedButtons[4] == 1){
-          fillRect(playerX,0,0,0,0);
-          // if(playerX > maxAlienRight) playerX = maxAlienRight; // Boundary of Movement to Right
-          // pressedButtons[4] = 0;
+          playerX = playerX + 1;
+          if(playerX > maxAlienRight) playerX = maxAlienRight; // Boundary of Movement to Right
+          pressedButtons[4] = 0;
         }
         if(pressedButtons[5] == 1){
           playerX = playerX - 1;

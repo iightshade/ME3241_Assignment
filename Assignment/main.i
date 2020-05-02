@@ -1541,10 +1541,7 @@ void createBossLaser(void){
   }
 }
 # 2 "myhandler.h" 2
-
-
-extern void fillRect(unsigned int x,unsigned int y, unsigned int width, unsigned int height, unsigned int color);
-# 13 "myhandler.h"
+# 11 "myhandler.h"
 void Handler(void)
 {
     u16 Flag; int x, y, steps, ones, tens, min_ones, min_tens, j, k, c, i=0;
@@ -1738,9 +1735,9 @@ void Handler(void)
 
 
         if(pressedButtons[4] == 1){
-          fillRect(playerX,0,0,0,0);
-
-
+          playerX = playerX + 1;
+          if(playerX > maxAlienRight) playerX = maxAlienRight;
+          pressedButtons[4] = 0;
         }
         if(pressedButtons[5] == 1){
           playerX = playerX - 1;
