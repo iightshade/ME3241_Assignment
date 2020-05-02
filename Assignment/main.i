@@ -795,6 +795,7 @@ u16 sprites32[] = {
     0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,
 
+
 };
 # 7 "main.c" 2
 
@@ -1335,6 +1336,22 @@ void drawSprite(int spritenumb, int N, int x, int y)
     }
 }
 
+void drawfours(int sprite1, int sprite2, int sprite3, int sprite4, int x, int y, int numb, int selection)
+{
+  int steps = 7;
+  if (selection==0){
+    drawSprite(sprite4, numb, x + 16, y);
+    drawSprite(sprite3, numb+1, x, y);
+    drawSprite(sprite2, numb+2, x + 16, y -16);
+    drawSprite(sprite1, numb+3, x, y -16);}
+
+  if (selection==1){
+    drawSprite(sprite4, numb, x, y);
+    drawSprite(sprite3, numb+1, x-steps, y);
+    drawSprite(sprite2, numb+2, x-2*steps-7, y);
+    drawSprite(sprite1, numb+3, x-3*steps-7, y);}
+}
+
 
 void fillPalette(void)
 {
@@ -1350,7 +1367,7 @@ void fillSprites(void)
 
     numsprites = 50;
     for (i = 0; i <= (37 -1)*8*8; i++) ((unsigned short *) 0x6010000)[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
-    for (i = 0; i <= (40*16*16); i++) {((unsigned short *) 0x6010000)[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
+    for (i = 0; i <= (60*16*16); i++) {((unsigned short *) 0x6010000)[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
 
 }
 
@@ -1574,10 +1591,7 @@ void Handler(void)
 
 
             c = 10;
-            drawSprite(68, c+3, 240/2 + 10, 20 +1*20);
-            drawSprite(64, c+2, 240/2 + 10- 1*16, 20 +1*20);
-            drawSprite(60, c+1, 240/2 + 10, 20 +1*20-1*16);
-            drawSprite(56, c, 240/2 + 10- 1*16, 20 +1*20-1*16);
+            drawfours(56,60,64,68,240/2, 40, c, 0);
 
             drawSprite(40, c+4, 240/2 + 40, 20 +1*20);
 
@@ -1654,10 +1668,11 @@ void Handler(void)
 
                     drawSprite(j+1+27,c+5,x-50-7,yhigh+j*10);
 
-                    drawSprite(ones+27,c+1,x,yhigh+j*10);
-                    drawSprite(tens+27,c+2,x-10,yhigh+j*10);
-                    drawSprite(min_ones+27,c+3,x-20-7,yhigh+j*10);
-                    drawSprite(min_tens+27,c+4,x-30-7,yhigh+j*10);
+                    drawfours(min_tens+27, min_ones+27, tens+27, ones+27, x, yhigh+j*10, c+1, 1);
+
+
+
+
 
                 }
 
@@ -1713,10 +1728,13 @@ void Handler(void)
         tens = counter/10%6;
         min_ones = counter/60%10;
         min_tens = counter/600;
-        drawSprite(ones+27,c+1,x,y);
-        drawSprite(tens+27,c+2,x-steps,y);
-        drawSprite(min_ones+27,c+3,x-2*steps-7,y);
-        drawSprite(min_tens+27,c+4,x-3*steps-7,y);
+
+        drawfours(min_tens+27, min_ones+27, tens+27, ones+27, x, y, c+1, 1);
+
+
+
+
+
         distx = x-3*steps-7;
 
         x = distx-130; c = 5;
@@ -1746,7 +1764,8 @@ void Handler(void)
         playerX = myadd(playerX, pressedButtons[4], pressedButtons[5], maxAlienRight, maxAlienLeft);
         pressedButtons[4] = 0;
         pressedButtons[5] = 0;
-# 220 "myhandler.h"
+
+
         drawSprite(40, spriteCounter, playerX, playerY);
 
 
@@ -1866,23 +1885,13 @@ void Handler(void)
                  }
            if(bossPositions[i][0] >= 1){
             if(i==1){
-             if(bossPositions[1][0] >= 1){
-                drawSprite(68, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
-                drawSprite(64, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
-                drawSprite(60, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
-                drawSprite(56, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
-                }
+             if(bossPositions[1][0] >= 1) drawfours(56,60,64,68,bossPositions[i][1], bossPositions[i][2], NAlien+5+i, 0);
             }
              else drawSprite(40 +4 +4 +4, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
            if(bossPositions[i][0] == 0){
             if(i==1){
-             if(bossPositions[1][0] == 0){
-                drawSprite(0, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
-                drawSprite(0, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
-                drawSprite(0, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
-                drawSprite(0, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
-                }
+             if(bossPositions[1][0] == 0) drawfours(0,0,0,0, bossPositions[i][1], bossPositions[i][2], NAlien+5+i, 0);
             }
              drawSprite(0, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
@@ -1956,7 +1965,7 @@ void Handler(void)
     *(u16*)0x4000208 = 0x01;
   }
 # 9 "main.c" 2
-# 20 "main.c"
+# 21 "main.c"
 int main(void)
 {
 
