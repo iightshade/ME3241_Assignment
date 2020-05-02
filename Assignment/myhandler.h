@@ -1,8 +1,7 @@
 #include "gbalib.h"
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
-#define u32 unsigned int
-extern void fillRect(u32 x,u32 y, u32 width, u32 height, u32 color);
 
+extern int myadd(int a, int b, int c, int d, int e);
 
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
@@ -33,10 +32,7 @@ void Handler(void)
             // c = 10-30
 
             c = 10;
-            drawSprite(DEATHSTAR4, c+3, SCREEN_WIDTH/2 + 10, 20 +1*20);
-            drawSprite(DEATHSTAR3, c+2, SCREEN_WIDTH/2 + 10- 1*16, 20 +1*20);
-            drawSprite(DEATHSTAR2, c+1, SCREEN_WIDTH/2 + 10, 20 +1*20-1*16);
-            drawSprite(DEATHSTAR1, c, SCREEN_WIDTH/2 + 10- 1*16, 20 +1*20-1*16);
+            drawfours(DEATHSTAR1,DEATHSTAR2,DEATHSTAR3,DEATHSTAR4,SCREEN_WIDTH/2, 40, c, 0);
 
             drawSprite(SPACESHIP, c+4, SCREEN_WIDTH/2 + 40, 20 +1*20);
 
@@ -113,11 +109,7 @@ void Handler(void)
 
                     drawSprite(j+1+NUMBER,c+5,x-50-7,yhigh+j*10);
 
-                    drawSprite(ones+NUMBER,c+1,x,yhigh+j*10);
-                    drawSprite(tens+NUMBER,c+2,x-10,yhigh+j*10);
-                    drawSprite(min_ones+NUMBER,c+3,x-20-7,yhigh+j*10);
-                    drawSprite(min_tens+NUMBER,c+4,x-30-7,yhigh+j*10);
-
+                    drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*10, c+1, 1);
                 }
 
                 if(pressedButtons[1] == 1){
@@ -172,10 +164,9 @@ void Handler(void)
         tens = counter/10%6;
         min_ones = counter/60%10;
         min_tens = counter/600;
-        drawSprite(ones+NUMBER,c+1,x,y);
-        drawSprite(tens+NUMBER,c+2,x-steps,y);
-        drawSprite(min_ones+NUMBER,c+3,x-2*steps-7,y);
-        drawSprite(min_tens+NUMBER,c+4,x-3*steps-7,y);
+
+        drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, y, c+1, 1);
+
         distx = x-3*steps-7;
 
         x = distx-130; c = 5;
@@ -202,16 +193,10 @@ void Handler(void)
         spriteCounter = playerSpriteCounter;
 
         // Spaceship position //
-        if(pressedButtons[4] == 1){
-          fillRect(playerX,0,0,0,0);
-          // if(playerX > maxAlienRight) playerX = maxAlienRight; // Boundary of Movement to Right
-          // pressedButtons[4] = 0;
-        }
-        if(pressedButtons[5] == 1){
-          playerX = playerX - 1;
-          if(playerX < maxAlienLeft) playerX = maxAlienLeft; // Boundary of Movement to Left
-          pressedButtons[5] = 0;
-        }
+        playerX = myadd(playerX, pressedButtons[4], pressedButtons[5], maxAlienRight, maxAlienLeft);
+        pressedButtons[4] = 0;
+        pressedButtons[5] = 0;
+
 
         drawSprite(SPACESHIP, spriteCounter, playerX, playerY);
 
@@ -332,23 +317,13 @@ void Handler(void)
                  }
            if(bossPositions[i][0] >= 1){
             if(i==1){
-             if(bossPositions[1][0] >= 1){
-                drawSprite(DEATHSTAR4, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
-                drawSprite(DEATHSTAR3, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
-                drawSprite(DEATHSTAR2, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
-                drawSprite(DEATHSTAR1, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
-                }
+             if(bossPositions[1][0] >= 1) drawfours(DEATHSTAR1,DEATHSTAR2,DEATHSTAR3,DEATHSTAR4,bossPositions[i][1], bossPositions[i][2], NAlien+5+i, 0);
             }
              else drawSprite(STARDESTROYER, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
            if(bossPositions[i][0] == 0){
             if(i==1){
-             if(bossPositions[1][0] == 0){
-                drawSprite(SPACE, NAlien+5+i, bossPositions[i][1]+16, bossPositions[i][2]);
-                drawSprite(SPACE, NAlien+6+i, bossPositions[i][1], bossPositions[i][2]);
-                drawSprite(SPACE, NAlien+7+i, bossPositions[i][1]+16, bossPositions[i][2]-16);
-                drawSprite(SPACE, NAlien+8+i, bossPositions[i][1], bossPositions[i][2]-16);
-                }
+             if(bossPositions[1][0] == 0) drawfours(0,0,0,0, bossPositions[i][1], bossPositions[i][2], NAlien+5+i, 0);
             }
              drawSprite(SPACE, NAlien + i, bossPositions[i][1], bossPositions[i][2]);
              }
