@@ -37,7 +37,7 @@ int bossPositions[3][3] = {
 };
 int numBosses = 3;
 int alienTimer = 0;
-int totalNumAliens = 10;
+int numAliens = 10;
 int aliensMove = 1;
 int maxAlienRight = 220;
 int maxAlienLeft = 10;
@@ -54,6 +54,11 @@ int entryno = 0;
 int yhigh = 10;
 int lives = 3;
 
+int playerSpriteCounter = 30;
+int playerLaserSpriteCounter = 200;
+int alienSpriteCounter = 100;
+int alienLaserSpriteCounter = 300;
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +72,7 @@ void ClearScreen(void)
         for (y = 0; y < SCREEN_HEIGHT+20; y++){
                 drawSprite(SPACE,c,x,y); c++;
                 }
-            } 
+            }
 
 }
 
@@ -95,7 +100,7 @@ void ACSIIprint(int x, int y, char ch[50], int j_iclx, int j_icly, int steps, in
 }
 
 void drawSprite(int spritenumb, int N, int x, int y)
-{   
+{
     // Gift function: displays sprite number numb on screen at position (x,y), as sprite object N
     *(unsigned short *)(0x7000000 + 8*N) = y | 0x2000;
 
@@ -128,7 +133,7 @@ void fillSprites(void)
     numsprites = 50; // numsprites very impt - sets the limit of sprites that can show
     for (i = 0; i <= (SPRITE8-1)*8*8; i++) spriteData[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
     for (i = 0; i <= (40*16*16); i++) {spriteData[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
-    
+
 }
 
 
@@ -199,9 +204,23 @@ void createLaser(void){
 
 void deactivateLaser(int i, int spriteNum){       // To deactivate player's laser,  provide the row and spritenumber
   laserPositions[i][0] = 0;                       // Player's laser starts at 10100
-  laserPositions[i][2] = -20;
+  laserPositions[i][2] = -30;
   drawSprite(LASER, spriteNum, laserPositions[i][1], laserPositions[i][2]);
 
+}
+
+void enemyMove(int numRows, int enemyPosition[][3]){
+  int i = 0;
+  numRows = numRows - 1;
+  if(enemyPosition[numRows][1] > maxAlienRight){ // Move L once hit the maximum right frame
+    aliensMove = -1;
+  }
+  if(enemyPosition[0][1] < maxAlienLeft){  // Move R once hit the maximum right frame
+    aliensMove = 1;
+  }
+  for(i = 0; i <= numRows; i++){ // X position of all ALIENS moving together
+    enemyPosition[i][1] = enemyPosition[i][1] + aliensMove;
+  }
 }
 
 void createAlienLaser(void){                  // Create alien's laser
@@ -275,25 +294,31 @@ void createBossLaser(void){                  // Create alien's laser
     alienLaserPositions[alienlaserCounter][1] = bossPositions[attackingAlien][1];
     alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
     alienlaserCounter++;
+  }
+  if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
+    alienlaserCounter = 0;
+  }
 
-    if(laserSize >= 2){
+  if(laserSize >= 2){
 
-      alienLaserPositions[alienlaserCounter][0] = 1;
-      alienLaserPositions[alienlaserCounter][1] = bossPositions[attackingAlien][1] - 6;
-      alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
-      alienlaserCounter++;
-    }
+    alienLaserPositions[alienlaserCounter][0] = 1;
+    alienLaserPositions[alienlaserCounter][1] = bossPositions[attackingAlien][1] - 6;
+    alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
+    alienlaserCounter++;
+  }
+  if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
+    alienlaserCounter = 0;
+  }
 
-    if(laserSize >= 3){
+  if(laserSize >= 3){
 
-      alienLaserPositions[alienlaserCounter][0] = 1;
-      alienLaserPositions[alienlaserCounter][1] = bossPositions[attackingAlien][1] + 6;
-      alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
-      alienlaserCounter++;
-    }
+    alienLaserPositions[alienlaserCounter][0] = 1;
+    alienLaserPositions[alienlaserCounter][1] = bossPositions[attackingAlien][1] + 6;
+    alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
+    alienlaserCounter++;
+  }
 
-    if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
-      alienlaserCounter = 0;
-    }
+  if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
+    alienlaserCounter = 0;
   }
 }
