@@ -117,22 +117,6 @@ void drawSprite(int spritenumb, int N, int x, int y)
     }
 }
 
-void drawfours(int sprite1, int sprite2, int sprite3, int sprite4, int x, int y, int numb, int selection)
-{ 
-  int steps = 7;
-  if (selection==0){ // draw boss
-    drawSprite(sprite4, numb, x + 16, y);
-    drawSprite(sprite3, numb+1, x, y);
-    drawSprite(sprite2, numb+2, x + 16, y -16);
-    drawSprite(sprite1, numb+3, x, y -16);}
-
-  if (selection==1){ // draw clock
-    drawSprite(sprite4, numb, x, y);
-    drawSprite(sprite3, numb+1, x-steps, y);
-    drawSprite(sprite2, numb+2, x-2*steps-7, y);
-    drawSprite(sprite1, numb+3, x-3*steps-7, y);}
-}
-
 
 void fillPalette(void)
 {
@@ -148,7 +132,7 @@ void fillSprites(void)
 
     numsprites = 50; // numsprites very impt - sets the limit of sprites that can show
     for (i = 0; i <= (SPRITE8-1)*8*8; i++) spriteData[i] = (sprites8[i*2+1] << 8) + sprites8[i*2];
-    for (i = 0; i <= (60*16*16); i++) {spriteData[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
+    for (i = 0; i <= (40*16*16); i++) {spriteData[i+((37)*8*8)] = (sprites16[i*2+1] << 8) + sprites16[i*2];}
 
 }
 
