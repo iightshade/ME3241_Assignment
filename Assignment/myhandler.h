@@ -1,6 +1,7 @@
 #include "gbalib.h"
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
 
+extern int myadd(int a, int b, int c, int d, int e);
 
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
@@ -200,16 +201,21 @@ void Handler(void)
         spriteCounter = playerSpriteCounter;
 
         // Spaceship position //
-        if(pressedButtons[4] == 1){
-          playerX = playerX + 1;
-          if(playerX > maxAlienRight) playerX = maxAlienRight; // Boundary of Movement to Right
-          pressedButtons[4] = 0;
-        }
-        if(pressedButtons[5] == 1){
-          playerX = playerX - 1;
-          if(playerX < maxAlienLeft) playerX = maxAlienLeft; // Boundary of Movement to Left
-          pressedButtons[5] = 0;
-        }
+        playerX = myadd(playerX, pressedButtons[4], pressedButtons[5], maxAlienRight, maxAlienLeft);
+        pressedButtons[4] = 0;
+        pressedButtons[5] = 0;
+
+        // if(pressedButtons[4] == 1){
+        //   playerX = myadd(playerX, 1, maxAlienRight);
+        //
+        //   // playerX = playerX + 1;
+        //   // if(playerX > maxAlienRight) playerX = maxAlienRight; // Boundary of Movement to Right
+        //
+        // }
+        // if(pressedButtons[5] == 1){
+        //   playerX = playerX - 1;
+        //   if(playerX < maxAlienLeft) playerX = maxAlienLeft; // Boundary of Movement to Left
+        // }
 
         drawSprite(SPACESHIP, spriteCounter, playerX, playerY);
 

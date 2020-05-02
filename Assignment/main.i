@@ -1541,7 +1541,16 @@ void createBossLaser(void){
   }
 }
 # 2 "myhandler.h" 2
-# 11 "myhandler.h"
+
+
+extern int myadd(int a, int b, int c, int d, int e);
+
+
+
+
+
+
+
 void Handler(void)
 {
     u16 Flag; int x, y, steps, ones, tens, min_ones, min_tens, j, k, c, i=0;
@@ -1734,17 +1743,10 @@ void Handler(void)
         spriteCounter = playerSpriteCounter;
 
 
-        if(pressedButtons[4] == 1){
-          playerX = playerX + 1;
-          if(playerX > maxAlienRight) playerX = maxAlienRight;
-          pressedButtons[4] = 0;
-        }
-        if(pressedButtons[5] == 1){
-          playerX = playerX - 1;
-          if(playerX < maxAlienLeft) playerX = maxAlienLeft;
-          pressedButtons[5] = 0;
-        }
-
+        playerX = myadd(playerX, pressedButtons[4], pressedButtons[5], maxAlienRight, maxAlienLeft);
+        pressedButtons[4] = 0;
+        pressedButtons[5] = 0;
+# 220 "myhandler.h"
         drawSprite(40, spriteCounter, playerX, playerY);
 
 
@@ -1954,7 +1956,7 @@ void Handler(void)
     *(u16*)0x4000208 = 0x01;
   }
 # 9 "main.c" 2
-# 22 "main.c"
+# 20 "main.c"
 int main(void)
 {
 
