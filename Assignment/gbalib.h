@@ -260,7 +260,7 @@ void createAlienLaser(void){                  // Create alien's laser
     alienLaserPositions[alienlaserCounter][1] = alienPositions[attackingAlien][1];
     alienLaserPositions[alienlaserCounter][2] = alienPositions[attackingAlien][2];
     alienlaserCounter++;
-    if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
+    if(alienlaserCounter >= maxLaserNum){                  // Maximum alien lasers kept at 10
       alienlaserCounter = 0;
     }
   }
@@ -311,7 +311,7 @@ void createBossLaser(void){                  // Create alien's laser
     alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
     alienlaserCounter++;
   }
-  if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
+  if(alienlaserCounter >= maxLaserNum){                  // Maximum alien lasers kept at 10
     alienlaserCounter = 0;
   }
 
@@ -322,7 +322,7 @@ void createBossLaser(void){                  // Create alien's laser
     alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
     alienlaserCounter++;
   }
-  if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
+  if(alienlaserCounter >= maxLaserNum){                  // Maximum alien lasers kept at 10
     alienlaserCounter = 0;
   }
 
@@ -334,7 +334,7 @@ void createBossLaser(void){                  // Create alien's laser
     alienlaserCounter++;
   }
 
-  if(alienlaserCounter > 9){                  // Maximum alien lasers kept at 10
+  if(alienlaserCounter >= maxLaserNum){                  // Maximum alien lasers kept at 10
     alienlaserCounter = 0;
   }
 }
