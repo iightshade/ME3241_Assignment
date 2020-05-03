@@ -1252,7 +1252,7 @@ int alienPositions[10][3]= {
 };
 int bossPositions[3][3] = {
   {5, 30, 50},
-  {20, 60, 50},
+  {1, 60, 50},
   {5, 106, 50}
 };
 int numBosses = 3;
@@ -1271,7 +1271,7 @@ int alienlaserTimeCounter = 0;
 int endCount;
 int saved_counter[20] ={};
 int entryno = 0;
-int yhigh = 10;
+int yhigh = 160/2 - 4;
 int lives = 3;
 
 int playerSpriteCounter = 30;
@@ -1597,6 +1597,7 @@ int playerHit(int spriteCount, int alienLaserPos[][3], int playerX, int playerY)
 
 
 extern int myadd(int a, int b, int c, int d, int e);
+extern int highScore(int a1, int b1, int c1, int d1, int e1);
 
 
 
@@ -1655,7 +1656,7 @@ void Handler(void)
             }
             if (menu_point == (160/2 + 2*20-20) && pressedButtons[0] == 1){
                 cleanButtons();
-                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0;
+                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0; yhigh = 160/2 - 4;
             }
             if (menu_point == (160/2 + 3*20-20) && pressedButtons[0] == 1){
                 cleanButtons();
@@ -1680,35 +1681,27 @@ void Handler(void)
                 checkbutton();
 
                 x = 240 - 50;
-                if(pressedButtons[6] == 1){
-                      yhigh = yhigh-10;
-                      if (yhigh < 10) yhigh = 10;
-                      pressedButtons[6] = 0;
-                    }
-                if(pressedButtons[7] == 1){
-                      yhigh = yhigh+10;
-
-                      pressedButtons[7] = 0;
-                    }
 
 
 
-                c = 30;
-                for (j=0;j<entryno;j++){
+                c = 30; y = 160/2 - 4;
+                drawSprite(37,29,x-40,y);
+# 107 "myhandler.h"
+                entryno = 2;
+                drawSprite(1+1+27,c+5,x-57,yhigh+0*160/5);
+                drawfours(1+27, 1+27, 1+27, 1+27, x, yhigh+0*160/5, c+1, 1);
 
-                    c += 5;
-                    ones = saved_counter[j]%10;
-                    tens = saved_counter[j]/10%6;
-                    min_ones = saved_counter[j]/60%10;
-                    min_tens = saved_counter[j]/600;
+                drawSprite(1+1+27,c+10,x-57,yhigh+1*160/5);
+                drawfours(1+27, 1+27, 1+27, 1+27, x, yhigh+1*160/5, c+6, 1);
 
-                    drawSprite(j+1+27,c+5,x-50-7,yhigh+j*10);
 
-                    drawfours(min_tens+27, min_ones+27, tens+27, ones+27, x, yhigh+j*10, c+1, 1);
-                }
-
+                int bits = 160/5;
+                yhigh = highScore(yhigh,pressedButtons[6],pressedButtons[7],entryno,bits);
+                pressedButtons[6] = 0;
+                pressedButtons[7] = 0;
+# 132 "myhandler.h"
                 if(pressedButtons[1] == 1){
-                ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; yhigh = 10;
+                ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0;
                 }
             }
 
@@ -1905,24 +1898,28 @@ void Handler(void)
       }
 
 
-        if (endCount == (numAliens + numBosses)){
+      if (endCount == (numAliens + numBosses)){
 
-            x = 240/2 - 40; y = 160/2; c = 300;
-            ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
-            winlosecounter++;
+          x = 240/2 - 40; y = 160/2; c = 300;
+          ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
 
-            if(winlosecounter > 120) winlosecounter = 0;
-        }
+          for( i = 0; i < 10; i++) deactivateAlienLaser(i, alienLaserSpriteCounter + i);
+          winlosecounter++;
+
+          if(winlosecounter > 100) winlosecounter = 0;
+      }
 
 
-        if (lives <= 0){
+      if (lives <= 0){
 
-            x = 240/2 - 40; y = 160/2; c = 300;
-            ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
-            winlosecounter++;
+          x = 240/2 - 40; y = 160/2; c = 300;
+          ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
 
-            if(winlosecounter > 120) winlosecounter = 0;
-        }
+          for( i = 0; i < 10; i++) deactivateLaser(i, playerLaserSpriteCounter + i);
+          winlosecounter++;
+
+          if(winlosecounter > 100) winlosecounter = 0;
+      }
 
 
       if((endCount == (numAliens + numBosses) || lives <= 0) && winlosecounter == 0){
@@ -1944,7 +1941,6 @@ void Handler(void)
             deactivateAlienLaser(i, spriteCounter + i);
             }
         }
-
 
     }
   }

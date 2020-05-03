@@ -15,8 +15,9 @@ PROGNAME=mini
 #
 # Set a list of files you want to compile
 #
-OFILES +=main.o \
-	myadd.o
+OFILES +=main.o 
+OFILES +=myadd.o 
+OFILES +=highScore.o
 
 #
 # Set a list of libraries you want to link

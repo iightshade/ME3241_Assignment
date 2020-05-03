@@ -2,6 +2,7 @@
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
 
 extern int myadd(int a, int b, int c, int d, int e);
+extern int highScore(int a1, int b1, int c1, int d1, int e1);
 
 //global variable
 //Resolution: 240x (SCREEN_WIDTH) 160y (SCREEN_HEIGHT)
@@ -60,11 +61,11 @@ void Handler(void)
             }
             if (menu_point == (SCREEN_HEIGHT/2 + 2*20-20) && pressedButtons[0] == 1){
                 cleanButtons();
-                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0;
+                menumap = 0; gamemap = 0; highscore = 1; credits = 0; CS=1; pressedButtons[0] = 0; yhigh = SCREEN_HEIGHT/2 - 4;
             }
             if (menu_point == (SCREEN_HEIGHT/2 + 3*20-20) && pressedButtons[0] == 1){
                 cleanButtons();
-                menumap = 0; gamemap = 0; highscore = 0; credits = 1; CS=1; pressedButtons[0] = 0;
+                menumap = 0; gamemap = 0; highscore = 0; credits = 1; CS=1; pressedButtons[0] = 0; 
             }
         }
 
@@ -82,38 +83,53 @@ void Handler(void)
                 x = SCREEN_WIDTH/2 - 100; y = SCREEN_HEIGHT/2 - 40; c = 0;
                 ACSIIprint(x,y," HIGHSCORE>SCOLL UP>OR DOWN>", 0, 1, 10, c);
 
-                checkbutton();
-
                 x = SCREEN_WIDTH - 50;
-                if(pressedButtons[6] == 1){
-                      yhigh = yhigh-10;
-                      if (yhigh < 10) yhigh = 10;
-                      pressedButtons[6] = 0;
-                    }
-                if(pressedButtons[7] == 1){
-                      yhigh = yhigh+10;
-                      // if (yhigh > SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT;
-                      pressedButtons[7] = 0;
-                    }
 
                 // c = 30-120
 
-                c = 30;
-                for (j=0;j<entryno;j++){
+                c = 30; y = SCREEN_HEIGHT/2 - 4;
+                drawSprite(BUTTON_CURSOR,29,x-40,y);
+                // for (j=0;j<entryno;j++){
 
-                    c += 5;
-                    ones = saved_counter[j]%10;
-                    tens = saved_counter[j]/10%6;
-                    min_ones = saved_counter[j]/60%10;
-                    min_tens = saved_counter[j]/600;
+                //     c += 5;
+                //     ones = saved_counter[j]%10;
+                //     tens = saved_counter[j]/10%6;
+                //     min_ones = saved_counter[j]/60%10;
+                //     min_tens = saved_counter[j]/600;
 
-                    drawSprite(j+1+NUMBER,c+5,x-50-7,yhigh+j*10);
+                //     drawSprite(j+1+NUMBER,c+5,x-57,yhigh+j*SCREEN_HEIGHT/5);
 
-                    drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*10, c+1, 1);
-                }
+                //     drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*SCREEN_HEIGHT/5, c+1, 1);
+                // }
+
+                entryno = 2;
+                drawSprite(1+1+NUMBER,c+5,x-57,yhigh+0*SCREEN_HEIGHT/5);
+                drawfours(1+NUMBER, 1+NUMBER, 1+NUMBER, 1+NUMBER, x, yhigh+0*SCREEN_HEIGHT/5, c+1, 1);
+
+                drawSprite(1+1+NUMBER,c+10,x-57,yhigh+1*SCREEN_HEIGHT/5);
+                drawfours(1+NUMBER, 1+NUMBER, 1+NUMBER, 1+NUMBER, x, yhigh+1*SCREEN_HEIGHT/5, c+6, 1);
+
+                checkbutton();
+                // screen divide by 5
+                int bits = SCREEN_HEIGHT/5;
+                yhigh = highScore(yhigh, pressedButtons[6], pressedButtons[7], entryno, bits);
+                pressedButtons[6] = 0;
+                pressedButtons[7] = 0;
+
+                // if(pressedButtons[6] == 1){
+                //       yhigh = yhigh+(SCREEN_HEIGHT/5);
+                //       if ((yhigh - SCREEN_HEIGHT/5) > (3*SCREEN_HEIGHT/5)) yhigh = yhigh-(SCREEN_HEIGHT/5);
+                //       pressedButtons[6] = 0;
+                //     }
+                // if(pressedButtons[7] == 1){
+                      
+                //       yhigh = yhigh-(SCREEN_HEIGHT/5);
+                //       if ((yhigh + entryno*SCREEN_HEIGHT/5) < (2*SCREEN_HEIGHT/5)) yhigh = yhigh+(SCREEN_HEIGHT/5);
+                //       pressedButtons[7] = 0;
+                //     }
 
                 if(pressedButtons[1] == 1){
-                ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; yhigh = 10;
+                ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; 
                 }
             }
 
@@ -314,9 +330,11 @@ void Handler(void)
 
           x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
           ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
+
+          for( i = 0; i < 10; i++) deactivateAlienLaser(i, alienLaserSpriteCounter + i);
           winlosecounter++;
 
-          if(winlosecounter > 120) winlosecounter = 0;
+          if(winlosecounter > 100) winlosecounter = 0;
       }
 
       //YOU LOSE
@@ -324,9 +342,11 @@ void Handler(void)
 
           x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
           ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
+
+          for( i = 0; i < 10; i++) deactivateLaser(i, playerLaserSpriteCounter + i);
           winlosecounter++;
 
-          if(winlosecounter > 120) winlosecounter = 0;
+          if(winlosecounter > 100) winlosecounter = 0;
       }
 
       // End of game* //
