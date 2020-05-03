@@ -309,25 +309,25 @@ void Handler(void)
 
       }
 
-          //YOU WIN
-          if (endCount == (numAliens + numBosses)){
+        //YOU WIN
+        if (endCount == (numAliens + numBosses)){
 
-              x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
-              ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
-              winlosecounter++;
+            x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
+            ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
+            winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
-          }
+            if(winlosecounter > 120) winlosecounter = 0;
+        }
 
-          //YOU LOSE
-          if (lives <= 0){
+        //YOU LOSE
+        if (lives <= 0){
 
-              x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
-              ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
-              winlosecounter++;
+            x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
+            ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
+            winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
-          }
+            if(winlosecounter > 120) winlosecounter = 0;
+        }
 
       // End of game* //
       if((endCount == (numAliens + numBosses) || lives <= 0) && winlosecounter == 0){
@@ -340,12 +340,15 @@ void Handler(void)
           for(i = 0; i < numBosses; i++){
             bossPositions[i][0] = 5;
             }
-          spriteCounter = 200;
-          for(i = 0; i < 10; i++){
+          spriteCounter = playerLaserSpriteCounter;
+          for(i = 0; i < maxLaserNum; i++){
             deactivateLaser(i, spriteCounter + i);
             }
+          spriteCounter = alienLaserSpriteCounter;
+          for(i = 0; i < maxLaserNum; i++){
+            deactivateAlienLaser(i, spriteCounter + i);
+            }
         }
-
 
     }
   }

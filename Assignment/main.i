@@ -1479,7 +1479,7 @@ void createAlienLaser(void){
     alienLaserPositions[alienlaserCounter][1] = alienPositions[attackingAlien][1];
     alienLaserPositions[alienlaserCounter][2] = alienPositions[attackingAlien][2];
     alienlaserCounter++;
-    if(alienlaserCounter > 9){
+    if(alienlaserCounter >= maxLaserNum){
       alienlaserCounter = 0;
     }
   }
@@ -1530,7 +1530,7 @@ void createBossLaser(void){
     alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
     alienlaserCounter++;
   }
-  if(alienlaserCounter > 9){
+  if(alienlaserCounter >= maxLaserNum){
     alienlaserCounter = 0;
   }
 
@@ -1541,7 +1541,7 @@ void createBossLaser(void){
     alienLaserPositions[alienlaserCounter][2] = bossPositions[attackingAlien][2];
     alienlaserCounter++;
   }
-  if(alienlaserCounter > 9){
+  if(alienlaserCounter >= maxLaserNum){
     alienlaserCounter = 0;
   }
 
@@ -1553,7 +1553,7 @@ void createBossLaser(void){
     alienlaserCounter++;
   }
 
-  if(alienlaserCounter > 9){
+  if(alienlaserCounter >= maxLaserNum){
     alienlaserCounter = 0;
   }
 }
@@ -1905,24 +1905,24 @@ void Handler(void)
       }
 
 
-          if (endCount == (numAliens + numBosses)){
+        if (endCount == (numAliens + numBosses)){
 
-              x = 240/2 - 40; y = 160/2; c = 300;
-              ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
-              winlosecounter++;
+            x = 240/2 - 40; y = 160/2; c = 300;
+            ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
+            winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
-          }
+            if(winlosecounter > 120) winlosecounter = 0;
+        }
 
 
-          if (lives <= 0){
+        if (lives <= 0){
 
-              x = 240/2 - 40; y = 160/2; c = 300;
-              ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
-              winlosecounter++;
+            x = 240/2 - 40; y = 160/2; c = 300;
+            ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
+            winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
-          }
+            if(winlosecounter > 120) winlosecounter = 0;
+        }
 
 
       if((endCount == (numAliens + numBosses) || lives <= 0) && winlosecounter == 0){
@@ -1935,9 +1935,13 @@ void Handler(void)
           for(i = 0; i < numBosses; i++){
             bossPositions[i][0] = 5;
             }
-          spriteCounter = 200;
-          for(i = 0; i < 10; i++){
+          spriteCounter = playerLaserSpriteCounter;
+          for(i = 0; i < maxLaserNum; i++){
             deactivateLaser(i, spriteCounter + i);
+            }
+          spriteCounter = alienLaserSpriteCounter;
+          for(i = 0; i < maxLaserNum; i++){
+            deactivateAlienLaser(i, spriteCounter + i);
             }
         }
 
