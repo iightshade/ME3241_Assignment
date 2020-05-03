@@ -102,13 +102,6 @@ void Handler(void)
                     drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*SCREEN_HEIGHT/5, c+1, 1);
                 }
 
-                // entryno = 2;
-                // drawSprite(1+1+NUMBER,c+5,x-57,yhigh+0*SCREEN_HEIGHT/5);
-                // drawfours(1+NUMBER, 1+NUMBER, 1+NUMBER, 1+NUMBER, x, yhigh+0*SCREEN_HEIGHT/5, c+1, 1);
-
-                // drawSprite(1+1+NUMBER,c+10,x-57,yhigh+1*SCREEN_HEIGHT/5);
-                // drawfours(1+NUMBER, 1+NUMBER, 1+NUMBER, 1+NUMBER, x, yhigh+1*SCREEN_HEIGHT/5, c+6, 1);
-
                 checkbutton();
                 // screen divide by 5
                 int bits = SCREEN_HEIGHT/5; 

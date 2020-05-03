@@ -33,7 +33,7 @@ int alienPositions[10][3]= {
 };
 int bossPositions[3][3] = {
   {5, 30, 50},
-  {1, 60, 50},
+  {20, 60, 50},
   {5, 106, 50}
 };
 int numBosses = 3;
@@ -54,12 +54,11 @@ int saved_counter[20] ={};
 int entryno = 0;
 int yhigh = SCREEN_HEIGHT/2 - 4;
 int lives = 3;
-int highy = SCREEN_HEIGHT/2 - 4;
 
 int playerSpriteCounter = 30;
 int playerLaserSpriteCounter = 200;
 int alienSpriteCounter = 100;
-int alienLaserSpriteCounter = 300;
+int alienLaserSpriteCounter = 500;
 
 
 

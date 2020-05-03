@@ -1252,7 +1252,7 @@ int alienPositions[10][3]= {
 };
 int bossPositions[3][3] = {
   {5, 30, 50},
-  {1, 60, 50},
+  {20, 60, 50},
   {5, 106, 50}
 };
 int numBosses = 3;
@@ -1277,7 +1277,7 @@ int lives = 3;
 int playerSpriteCounter = 30;
 int playerLaserSpriteCounter = 200;
 int alienSpriteCounter = 100;
-int alienLaserSpriteCounter = 300;
+int alienLaserSpriteCounter = 500;
 
 
 
@@ -1678,28 +1678,33 @@ void Handler(void)
                 x = 240/2 - 100; y = 160/2 - 40; c = 0;
                 ACSIIprint(x,y," HIGHSCORE>SCOLL UP>OR DOWN>", 0, 1, 10, c);
 
-                checkbutton();
-
                 x = 240 - 50;
 
 
 
                 c = 30; y = 160/2 - 4;
                 drawSprite(37,29,x-40,y);
-# 107 "myhandler.h"
-                entryno = 2;
-                drawSprite(1+1+27,c+5,x-57,yhigh+0*160/5);
-                drawfours(1+27, 1+27, 1+27, 1+27, x, yhigh+0*160/5, c+1, 1);
+                for (j=0;j<entryno;j++){
 
-                drawSprite(1+1+27,c+10,x-57,yhigh+1*160/5);
-                drawfours(1+27, 1+27, 1+27, 1+27, x, yhigh+1*160/5, c+6, 1);
+                    c += 5;
+                    ones = saved_counter[j]%10;
+                    tens = saved_counter[j]/10%6;
+                    min_ones = saved_counter[j]/60%10;
+                    min_tens = saved_counter[j]/600;
 
+                    drawSprite(j+1+27,c+5,x-57,yhigh+j*160/5);
+
+                    drawfours(min_tens+27, min_ones+27, tens+27, ones+27, x, yhigh+j*160/5, c+1, 1);
+                }
+
+                checkbutton();
 
                 int bits = 160/5;
-                yhigh = highScore(yhigh,pressedButtons[6],pressedButtons[7],entryno,bits);
+                yhigh = highScore(yhigh, pressedButtons[6], pressedButtons[7], entryno, bits);
                 pressedButtons[6] = 0;
                 pressedButtons[7] = 0;
-# 132 "myhandler.h"
+
+
                 if(pressedButtons[1] == 1){
                 ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0;
                 }
@@ -1949,7 +1954,7 @@ void Handler(void)
     *(u16*)0x4000208 = 0x01;
   }
 # 9 "main.c" 2
-# 21 "main.c"
+# 20 "main.c"
 int main(void)
 {
 
