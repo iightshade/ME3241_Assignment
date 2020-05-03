@@ -85,50 +85,34 @@ void Handler(void)
                 checkbutton();
 
                 x = SCREEN_WIDTH - 50;
-                // if(pressedButtons[6] == 1){
-                //       yhigh = yhigh-10;
-                //       if (yhigh < 0) yhigh = 0;
-                //       pressedButtons[6] = 0;
-                //     }
-                // if(pressedButtons[7] == 1){
-                //       yhigh = yhigh+10;
-                //       if ((yhigh - 16)> SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT;
-                //       pressedButtons[7] = 0;
-                //     }
-
 
                 // c = 30-120
 
-                c = 30;
+                c = 30; y = SCREEN_HEIGHT/2 - 4;
+                drawSprite(BUTTON_CURSOR,29,x-40,y);
+                for (j=0;j<entryno;j++){
 
-                drawSprite(1+1+NUMBER,c+5,x-50-7,yhigh+1*10);
-                drawfours(1+NUMBER, 1+NUMBER, 1+NUMBER, 1+NUMBER, x, yhigh, c+1, 1);
+                    c += 5;
+                    ones = saved_counter[j]%10;
+                    tens = saved_counter[j]/10%6;
+                    min_ones = saved_counter[j]/60%10;
+                    min_tens = saved_counter[j]/600;
 
+                    drawSprite(j+1+NUMBER,c+5,x-57,yhigh+j*SCREEN_HEIGHT/5);
 
-                // for (j=0;j<entryno;j++){
+                    drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*SCREEN_HEIGHT/5, c+1, 1);
+                }
 
-                //     c += 5;
-                //     ones = saved_counter[j]%10;
-                //     tens = saved_counter[j]/10%6;
-                //     min_ones = saved_counter[j]/60%10;
-                //     min_tens = saved_counter[j]/600;
-
-                //     drawSprite(j+1+NUMBER,c+5,x-50-7,yhigh+j*10);
-
-                //     drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*10, c+1, 1);
-                // }
-
-                // checkbutton();
-
-                // x = SCREEN_WIDTH - 50; // screen divide by 5
+                // screen divide by 5
                 if(pressedButtons[6] == 1){
-                      yhigh = yhigh-(SCREEN_HEIGHT/5);
-                      if (yhigh < 0) yhigh = (1 * SCREEN_HEIGHT/5);
+                      yhigh = yhigh+(SCREEN_HEIGHT/5);
+                      if ((yhigh - SCREEN_HEIGHT/5) > (3*SCREEN_HEIGHT/5)) yhigh = yhigh-(SCREEN_HEIGHT/5);
                       pressedButtons[6] = 0;
                     }
                 if(pressedButtons[7] == 1){
-                      yhigh = yhigh+(SCREEN_HEIGHT/5);
-                      if ((yhigh + 50)> SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT - 50;
+                      
+                      yhigh = yhigh-(SCREEN_HEIGHT/5);
+                      if ((yhigh + entryno*SCREEN_HEIGHT/5) < (2*SCREEN_HEIGHT/5)) yhigh = yhigh+(SCREEN_HEIGHT/5);
                       pressedButtons[7] = 0;
                     }
 

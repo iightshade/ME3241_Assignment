@@ -1251,7 +1251,7 @@ int alienPositions[10][3]= {
 };
 int bossPositions[3][3] = {
   {5, 30, 50},
-  {20, 60, 50},
+  {1, 60, 50},
   {5, 106, 50}
 };
 int numBosses = 3;
@@ -1270,7 +1270,7 @@ int alienlaserTimeCounter = 0;
 int endcount;
 int saved_counter[20] ={};
 int entryno = 0;
-int yhigh = 10;
+int yhigh = 160/2 - 4;
 int lives = 3;
 
 int playerSpriteCounter = 30;
@@ -1643,20 +1643,32 @@ void Handler(void)
                 checkbutton();
 
                 x = 240 - 50;
-# 102 "myhandler.h"
-                c = 30;
+# 103 "myhandler.h"
+                c = 30; y = 160/2 - 4;
+                drawSprite(37,29,x-40,y);
+                for (j=0;j<entryno;j++){
 
-                drawSprite(1+1+27,c+5,x-50-7,yhigh+1*10);
-                drawfours(1+27, 1+27, 1+27, 1+27, x, yhigh+1*10, c+1, 1);
-# 124 "myhandler.h"
+                    c += 5;
+                    ones = saved_counter[j]%10;
+                    tens = saved_counter[j]/10%6;
+                    min_ones = saved_counter[j]/60%10;
+                    min_tens = saved_counter[j]/600;
+
+                    drawSprite(j+1+27,c+5,x-57,yhigh+j*160/5);
+
+                    drawfours(min_tens+27, min_ones+27, tens+27, ones+27, x, yhigh+j*160/5, c+1, 1);
+                }
+
+
                 if(pressedButtons[6] == 1){
-                      yhigh = yhigh-10;
-                      if (yhigh < 0) yhigh = 0;
+                      yhigh = yhigh+(160/5);
+                      if ((yhigh - 160/5) > (3*160/5)) yhigh = yhigh-(160/5);
                       pressedButtons[6] = 0;
                     }
                 if(pressedButtons[7] == 1){
-                      yhigh = yhigh+10;
-                      if ((yhigh + 50)> 160) yhigh = 160 - 50;
+
+                      yhigh = yhigh-(160/5);
+                      if ((yhigh + entryno*160/5) < (2*160/5)) yhigh = yhigh+(160/5);
                       pressedButtons[7] = 0;
                     }
 
