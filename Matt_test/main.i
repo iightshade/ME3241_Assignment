@@ -1276,8 +1276,7 @@ int lives = 3;
 int playerSpriteCounter = 30;
 int playerLaserSpriteCounter = 200;
 int alienSpriteCounter = 100;
-int alienLaserSpriteCounter = 300;
-
+int alienLaserSpriteCounter = 500;
 
 
 
@@ -1644,37 +1643,22 @@ void Handler(void)
                 checkbutton();
 
                 x = 240 - 50;
+# 102 "myhandler.h"
+                c = 30;
+
+                drawSprite(1+1+27,c+5,x-50-7,yhigh+1*10);
+                drawfours(1+27, 1+27, 1+27, 1+27, x, yhigh+1*10, c+1, 1);
+# 124 "myhandler.h"
                 if(pressedButtons[6] == 1){
                       yhigh = yhigh-10;
-                      if (yhigh < 10) yhigh = 10;
+                      if (yhigh < 0) yhigh = 0;
                       pressedButtons[6] = 0;
                     }
                 if(pressedButtons[7] == 1){
                       yhigh = yhigh+10;
-
+                      if ((yhigh + 50)> 160) yhigh = 160 - 50;
                       pressedButtons[7] = 0;
                     }
-
-
-
-                c = 30;
-                for (j=0;j<entryno;j++){
-
-                    c += 5;
-                    ones = saved_counter[j]%10;
-                    tens = saved_counter[j]/10%6;
-                    min_ones = saved_counter[j]/60%10;
-                    min_tens = saved_counter[j]/600;
-
-                    drawSprite(j+1+27,c+5,x-50-7,yhigh+j*10);
-
-                    drawfours(min_tens+27, min_ones+27, tens+27, ones+27, x, yhigh+j*10, c+1, 1);
-
-
-
-
-
-                }
 
                 if(pressedButtons[1] == 1){
                 ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; yhigh = 10;
@@ -1730,10 +1714,6 @@ void Handler(void)
         min_tens = counter/600;
 
         drawfours(min_tens+27, min_ones+27, tens+27, ones+27, x, y, c+1, 1);
-
-
-
-
 
         distx = x-3*steps-7;
 
@@ -1925,9 +1905,11 @@ void Handler(void)
 
               x = 240/2 - 40; y = 160/2; c = 300;
               ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
+
+              for( i = 0; i < 10; i++) deactivateAlienLaser(i, alienLaserSpriteCounter + i);
               winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
+              if(winlosecounter > 100) winlosecounter = 0;
           }
 
 
@@ -1935,9 +1917,11 @@ void Handler(void)
 
               x = 240/2 - 40; y = 160/2; c = 300;
               ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
+
+              for( i = 0; i < 10; i++) deactivateLaser(i, playerLaserSpriteCounter + i);
               winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
+              if(winlosecounter > 100) winlosecounter = 0;
           }
 
 
@@ -1965,7 +1949,7 @@ void Handler(void)
     *(u16*)0x4000208 = 0x01;
   }
 # 9 "main.c" 2
-# 21 "main.c"
+# 22 "main.c"
 int main(void)
 {
 

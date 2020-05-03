@@ -85,32 +85,52 @@ void Handler(void)
                 checkbutton();
 
                 x = SCREEN_WIDTH - 50;
-                if(pressedButtons[6] == 1){
-                      yhigh = yhigh-10;
-                      if (yhigh < 10) yhigh = 10;
-                      pressedButtons[6] = 0;
-                    }
-                if(pressedButtons[7] == 1){
-                      yhigh = yhigh+10;
-                      // if (yhigh > SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT;
-                      pressedButtons[7] = 0;
-                    }
+                // if(pressedButtons[6] == 1){
+                //       yhigh = yhigh-10;
+                //       if (yhigh < 0) yhigh = 0;
+                //       pressedButtons[6] = 0;
+                //     }
+                // if(pressedButtons[7] == 1){
+                //       yhigh = yhigh+10;
+                //       if ((yhigh - 16)> SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT;
+                //       pressedButtons[7] = 0;
+                //     }
+
 
                 // c = 30-120
 
                 c = 30;
-                for (j=0;j<entryno;j++){
 
-                    c += 5;
-                    ones = saved_counter[j]%10;
-                    tens = saved_counter[j]/10%6;
-                    min_ones = saved_counter[j]/60%10;
-                    min_tens = saved_counter[j]/600;
+                drawSprite(1+1+NUMBER,c+5,x-50-7,yhigh+1*10);
+                drawfours(1+NUMBER, 1+NUMBER, 1+NUMBER, 1+NUMBER, x, yhigh, c+1, 1);
 
-                    drawSprite(j+1+NUMBER,c+5,x-50-7,yhigh+j*10);
 
-                    drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*10, c+1, 1);
-                }
+                // for (j=0;j<entryno;j++){
+
+                //     c += 5;
+                //     ones = saved_counter[j]%10;
+                //     tens = saved_counter[j]/10%6;
+                //     min_ones = saved_counter[j]/60%10;
+                //     min_tens = saved_counter[j]/600;
+
+                //     drawSprite(j+1+NUMBER,c+5,x-50-7,yhigh+j*10);
+
+                //     drawfours(min_tens+NUMBER, min_ones+NUMBER, tens+NUMBER, ones+NUMBER, x, yhigh+j*10, c+1, 1);
+                // }
+
+                // checkbutton();
+
+                // x = SCREEN_WIDTH - 50; // screen divide by 5
+                if(pressedButtons[6] == 1){
+                      yhigh = yhigh-(SCREEN_HEIGHT/5);
+                      if (yhigh < 0) yhigh = (1 * SCREEN_HEIGHT/5);
+                      pressedButtons[6] = 0;
+                    }
+                if(pressedButtons[7] == 1){
+                      yhigh = yhigh+(SCREEN_HEIGHT/5);
+                      if ((yhigh + 50)> SCREEN_HEIGHT) yhigh = SCREEN_HEIGHT - 50;
+                      pressedButtons[7] = 0;
+                    }
 
                 if(pressedButtons[1] == 1){
                 ClearScreen(); cleanButtons(); menumap = 1; gamemap = 0; highscore = 0; credits = 0; yhigh = 10;
@@ -357,9 +377,11 @@ void Handler(void)
 
               x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
               ACSIIprint(x,y," YOU WIN>", 0, 0, 10, c);
+
+              for( i = 0; i < 10; i++) deactivateAlienLaser(i, alienLaserSpriteCounter + i);
               winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
+              if(winlosecounter > 100) winlosecounter = 0;
           }
 
           //YOU LOSE
@@ -367,9 +389,11 @@ void Handler(void)
 
               x = SCREEN_WIDTH/2 - 40; y = SCREEN_HEIGHT/2; c = 300;
               ACSIIprint(x,y," YOU LOSE>", 0, 0, 10, c);
+
+              for( i = 0; i < 10; i++) deactivateLaser(i, playerLaserSpriteCounter + i);
               winlosecounter++;
 
-              if(winlosecounter > 120) winlosecounter = 0;
+              if(winlosecounter > 100) winlosecounter = 0;
           }
 
       // End of game* //

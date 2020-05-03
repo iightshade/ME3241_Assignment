@@ -51,14 +51,13 @@ int alienlaserTimeCounter = 0;
 int endcount;
 int saved_counter[20] ={};
 int entryno = 0;
-int yhigh = 10;
+int yhigh = SCREEN_HEIGHT/2 - 8;
 int lives = 3;
 
 int playerSpriteCounter = 30;
 int playerLaserSpriteCounter = 200;
 int alienSpriteCounter = 100;
-int alienLaserSpriteCounter = 300;
-
+int alienLaserSpriteCounter = 500;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
